@@ -20,17 +20,6 @@
             --text-dark: #E2E8F0; /* Slate 200 */
         }
 
-        /* Light Mode */
-        .light-mode {
-            --primary: #047857; /* Darker Teal */
-            --secondary: #2563EB; /* Darker Blue */
-            --accent: #7C3AED; /* Darker Purple */
-            --background: #F8FAFC; /* Slate 50 */
-            --surface: #E2E8F0; /* Slate 200 */
-            --text-light: #475569; /* Slate 600 */
-            --text-dark: #1E293B; /* Slate 800 */
-        }
-        
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--background);
@@ -132,15 +121,6 @@
                 <a href="#testimonials" class="navbar-link text-slate-400 hover:text-white transition-colors duration-300">Testimonials</a>
                 <a href="#contact" class="navbar-link text-slate-400 hover:text-white transition-colors duration-300">Contact</a>
             </div>
-
-            <button id="mode-toggle" class="p-2 text-slate-400 hover:text-white focus:outline-none rounded-lg transition-colors duration-300">
-                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-            </button>
 
             <button id="mobile-menu-button" class="md:hidden p-2 text-slate-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-400 rounded-lg transition-colors duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -517,19 +497,6 @@
             cardContainer.addEventListener('mouseleave', () => {
                 card.style.transform = `scale(1) rotateX(0deg) rotateY(0deg)`;
             });
-        });
-
-        // Dark/Light Mode Toggle
-        const modeToggle = document.getElementById('mode-toggle');
-        const body = document.body;
-        const moonIcon = document.getElementById('moon-icon');
-        const sunIcon = document.getElementById('sun-icon');
-        
-        modeToggle.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            const isLightMode = body.classList.contains('light-mode');
-            moonIcon.classList.toggle('hidden', isLightMode);
-            sunIcon.classList.toggle('hidden', !isLightMode);
         });
 
         // Scroll-Spy Effect
