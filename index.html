@@ -4,989 +4,1003 @@
 
 <head>
 
-    <meta charset="UTF-8">
+       
+    <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Desnabil Gymnastiar - Expert Web Developer Portfolio</title>
+        <title>Desnabil Gymnastiar - Expert Web Developer Portfolio</title>
 
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
+       
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💻</text></svg>">
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+       
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-    <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://cdn.tailwindcss.com"></script>
 
-    <style>
+        <style>
+        body {
 
-        body {
+            font-family: 'Inter', sans-serif;
 
-            font-family: 'Inter', sans-serif;
+            @apply bg-gray-950 text-gray-200;
 
-            @apply bg-gray-950 text-gray-200;
+            position: relative;
 
-            position: relative;
+            overflow-x: hidden;
 
-            overflow-x: hidden;
+        }
 
-        }
 
 
+        /* Canvas for binary code animation */
 
-        /* Canvas for binary code animation */
+        #bg-canvas {
 
-        #bg-canvas {
+            position: fixed;
 
-            position: fixed;
+            top: 0;
 
-            top: 0;
+            left: 0;
 
-            left: 0;
+            width: 100%;
 
-            width: 100%;
+            height: 100%;
 
-            height: 100%;
+            z-index: -10;
 
-            z-index: -10;
+        }
 
-        }
 
-        
 
-        /* --- General Animations & Effects --- */
+        /* --- General Animations & Effects --- */
 
-        .section-animated {
+        .section-animated {
 
-            opacity: 0;
+            opacity: 0;
 
-            transform: translateY(20px);
+            transform: translateY(20px);
 
-            transition: opacity 1s ease-out, transform 1s ease-out;
+            transition: opacity 1s ease-out, transform 1s ease-out;
 
-        }
+        }
 
 
 
-        .section-animated.is-visible {
+        .section-animated.is-visible {
 
-            opacity: 1;
+            opacity: 1;
 
-            transform: translateY(0);
+            transform: translateY(0);
 
-        }
+        }
 
 
 
-        .glow-on-hover {
+        .glow-on-hover {
 
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2), 0 0 25px rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2), 0 0 25px rgba(0, 255, 255, 0.1);
 
-            transition: box-shadow 0.3s ease-in-out;
+            transition: box-shadow 0.3s ease-in-out;
 
-        }
+        }
 
-        .glow-on-hover:hover {
+        .glow-on-hover:hover {
 
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.4);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.4);
 
-        }
+        }
 
 
 
-        /* --- 3D Card Tilt Effect --- */
+        /* --- 3D Card Tilt Effect --- */
 
-        .tilt-card-container {
+        .tilt-card-container {
 
-            perspective: 1000px;
+            perspective: 1000px;
 
-        }
+        }
 
-        .tilt-card {
+        .tilt-card {
 
-            transition: transform 0.2s ease-out;
+            transition: transform 0.2s ease-out;
 
-            transform-style: preserve-3d;
+            transform-style: preserve-3d;
 
-            will-change: transform; /* Performance optimization */
+            will-change: transform;
+            /* Performance optimization */
 
-            position: relative;
+            position: relative;
 
-        }
+        }
 
-        .tilt-card:hover {
+        .tilt-card:hover {
 
-            transform: scale(1.05); /* Slightly enlarge on hover */
+            transform: scale(1.05);
+            /* Slightly enlarge on hover */
 
-        }
+        }
 
-        
 
-        /* New Subtle Card Glow Effect */
 
-        .card-glow-border {
+        /* New Subtle Card Glow Effect */
 
-            border: 2px solid transparent;
+        .card-glow-border {
 
-            transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border: 2px solid transparent;
 
-            border-radius: 1.5rem;
+            transition: border-color 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
-        }
+            border-radius: 1.5rem;
 
+        }
 
 
-        .card-glow-border:hover {
 
-            border-color: #4FD1C5;
+        .card-glow-border:hover {
 
-            box-shadow: 0 0 10px #4FD1C5, 0 0 20px #4FD1C5;
+            border-color: #4FD1C5;
 
-        }
+            box-shadow: 0 0 10px #4FD1C5, 0 0 20px #4FD1C5;
 
+        }
 
 
-        /* Hero Text Animation */
 
-        .hero-text-gradient {
+        /* Hero Text Animation */
 
-            background: linear-gradient(90deg, #4FD1C5, #6366F1, #4FD1C5, #6366F1);
+        .hero-text-gradient {
 
-            background-size: 200% 100%;
+            background: linear-gradient(90deg, #4FD1C5, #6366F1, #4FD1C5, #6366F1);
 
-            -webkit-background-clip: text;
+            background-size: 200% 100%;
 
-            background-clip: text;
+            -webkit-background-clip: text;
 
-            -webkit-text-fill-color: transparent;
+            background-clip: text;
 
-            animation: gradient-flow 3s linear infinite;
+            -webkit-text-fill-color: transparent;
 
-        }
+            animation: gradient-flow 3s linear infinite;
 
+        }
 
 
-        @keyframes gradient-flow {
 
-            0% { background-position: 100% 0; }
+        @keyframes gradient-flow {
 
-            100% { background-position: -100% 0; }
+            0% {
+                background-position: 100% 0;
+            }
 
-        }
+            100% {
+                background-position: -100% 0;
+            }
 
-    </style>
+        }
+    </style>
 
 </head>
 
 <body class="bg-gray-950 text-gray-200 antialiased">
 
-    <!-- Background Canvas for Binary Code Animation -->
+        <!-- Background Canvas for Binary Code Animation -->
 
-    <canvas id="bg-canvas"></canvas>
+        <canvas id="bg-canvas"></canvas>
 
 
 
-    <!-- Header -->
+        <!-- Header -->
 
-    <header class="fixed top-0 left-0 w-full z-50 bg-gray-950/80 backdrop-blur-md shadow-lg rounded-b-xl">
+        <header class="fixed top-0 left-0 w-full z-50 bg-gray-950/80 backdrop-blur-md shadow-lg rounded-b-xl">
 
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+                <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
 
-            <a href="#hero" class="flex items-center space-x-2 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 rounded-lg">
+                        <a href="#hero" class="flex items-center space-x-2 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500 rounded-lg">
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
 
-                    <path d="M12 2L2 12l10 10 10-10L12 2zm-1 5h2v2h-2V7zm0 4h2v6h-2v-6z"/>
+                                       
+                    <path d="M12 2L2 12l10 10 10-10L12 2zm-1 5h2v2h-2V7zm0 4h2v6h-2v-6z" />
 
-                </svg>
+                                   
+                </svg>
 
-                <span>Biel07.dev</span>
+                                <span>Biel07.dev</span>
 
-            </a>
+                            </a>
 
 
 
-            <!-- Desktop Navigation -->
+                        <!-- Desktop Navigation -->
 
-            <div class="hidden md:flex space-x-6">
+                        <div class="hidden md:flex space-x-6">
 
-                <a href="#about" class="text-gray-400 hover:text-white transition-colors duration-300">About</a>
+                                <a href="#about" class="text-gray-400 hover:text-white transition-colors duration-300">About</a>
 
-                <a href="#skills" class="text-gray-400 hover:text-white transition-colors duration-300">Skills</a>
+                                <a href="#skills" class="text-gray-400 hover:text-white transition-colors duration-300">Skills</a>
 
-                <a href="#projects" class="text-gray-400 hover:text-white transition-colors duration-300">Projects</a>
+                                <a href="#projects" class="text-gray-400 hover:text-white transition-colors duration-300">Projects</a>
 
-                <a href="#contact" class="text-gray-400 hover:text-white transition-colors duration-300">Contact</a>
+                                <a href="#contact" class="text-gray-400 hover:text-white transition-colors duration-300">Contact</a>
 
-            </div>
+                            </div>
 
 
 
-            <!-- Mobile Menu Button -->
+                        <!-- Mobile Menu Button -->
 
-            <button id="mobile-menu-button" class="md:hidden p-2 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-400 rounded-lg transition-colors duration-300">
+                        <button id="mobile-menu-button" class="md:hidden p-2 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-400 rounded-lg transition-colors duration-300">
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                                       
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
 
-                </svg>
+                                   
+                </svg>
 
-            </button>
+                            </button>
 
-        </nav>
+                    </nav>
 
-    </header>
+            </header>
 
 
 
-    <!-- Mobile Menu -->
+        <!-- Mobile Menu -->
 
-    <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-gray-950/95 z-40 p-6 flex flex-col items-center justify-center space-y-6 md:hidden rounded-lg">
+        <div id="mobile-menu" class="hidden fixed top-0 left-0 w-full h-full bg-gray-950/95 z-40 p-6 flex flex-col items-center justify-center space-y-6 md:hidden rounded-lg">
 
-        <button id="close-menu-button" class="absolute top-4 right-4 p-2 text-gray-400 hover:text-white focus:outline-none rounded-lg">
+                <button id="close-menu-button" class="absolute top-4 right-4 p-2 text-gray-400 hover:text-white focus:outline-none rounded-lg">
 
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
 
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                   
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
 
-                </svg>
+                               
+            </svg>
 
-        </button>
+                    </button>
 
-        <a href="#about" class="text-gray-400 hover:text-white text-2xl font-semibold transition-colors duration-300">About</a>
+                <a href="#about" class="text-gray-400 hover:text-white text-2xl font-semibold transition-colors duration-300">About</a>
 
-        <a href="#skills" class="text-gray-400 hover:text-white text-2xl font-semibold transition-colors duration-300">Skills</a>
+                <a href="#skills" class="text-gray-400 hover:text-white text-2xl font-semibold transition-colors duration-300">Skills</a>
 
-        <a href="#projects" class="text-gray-400 hover:text-white text-2xl font-semibold transition-colors duration-300">Projects</a>
+                <a href="#projects" class="text-gray-400 hover:text-white text-2xl font-semibold transition-colors duration-300">Projects</a>
 
-        <a href="#contact" class="text-gray-400 hover:text-white text-2xl font-semibold transition-colors duration-300">Contact</a>
+                <a href="#contact" class="text-gray-400 hover:text-white text-2xl font-semibold transition-colors duration-300">Contact</a>
 
-    </div>
+            </div>
 
 
 
-    <main class="pt-24">
+        <main class="pt-24">
 
 
 
-        <!-- Hero Section -->
+                <!-- Hero Section -->
 
-        <section id="hero" class="container mx-auto px-6 py-20 md:py-32 text-center">
+                <section id="hero" class="container mx-auto px-6 py-20 md:py-32 text-center">
 
-            <div class="flex flex-col items-center section-animated">
+                        <div class="flex flex-col items-center section-animated">
 
-                <div class="relative w-48 h-48 rounded-full mb-6 overflow-hidden border-4 border-gray-700 shadow-xl glow-on-hover">
+                                <div class="relative w-48 h-48 rounded-full mb-6 overflow-hidden border-4 border-gray-700 shadow-xl glow-on-hover">
 
-                    <!-- NOTE: Replace the image URL below with your own profile picture -->
+                                        <!-- NOTE: Replace the image URL below with your own profile picture -->
 
-                    <img class="absolute top-0 left-0 w-full h-full object-cover" src="https://placehold.co/400x400/1F2937/D1D5DB?text=Profile" alt="Your Profile Picture">
+                                        <img class="absolute top-0 left-0 w-full h-full object-cover" src="https://placehold.co/400x400/1F2937/D1D5DB?text=Profile" alt="Your Profile Picture">
 
-                </div>
+                                    </div>
 
-                <!-- Dynamic Typing Title -->
+                                <!-- Dynamic Typing Title -->
 
-                <h1 id="headline" class="text-4xl md:text-6xl font-bold leading-tight mb-4 min-h-[4rem] hero-text-gradient"></h1>
+                                <h1 id="headline" class="text-4xl md:text-6xl font-bold leading-tight mb-4 min-h-[4rem] hero-text-gradient"></h1>
 
-                <p class="text-lg md:text-2xl text-gray-400 max-w-2xl mx-auto mb-8">
+                                <p class="text-lg md:text-2xl text-gray-400 max-w-2xl mx-auto mb-8">
 
-                    An expert web developer who creates seamless digital experiences with a passion for clean code and intuitive design.
+                                        An expert web developer who creates seamless digital experiences with a passion for clean code and intuitive design.
 
-                </p>
+                                    </p>
 
-                <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-semibold rounded-full shadow-lg hover:from-teal-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105">
+                                <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-semibold rounded-full shadow-lg hover:from-teal-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105">
 
-                    Contact Me
+                                        Contact Me
 
-                </a>
+                                    </a>
 
-            </div>
+                            </div>
 
-        </section>
+                    </section>
 
 
 
-        <!-- About Section -->
+                <!-- About Section -->
 
-        <section id="about" class="container mx-auto px-6 py-12 md:py-20 section-animated">
+                <section id="about" class="container mx-auto px-6 py-12 md:py-20 section-animated">
 
-            <div class="bg-gray-800 rounded-3xl p-8 md:p-12 shadow-xl card-glow-border">
+                        <div class="bg-gray-800 rounded-3xl p-8 md:p-12 shadow-xl card-glow-border">
 
-                <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
+                                <h2 class="text-3xl md:text-4xl font-bold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
 
-                    About Me
+                                        About Me
 
-                </h2>
+                                    </h2>
 
-                <div class="prose prose-invert max-w-none text-gray-300">
+                                <div class="prose prose-invert max-w-none text-gray-300">
 
-                    <p>
+                                        <p>
 
-                        I am a professional full-stack web developer with 2 years of experience. My journey in technology started from a fascination with solving complex problems and turning them into functional, user-friendly digital solutions. I believe that every line of code has the power to create a positive impact.
+                                                I am a professional full-stack web developer with 2 years of experience. My journey in technology started from a fascination with solving complex problems and turning them into functional, user-friendly digital solutions. I believe that every line of code has the power to create a positive impact.
 
-                    </p>
+                                            </p>
 
-                    <p>
+                                        <p>
 
-                        With 2 years of experience at PT. Astra Daihatsu Motor as a system developer for component exports and continuing my career at PT. NAMICOH INDONESIA COMPONENT, I have honed my technical skills and critical thinking to produce reliable and efficient digital products.
+                                                With 2 years of experience at PT. Astra Daihatsu Motor as a system developer for component exports and continuing my career at PT. NAMICOH INDONESIA COMPONENT, I have honed my technical skills and critical thinking to produce reliable and efficient digital products.
 
-                    </p>
+                                            </p>
 
-                    <p class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mt-4">
+                                        <p class="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mt-4">
 
-                        Creating digital experiences that stand the test of time.
+                                                Creating digital experiences that stand the test of time.
 
-                    </p>
+                                            </p>
 
-                </div>
+                                    </div>
 
-            </div>
+                            </div>
 
-        </section>
+                    </section>
 
 
 
-        <!-- Skills Section -->
+                <!-- Skills Section -->
 
-        <section id="skills" class="container mx-auto px-6 py-12 md:py-20 section-animated">
+                <section id="skills" class="container mx-auto px-6 py-12 md:py-20 section-animated">
 
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
+                        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
 
-                Skills & Technologies
+                                Skills & Technologies
 
-            </h2>
+                            </h2>
 
-            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
 
-                <!-- Skill Card 1: PHP -->
+                                <!-- Skill Card 1: PHP -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
+                                        <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
 
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg" alt="PHP" class="w-16 h-16 mb-4 object-contain" />
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/2/27/PHP-logo.svg" alt="PHP" class="w-16 h-16 mb-4 object-contain" />
 
-                        <p class="text-lg font-medium text-gray-300 text-center">PHP (Native)</p>
+                                                <p class="text-lg font-medium text-gray-300 text-center">PHP (Native)</p>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-                <!-- Skill Card 2: MySQL -->
+                                <!-- Skill Card 2: MySQL -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
+                                        <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
 
-                        <img src="https://upload.wikimedia.org/wikipedia/en/d/dd/MySQL_logo.svg" alt="MySQL" class="w-16 h-16 mb-4 object-contain" />
+                                                <img src="https://upload.wikimedia.org/wikipedia/en/d/dd/MySQL_logo.svg" alt="MySQL" class="w-16 h-16 mb-4 object-contain" />
 
-                        <p class="text-lg font-medium text-gray-300 text-center">MySQL</p>
+                                                <p class="text-lg font-medium text-gray-300 text-center">MySQL</p>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-                <!-- Skill Card 3: JavaScript -->
+                                <!-- Skill Card 3: JavaScript -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
+                                        <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
 
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" class="w-16 h-16 mb-4 object-contain" />
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png" alt="JavaScript" class="w-16 h-16 mb-4 object-contain" />
 
-                        <p class="text-lg font-medium text-gray-300 text-center">JavaScript</p>
+                                                <p class="text-lg font-medium text-gray-300 text-center">JavaScript</p>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-                <!-- Skill Card for AJAX -->
+                                <!-- Skill Card for AJAX -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
+                                        <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
 
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/AJAX_logo_by_gengns.svg/1200px-AJAX_logo_by_gengns.svg.png" alt="AJAX Logo" class="w-16 h-16 mb-4 object-contain" />
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a1/AJAX_logo_by_gengns.svg/1200px-AJAX_logo_by_gengns.svg.png" alt="AJAX Logo" class="w-16 h-16 mb-4 object-contain" />
 
-                        <p class="text-lg font-medium text-gray-300 text-center">AJAX</p>
+                                                <p class="text-lg font-medium text-gray-300 text-center">AJAX</p>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-                <!-- Skill Card for JQuery -->
+                                <!-- Skill Card for JQuery -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
+                                        <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
 
-                        <img src="https://cdn.iconscout.com/icon/free/png-256/free-jquery-icon-svg-png-download-1175155.png" alt="JQuery Logo" class="w-16 h-16 mb-4 object-contain" />
+                                                <img src="https://cdn.iconscout.com/icon/free/png-256/free-jquery-icon-svg-png-download-1175155.png" alt="JQuery Logo" class="w-16 h-16 mb-4 object-contain" />
 
-                        <p class="text-lg font-medium text-gray-300 text-center">JQuery</p>
+                                                <p class="text-lg font-medium text-gray-300 text-center">JQuery</p>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-                <!-- Skill Card for Bootstrap -->
+                                <!-- Skill Card for Bootstrap -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
+                                        <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
 
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg" alt="Bootstrap Logo" class="w-16 h-16 mb-4 object-contain" />
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Bootstrap_logo.svg" alt="Bootstrap Logo" class="w-16 h-16 mb-4 object-contain" />
 
-                        <p class="text-lg font-medium text-gray-300 text-center">Bootstrap</p>
+                                                <p class="text-lg font-medium text-gray-300 text-center">Bootstrap</p>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-                <!-- Skill Card 9: Node.js -->
+                                <!-- Skill Card 9: Node.js -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
+                                        <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
 
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Node.js" class="w-16 h-16 mb-4 object-contain" />
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Node.js_logo.svg" alt="Node.js" class="w-16 h-16 mb-4 object-contain" />
 
-                        <p class="text-lg font-medium text-gray-300 text-center">Node.js</p>
+                                                <p class="text-lg font-medium text-gray-300 text-center">Node.js</p>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-                <!-- Skill Card 10: Power BI -->
+                                <!-- Skill Card 10: Power BI -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
+                                        <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
 
-                        <img src="https://logos-world.net/wp-content/uploads/2022/02/Microsoft-Power-BI-Symbol.png" alt="Power BI" class="w-16 h-16 mb-4 object-contain" />
+                                                <img src="https://logos-world.net/wp-content/uploads/2022/02/Microsoft-Power-BI-Symbol.png" alt="Power BI" class="w-16 h-16 mb-4 object-contain" />
 
-                        <p class="text-lg font-medium text-gray-300 text-center">Power BI</p>
+                                                <p class="text-lg font-medium text-gray-300 text-center">Power BI</p>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-                <!-- Skill Card 11: Laravel -->
+                                <!-- Skill Card 11: Laravel -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
+                                        <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
 
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" alt="Laravel" class="w-16 h-16 mb-4 object-contain" />
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Laravel.svg" alt="Laravel" class="w-16 h-16 mb-4 object-contain" />
 
-                        <p class="text-lg font-medium text-gray-300 text-center">Laravel</p>
+                                                <p class="text-lg font-medium text-gray-300 text-center">Laravel</p>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-                <!-- Skill Card 12: Codeigniter -->
+                                <!-- Skill Card 12: Codeigniter -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
+                                        <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
 
-                        <img src="https://cdn.worldvectorlogo.com/logos/codeigniter.svg" alt="Codeigniter" class="w-16 h-16 mb-4 object-contain" />
+                                                <img src="https://cdn.worldvectorlogo.com/logos/codeigniter.svg" alt="Codeigniter" class="w-16 h-16 mb-4 object-contain" />
 
-                        <p class="text-lg font-medium text-gray-300 text-center">Codeigniter 3 & 4</p>
+                                                <p class="text-lg font-medium text-gray-300 text-center">Codeigniter 3 & 4</p>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-                <!-- Skill Card 13: Visual Basic -->
+                                <!-- Skill Card 13: Visual Basic -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
+                                        <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
 
-                        <img src="https://logodix.com/logo/1769978.png" alt="Visual Basic" class="w-16 h-16 mb-4 object-contain" />
+                                                <img src="https://logodix.com/logo/1769978.png" alt="Visual Basic" class="w-16 h-16 mb-4 object-contain" />
 
-                        <p class="text-lg font-medium text-gray-300 text-center">Visual Basic</p>
+                                                <p class="text-lg font-medium text-gray-300 text-center">Visual Basic</p>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-                <!-- Skill Card 14: Linux Debian -->
+                                <!-- Skill Card 14: Linux Debian -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
+                                        <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
 
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Debian_logo.png" alt="Linux Debian" class="w-16 h-16 mb-4 object-contain" />
+                                                <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Debian_logo.png" alt="Linux Debian" class="w-16 h-16 mb-4 object-contain" />
 
-                        <p class="text-lg font-medium text-gray-300 text-center">Linux Debian</p>
+                                                <p class="text-lg font-medium text-gray-300 text-center">Linux Debian</p>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-                <!-- Skill Card 15: Winbox -->
+                                <!-- Skill Card 15: Winbox -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
+                                        <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
 
-                        <img src="https://freesvg.org/img/winbox-mikrotik-icon.png" alt="Winbox" class="w-16 h-16 mb-4 object-contain" />
+                                                <img src="https://freesvg.org/img/winbox-mikrotik-icon.png" alt="Winbox" class="w-16 h-16 mb-4 object-contain" />
 
-                        <p class="text-lg font-medium text-gray-300 text-center">Winbox</p>
+                                                <p class="text-lg font-medium text-gray-300 text-center">Winbox</p>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-                <!-- Skill Card 16: Cisco -->
+                                <!-- Skill Card 16: Cisco -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
+                                        <div class="tilt-card bg-gray-800 flex flex-col items-center p-6 rounded-2xl shadow-lg border border-gray-700 hover:border-teal-400 hover:shadow-lg hover:shadow-teal-500/30">
 
-                        <img src="https://images.seeklogo.com/logo-png/28/2/cisco-logo-png_seeklogo-289203.png" alt="Cisco" class="w-16 h-16 mb-4 object-contain" />
+                                                <img src="https://images.seeklogo.com/logo-png/28/2/cisco-logo-png_seeklogo-289203.png" alt="Cisco" class="w-16 h-16 mb-4 object-contain" />
 
-                        <p class="text-lg font-medium text-gray-300 text-center">Cisco</p>
+                                                <p class="text-lg font-medium text-gray-300 text-center">Cisco</p>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-            </div>
+                            </div>
 
-        </section>
+                    </section>
 
 
 
-        <!-- Projects Section -->
+                <!-- Projects Section -->
 
-        <section id="projects" class="container mx-auto px-6 py-12 md:py-20 section-animated">
+                <section id="projects" class="container mx-auto px-6 py-12 md:py-20 section-animated">
 
-            <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
+                        <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
 
-                    My Projects
+                                    My Projects
 
-            </h2>
+                            </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
-                <!-- Project Card 1 -->
+                                <!-- Project Card 1 -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 rounded-2xl shadow-xl overflow-hidden card-glow-border">
+                                        <div class="tilt-card bg-gray-800 rounded-2xl shadow-xl overflow-hidden card-glow-border">
 
-                        <div class="relative w-full h-48 bg-white p-4 flex items-center justify-center">
+                                                <div class="relative w-full h-48 bg-white p-4 flex items-center justify-center">
 
-                            <img class="max-w-full max-h-full object-contain" src="https://himawanputra.com/wp-content/uploads/2024/03/Daihatsu-Logo.wine_.png" alt="Daihatsu Logo">
+                                                        <img class="max-w-full max-h-full object-contain" src="https://himawanputra.com/wp-content/uploads/2024/03/Daihatsu-Logo.wine_.png" alt="Daihatsu Logo">
 
-                        </div>
+                                                    </div>
 
-                        <div class="p-6">
+                                                <div class="p-6">
 
-                            <h3 class="text-xl font-semibold mb-2 text-white">Component Export Process Assurance System</h3>
+                                                        <h3 class="text-xl font-semibold mb-2 text-white">Component Export Process Assurance System</h3>
 
-                            <p class="text-gray-400 mb-4">Developed a component export process assurance system that significantly **reduced shipping errors by 95%** and **improved verification efficiency** for shipments to Toyota Kuozui Taiwan and Perodua Malaysia.</p>
+                                                        <p class="text-gray-400 mb-4">Developed a component export process assurance system that significantly **reduced shipping errors by 95%** and **improved verification efficiency** for shipments to Toyota Kuozui Taiwan and Perodua Malaysia.</p>
 
-                            <!-- NOTE: Replace the URL below with a real link to your project -->
+                                                        <!-- NOTE: Replace the URL below with a real link to your project -->
 
-                            <a href="#" class="inline-block px-4 py-2 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-semibold rounded-full shadow-lg hover:from-blue-500 hover:to-purple-600 transition-all duration-300 transform hover:scale-105">View Project &rarr;</a>
+                                                        <a href="#" class="inline-block px-4 py-2 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-semibold rounded-full shadow-lg hover:from-blue-500 hover:to-purple-600 transition-all duration-300 transform hover:scale-105">View Project &rarr;</a>
 
-                        </div>
+                                                    </div>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-                <!-- Project Card 2 -->
+                                <!-- Project Card 2 -->
 
-                <div class="tilt-card-container">
+                                <div class="tilt-card-container">
 
-                    <div class="tilt-card bg-gray-800 rounded-2xl shadow-xl overflow-hidden card-glow-border">
+                                        <div class="tilt-card bg-gray-800 rounded-2xl shadow-xl overflow-hidden card-glow-border">
 
-                        <div class="relative w-full h-48 bg-white p-4 flex items-center justify-center">
+                                                <div class="relative w-full h-48 bg-white p-4 flex items-center justify-center">
 
-                            <img class="max-w-full max-h-full object-contain" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEaFI0Bo96gmnJ4jXHKtZv5LTzzmbopn-TMw&s" alt="NAMICOH INDONESIA COMPONENT Logo">
+                                                        <img class="max-w-full max-h-full object-contain" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEaFI0Bo96gmnJ4jXHKtZv5LTzzmbopn-TMw&s" alt="NAMICOH INDONESIA COMPONENT Logo">
 
-                        </div>
+                                                    </div>
 
-                        <div class="p-6">
+                                                <div class="p-6">
 
-                            <h3 class="text-xl font-semibold mb-2 text-white">4-Point Delivery Assurance System</h3>
+                                                        <h3 class="text-xl font-semibold mb-2 text-white">4-Point Delivery Assurance System</h3>
 
-                            <p class="text-gray-400 mb-4">Developed a delivery assurance system that **improves the accuracy and reliability of customer shipments**. The system automatically verifies each process stage to **ensure product quality and completeness**, resulting in a significant **increase in customer satisfaction**.</p>
+                                                        <p class="text-gray-400 mb-4">Developed a delivery assurance system that **improves the accuracy and reliability of customer shipments**. The system automatically verifies each process stage to **ensure product quality and completeness**, resulting in a significant **increase in customer satisfaction**.</p>
 
-                            <!-- NOTE: Replace the URL below with a real link to your project -->
+                                                        <!-- NOTE: Replace the URL below with a real link to your project -->
 
-                            <a href="#" class="inline-block px-4 py-2 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-semibold rounded-full shadow-lg hover:from-blue-500 hover:to-purple-600 transition-all duration-300 transform hover:scale-105">View Project &rarr;</a>
+                                                        <a href="#" class="inline-block px-4 py-2 bg-gradient-to-r from-blue-400 to-purple-500 text-white font-semibold rounded-full shadow-lg hover:from-blue-500 hover:to-purple-600 transition-all duration-300 transform hover:scale-105">View Project &rarr;</a>
 
-                        </div>
+                                                    </div>
 
-                    </div>
+                                            </div>
 
-                </div>
+                                    </div>
 
-            </div>
+                            </div>
 
-        </section>
+                    </section>
 
 
 
-        <!-- Contact Section -->
+                <!-- Contact Section -->
 
-        <section id="contact" class="container mx-auto px-6 py-12 md:py-20 section-animated">
+                <section id="contact" class="container mx-auto px-6 py-12 md:py-20 section-animated">
 
-            <div class="bg-gray-800 rounded-3xl p-8 md:p-12 shadow-xl text-center card-glow-border">
+                        <div class="bg-gray-800 rounded-3xl p-8 md:p-12 shadow-xl text-center card-glow-border">
 
-                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
+                                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-blue-500">
 
-                    Contact Me
+                                        Contact Me
 
-                </h2>
+                                    </h2>
 
-                <p class="text-gray-300 text-lg mb-6">
+                                <p class="text-gray-300 text-lg mb-6">
 
-                    Feel free to contact me via email for inquiries or collaboration.
+                                        Feel free to contact me via email for inquiries or collaboration.
 
-                </p>
+                                    </p>
 
-                <a href="mailto:fbilgy@gmail.com" class="px-8 py-3 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-semibold rounded-full shadow-lg hover:from-teal-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 inline-block">
+                                <a href="mailto:fbilgy@gmail.com" class="px-8 py-3 bg-gradient-to-r from-teal-500 to-blue-600 text-white font-semibold rounded-full shadow-lg hover:from-teal-600 hover:to-blue-700 transition-all duration-300 transform hover:scale-105 inline-block">
 
-                    fbilgy@gmail.com
+                                        fbilgy@gmail.com
 
-                </a>
+                                    </a>
 
-            </div>
+                            </div>
 
-        </section>
+                    </section>
 
 
 
-    </main>
+            </main>
 
 
 
-    <!-- Footer -->
+        <!-- Footer -->
 
-    <footer class="bg-gray-900 text-gray-400 py-6 text-center rounded-t-xl">
+        <footer class="bg-gray-900 text-gray-400 py-6 text-center rounded-t-xl">
 
-        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+                <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
 
-            <div class="flex items-center space-x-2">
+                        <div class="flex items-center space-x-2">
 
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="currentColor">
 
-                    <path d="M12 2L2 12l10 10 10-10L12 2zm-1 5h2v2h-2V7zm0 4h2v6h-2v-6z"/>
+                                       
+                    <path d="M12 2L2 12l10 10 10-10L12 2zm-1 5h2v2h-2V7zm0 4h2v6h-2v-6z" />
 
-                </svg>
+                                   
+                </svg>
 
-                <span class="text-sm font-semibold">Biel07.dev</span>
+                                <span class="text-sm font-semibold">Biel07.dev</span>
 
-            </div>
+                            </div>
 
-            <p class="text-sm">&copy; 2025 Desnabil Gymnastiar. All Rights Reserved.</p>
+                        <p class="text-sm">&copy; 2025 Desnabil Gymnastiar. All Rights Reserved.</p>
 
-        </div>
+                    </div>
 
-    </footer>
+            </footer>
 
 
 
-    <!-- JavaScript for Mobile Menu, Animations, and Card Tilt -->
+        <!-- JavaScript for Mobile Menu, Animations, and Card Tilt -->
 
-    <script>
+        <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
 
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
 
-        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenuButton = document.getElementById('close-menu-button');
 
-        const closeMenuButton = document.getElementById('close-menu-button');
+        const navLinks = mobileMenu.querySelectorAll('a');
 
-        const navLinks = mobileMenu.querySelectorAll('a');
 
 
+        mobileMenuButton.addEventListener('click', () => {
 
-        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden');
 
-            mobileMenu.classList.remove('hidden');
+        });
 
-        });
 
 
+        closeMenuButton.addEventListener('click', () => {
 
-        closeMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
 
-            mobileMenu.classList.add('hidden');
+        });
 
-        });
 
 
+        navLinks.forEach(link => {
 
-        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
 
-            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
 
-                mobileMenu.classList.add('hidden');
+            });
 
-            });
+        });
 
-        });
 
 
+        // Intersection Observer for scroll animations
 
-        // Intersection Observer for scroll animations
+        const sections = document.querySelectorAll('.section-animated');
 
-        const sections = document.querySelectorAll('.section-animated');
+        const observerOptions = {
 
-        const observerOptions = {
+            root: null,
 
-            root: null,
+            rootMargin: '0px',
 
-            rootMargin: '0px',
+            threshold: 0.2
 
-            threshold: 0.2
+        };
 
-        };
 
 
+        const observer = new IntersectionObserver((entries, observer) => {
 
-        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
 
-            entries.forEach(entry => {
+                if (entry.isIntersecting) {
 
-                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible');
 
-                    entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
 
-                    observer.unobserve(entry.target);
+                }
 
-                }
+            });
 
-            });
+        }, observerOptions);
 
-        }, observerOptions);
 
 
+        sections.forEach(section => {
 
-        sections.forEach(section => {
+            observer.observe(section);
 
-            observer.observe(section);
+        });
 
-        });
 
-        
 
-        // --- Dynamic Typing & Text Rotation Effect ---
+        // --- Dynamic Typing & Text Rotation Effect ---
 
-        const headlineElement = document.getElementById('headline');
+        const headlineElement = document.getElementById('headline');
 
-        const phrases = [
+        const phrases = [
 
-            "Hello, I'm Desnabil Gymnastiar",
+            "Hello, I'm Desnabil Gymnastiar",
 
-            "Building digital experiences",
+            "Building digital experiences",
 
-            "Crafting clean code",
+            "Crafting clean code",
 
-            "Solving complex problems"
+            "Solving complex problems"
 
-        ];
+        ];
 
-        let phraseIndex = 0;
+        let phraseIndex = 0;
 
-        let charIndex = 0;
+        let charIndex = 0;
 
-        let isTyping = true;
+        let isTyping = true;
 
-        
 
-        function typeText() {
 
-            const currentPhrase = phrases[phraseIndex];
+        function typeText() {
 
-            if (isTyping) {
+            const currentPhrase = phrases[phraseIndex];
 
-                if (charIndex < currentPhrase.length) {
+            if (isTyping) {
 
-                    headlineElement.textContent += currentPhrase.charAt(charIndex);
+                if (charIndex < currentPhrase.length) {
 
-                    charIndex++;
+                    headlineElement.textContent += currentPhrase.charAt(charIndex);
 
-                    setTimeout(typeText, 70);
+                    charIndex++;
 
-                } else {
+                    setTimeout(typeText, 70);
 
-                    isTyping = false;
+                } else {
 
-                    setTimeout(typeText, 2000); // Wait 2 seconds before deleting
+                    isTyping = false;
 
-                }
+                    setTimeout(typeText, 2000); // Wait 2 seconds before deleting
 
-            } else {
+                }
 
-                if (headlineElement.textContent.length > 0) {
+            } else {
 
-                    headlineElement.textContent = headlineElement.textContent.slice(0, -1);
+                if (headlineElement.textContent.length > 0) {
 
-                    setTimeout(typeText, 50);
+                    headlineElement.textContent = headlineElement.textContent.slice(0, -1);
 
-                } else {
+                    setTimeout(typeText, 50);
 
-                    isTyping = true;
+                } else {
 
-                    phraseIndex = (phraseIndex + 1) % phrases.length;
+                    isTyping = true;
 
-                    setTimeout(typeText, 500); // Wait 0.5 seconds before typing new phrase
+                    phraseIndex = (phraseIndex + 1) % phrases.length;
 
-                }
+                    setTimeout(typeText, 500); // Wait 0.5 seconds before typing new phrase
 
-            }
+                }
 
-        }
+            }
 
-        
+        }
 
-        // --- Binary Stream Background JavaScript ---
 
-        window.onload = function() {
 
-            const canvas = document.getElementById('bg-canvas');
+        // --- Binary Stream Background JavaScript ---
 
-            const ctx = canvas.getContext('2d');
+        window.onload = function() {
 
-            let columns, drops;
+            const canvas = document.getElementById('bg-canvas');
 
+            const ctx = canvas.getContext('2d');
 
+            let columns, drops;
 
-            function initCanvas() {
 
-                canvas.width = window.innerWidth;
 
-                canvas.height = window.innerHeight;
+            function initCanvas() {
 
-                columns = Math.floor(canvas.width / 20);
+                canvas.width = window.innerWidth;
 
-                drops = [];
+                canvas.height = window.innerHeight;
 
-                for (let i = 0; i < columns; i++) {
+                columns = Math.floor(canvas.width / 20);
 
-                    drops[i] = 1;
+                drops = [];
 
-                }
+                for (let i = 0; i < columns; i++) {
 
-            }
+                    drops[i] = 1;
 
+                }
 
+            }
 
-            function draw() {
 
-                ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
 
-                ctx.fillRect(0, 0, canvas.width, canvas.height);
+            function draw() {
 
-                
+                ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
 
-                ctx.fillStyle = '#4FD1C5';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-                ctx.font = '15px monospace';
 
 
+                ctx.fillStyle = '#4FD1C5';
 
-                for (let i = 0; i < drops.length; i++) {
+                ctx.font = '15px monospace';
 
-                    const text = String(Math.floor(Math.random() * 2));
 
-                    ctx.fillText(text, i * 20, drops[i] * 20);
 
+                for (let i = 0; i < drops.length; i++) {
 
+                    const text = String(Math.floor(Math.random() * 2));
 
-                    if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
+                    ctx.fillText(text, i * 20, drops[i] * 20);
 
-                        drops[i] = 0;
 
-                    }
 
-                    drops[i]++;
+                    if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
 
-                }
+                        drops[i] = 0;
 
-            }
+                    }
 
+                    drops[i]++;
 
+                }
 
-            function animate() {
+            }
 
-                requestAnimationFrame(animate);
 
-                draw();
 
-            }
+            function animate() {
 
+                requestAnimationFrame(animate);
 
+                draw();
 
-            window.addEventListener('resize', initCanvas);
+            }
 
-            
 
-            initCanvas();
 
-            animate();
+            window.addEventListener('resize', initCanvas);
 
-            typeText();
 
-        };
 
+            initCanvas();
 
+            animate();
 
-        // --- 3D Tilt Effect JavaScript ---
+            typeText();
 
-        const tiltCards = document.querySelectorAll('.tilt-card-container');
+        };
 
-        tiltCards.forEach(cardContainer => {
 
-            const card = cardContainer.querySelector('.tilt-card');
 
-            
+        // --- 3D Tilt Effect JavaScript ---
 
-            cardContainer.addEventListener('mousemove', (event) => {
+        const tiltCards = document.querySelectorAll('.tilt-card-container');
 
-                const rect = cardContainer.getBoundingClientRect();
+        tiltCards.forEach(cardContainer => {
 
-                const x = event.clientX - rect.left;
+            const card = cardContainer.querySelector('.tilt-card');
 
-                const y = event.clientY - rect.top;
 
-                const center = {
 
-                    x: rect.width / 2,
+            cardContainer.addEventListener('mousemove', (event) => {
 
-                    y: rect.height / 2
+                const rect = cardContainer.getBoundingClientRect();
 
-                };
+                const x = event.clientX - rect.left;
 
-                
+                const y = event.clientY - rect.top;
 
-                const rotateX = ((y - center.y) / center.y) * 10;
+                const center = {
 
-                const rotateY = ((x - center.x) / center.x) * -10;
+                    x: rect.width / 2,
 
+                    y: rect.height / 2
 
+                };
 
-                card.style.transform = `scale(1.05) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
-            });
 
+                const rotateX = ((y - center.y) / center.y) * 10;
 
+                const rotateY = ((x - center.x) / center.x) * -10;
 
-            cardContainer.addEventListener('mouseleave', () => {
 
-                card.style.transform = `scale(1) rotateX(0deg) rotateY(0deg)`;
 
-            });
+                card.style.transform = `scale(1.05) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
-        });
+            });
 
-    </script>
+
+
+            cardContainer.addEventListener('mouseleave', () => {
+
+                card.style.transform = `scale(1) rotateX(0deg) rotateY(0deg)`;
+
+            });
+
+        });
+    </script>
 
 </body>
 
