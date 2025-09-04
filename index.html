@@ -10,7 +10,6 @@
     <style>
         /* New Color Palette & Fonts */
         :root {
-            /* Dark Mode (Default) */
             --primary: #4FD1C5; /* Teal */
             --secondary: #6366F1; /* Blue */
             --accent: #A855F7; /* Purple */
@@ -20,26 +19,25 @@
             --text-dark: #E2E8F0; /* Slate 200 */
         }
 
-        /* Light Mode */
-        .light-mode {
-            --primary: #047857; /* Darker Teal */
-            --secondary: #2563EB; /* Darker Blue */
-            --accent: #7C3AED; /* Darker Purple */
-            --background: #F8FAFC; /* Slate 50 */
-            --surface: #E2E8F0; /* Slate 200 */
-            --text-light: #475569; /* Slate 600 */
-            --text-dark: #1E293B; /* Slate 800 */
-        }
-        
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--background);
             color: var(--text-dark);
             position: relative;
             overflow-x: hidden;
-            transition: background-color 0.5s ease;
         }
 
+        /* Canvas for binary code animation */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+        }
+
+        /* General Animations & Effects */
         .section-animated {
             opacity: 0;
             transform: translateY(20px);
@@ -50,12 +48,6 @@
             transform: translateY(0);
         }
 
-        /* Scroll-Spy Active Link */
-        .navbar-link.active {
-            color: var(--primary); /* Warna highlight yang konsisten */
-            font-weight: 600;
-        }
-
         .glow-on-hover {
             box-shadow: 0 0 15px rgba(0, 255, 255, 0.2), 0 0 25px rgba(0, 255, 255, 0.1);
             transition: box-shadow 0.3s ease-in-out;
@@ -64,6 +56,7 @@
             box-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 40px rgba(0, 255, 255, 0.4);
         }
 
+        /* 3D Card Tilt Effect */
         .tilt-card-container {
             perspective: 1000px;
         }
@@ -72,10 +65,10 @@
             transform-style: preserve-3d;
             will-change: transform;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Subtle card shadow */
         }
         .tilt-card:hover {
-            transform: scale(1.03);
+            transform: scale(1.03); /* Slightly less aggressive scale */
         }
 
         .card-glow-border {
@@ -88,6 +81,7 @@
             box-shadow: 0 0 10px var(--primary), 0 0 20px var(--primary);
         }
 
+        /* Hero Text Animation */
         .hero-text-gradient {
             background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary), var(--secondary));
             background-size: 200% 100%;
@@ -116,21 +110,12 @@
             </a>
 
             <div class="hidden md:flex space-x-6">
-                <a href="#about" class="navbar-link text-slate-400 hover:text-white transition-colors duration-300">About</a>
-                <a href="#skills" class="navbar-link text-slate-400 hover:text-white transition-colors duration-300">Skills</a>
-                <a href="#projects" class="navbar-link text-slate-400 hover:text-white transition-colors duration-300">Projects</a>
-                <a href="#testimonials" class="navbar-link text-slate-400 hover:text-white transition-colors duration-300">Testimonials</a>
-                <a href="#contact" class="navbar-link text-slate-400 hover:text-white transition-colors duration-300">Contact</a>
+                <a href="#about" class="text-slate-400 hover:text-white transition-colors duration-300">About</a>
+                <a href="#skills" class="text-slate-400 hover:text-white transition-colors duration-300">Skills</a>
+                <a href="#projects" class="text-slate-400 hover:text-white transition-colors duration-300">Projects</a>
+                <a href="#testimonials" class="text-slate-400 hover:text-white transition-colors duration-300">Testimonials</a>
+                <a href="#contact" class="text-slate-400 hover:text-white transition-colors duration-300">Contact</a>
             </div>
-
-            <button id="mode-toggle" class="p-2 text-slate-400 hover:text-white focus:outline-none rounded-lg transition-colors duration-300">
-                <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-                </svg>
-                <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-            </button>
 
             <button id="mobile-menu-button" class="md:hidden p-2 text-slate-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-teal-400 rounded-lg transition-colors duration-300">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -146,11 +131,11 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
-        <a href="#about" class="navbar-link text-slate-400 hover:text-white text-2xl font-semibold transition-colors duration-300">About</a>
-        <a href="#skills" class="navbar-link text-slate-400 hover:text-white text-2xl font-semibold transition-colors duration-300">Skills</a>
-        <a href="#projects" class="navbar-link text-slate-400 hover:text-white text-2xl font-semibold transition-colors duration-300">Projects</a>
-        <a href="#testimonials" class="navbar-link text-slate-400 hover:text-white text-2xl font-semibold transition-colors duration-300">Testimonials</a>
-        <a href="#contact" class="navbar-link text-slate-400 hover:text-white text-2xl font-semibold transition-colors duration-300">Contact</a>
+        <a href="#about" class="text-slate-400 hover:text-white text-2xl font-semibold transition-colors duration-300">About</a>
+        <a href="#skills" class="text-slate-400 hover:text-white text-2xl font-semibold transition-colors duration-300">Skills</a>
+        <a href="#projects" class="text-slate-400 hover:text-white text-2xl font-semibold transition-colors duration-300">Projects</a>
+        <a href="#testimonials" class="text-slate-400 hover:text-white text-2xl font-semibold transition-colors duration-300">Testimonials</a>
+        <a href="#contact" class="text-slate-400 hover:text-white text-2xl font-semibold transition-colors duration-300">Contact</a>
     </div>
 
     <main class="pt-24">
@@ -402,7 +387,7 @@
         sections.forEach(section => {
             observer.observe(section);
         });
-
+        
         // Dynamic Typing & Text Rotation Effect
         const headlineElement = document.getElementById('headline');
         const phrases = [
@@ -506,41 +491,6 @@
 
             cardContainer.addEventListener('mouseleave', () => {
                 card.style.transform = `scale(1) rotateX(0deg) rotateY(0deg)`;
-            });
-        });
-
-        // Dark/Light Mode Toggle
-        const modeToggle = document.getElementById('mode-toggle');
-        const body = document.body;
-        const moonIcon = document.getElementById('moon-icon');
-        const sunIcon = document.getElementById('sun-icon');
-        
-        modeToggle.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
-            const isLightMode = body.classList.contains('light-mode');
-            moonIcon.classList.toggle('hidden', isLightMode);
-            sunIcon.classList.toggle('hidden', !isLightMode);
-        });
-
-        // Scroll-Spy Effect
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.navbar-link');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - 100) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('active');
-                }
             });
         });
     </script>
