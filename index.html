@@ -40,6 +40,16 @@
             transition: background-color 0.5s ease;
         }
 
+        /* Pastikan kanvas berada di bawah semua konten */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+        }
+
         .section-animated {
             opacity: 0;
             transform: translateY(20px);
@@ -402,7 +412,7 @@
         sections.forEach(section => {
             observer.observe(section);
         });
-
+        
         // Dynamic Typing & Text Rotation Effect
         const headlineElement = document.getElementById('headline');
         const phrases = [
