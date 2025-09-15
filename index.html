@@ -14,28 +14,9 @@
             font-family: 'Inter', sans-serif;
         }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(45deg, #06b6d4, #3b82f6);
-            border-radius: 4px;
-        }
-
-        /* Glassmorphism */
-        .glass {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(148, 163, 184, 0.1);
-        }
-
         /* Animated gradient background */
-        .gradient-bg {
-            background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #475569);
+        body {
+            background: linear-gradient(-45deg, #0f172a, #1e293b, #334155, #0f172a);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
         }
@@ -46,54 +27,44 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Floating particles */
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0.6;
+        /* Glassmorphism */
+        .glass {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        /* Neon effects */
+        .neon-cyan {
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.5);
+        }
+
+        .neon-purple {
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5);
+        }
+
+        /* Text animations */
+        .text-glow {
+            text-shadow: 0 0 20px rgba(6, 182, 212, 0.8);
+        }
+
+        /* Hover animations */
+        .hover-glow:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Floating animation */
+        .float {
             animation: float 6s ease-in-out infinite;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
         }
 
-        /* Neon glow effect */
-        .neon-glow {
-            box-shadow: 
-                0 0 5px #06b6d4,
-                0 0 10px #06b6d4,
-                0 0 15px #06b6d4,
-                0 0 20px #06b6d4;
-        }
-
-        /* Card hover animations */
-        .hover-lift {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .hover-lift:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Text gradient animation */
-        .text-gradient {
-            background: linear-gradient(45deg, #06b6d4, #3b82f6, #8b5cf6, #06b6d4);
-            background-size: 400% 400%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: textGradient 4s ease infinite;
-        }
-
-        @keyframes textGradient {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-
-        /* Typing animation */
+        /* Typing effect */
         .typing::after {
             content: '|';
             animation: blink 1s infinite;
@@ -104,86 +75,101 @@
             51%, 100% { opacity: 0; }
         }
 
-        /* Pulse animation for buttons */
-        .pulse-btn {
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        /* Particle system */
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.7;
+            animation: particleFloat 8s linear infinite;
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: .8; }
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
         }
 
-        /* Morphing shapes */
-        .morph {
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            animation: morph 8s ease-in-out infinite;
-        }
-
-        @keyframes morph {
-            0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-        }
-
-        /* Reveal animations */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease-out;
-        }
-        
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Interactive grid background */
-        .grid-bg {
-            background-image: 
-                linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
-            background-size: 50px 50px;
-        }
-
-        /* Skill bar animation */
-        .skill-bar {
-            height: 4px;
-            background: linear-gradient(90deg, #06b6d4, #3b82f6);
-            border-radius: 2px;
+        /* Skill progress bars */
+        .skill-progress {
             transform: scaleX(0);
             transform-origin: left;
-            transition: transform 1s ease-out;
+            transition: transform 1.5s ease-out;
         }
 
-        .skill-bar.animate {
+        .skill-progress.animate {
             transform: scaleX(1);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #06b6d4, #8b5cf6);
+            border-radius: 4px;
         }
     </style>
 </head>
-<body class="bg-slate-900 text-white  gradient-bg">
+<body class="text-white overflow-x-hidden">
     
-    <!-- Floating Particles -->
-    
-
-    <!-- Grid Background -->
-    <div class="fixed inset-0 grid-bg opacity-20 pointer-events-none"></div>
+    <!-- Particle System -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="particle w-2 h-2 bg-cyan-400 absolute" style="left: 10%; animation-delay: 0s;"></div>
+        <div class="particle w-1 h-1 bg-purple-400 absolute" style="left: 20%; animation-delay: 2s;"></div>
+        <div class="particle w-3 h-3 bg-blue-400 absolute" style="left: 30%; animation-delay: 4s;"></div>
+        <div class="particle w-2 h-2 bg-pink-400 absolute" style="left: 40%; animation-delay: 6s;"></div>
+        <div class="particle w-1 h-1 bg-green-400 absolute" style="left: 50%; animation-delay: 8s;"></div>
+        <div class="particle w-2 h-2 bg-yellow-400 absolute" style="left: 60%; animation-delay: 10s;"></div>
+        <div class="particle w-1 h-1 bg-cyan-400 absolute" style="left: 70%; animation-delay: 12s;"></div>
+        <div class="particle w-3 h-3 bg-purple-400 absolute" style="left: 80%; animation-delay: 14s;"></div>
+        <div class="particle w-2 h-2 bg-blue-400 absolute" style="left: 90%; animation-delay: 16s;"></div>
+    </div>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass border-b border-slate-700/50">
+    <nav class="fixed top-0 w-full z-50 glass">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <div class="text-2xl font-bold text-gradient">
-                    <i class="fas fa-code mr-2"></i>Biel07.dev
+                <div class="text-2xl font-black bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+                    <i class="fas fa-code text-cyan-400"></i> Biel07.dev
                 </div>
                 <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link text-slate-300 hover:text-cyan-400 transition-colors duration-300 relative">Home</a>
-                    <a href="#about" class="nav-link text-slate-300 hover:text-cyan-400 transition-colors duration-300 relative">About</a>
-                    <a href="#skills" class="nav-link text-slate-300 hover:text-cyan-400 transition-colors duration-300 relative">Skills</a>
-                    <a href="#projects" class="nav-link text-slate-300 hover:text-cyan-400 transition-colors duration-300 relative">Projects</a>
-                    <a href="#contact" class="nav-link text-slate-300 hover:text-cyan-400 transition-colors duration-300 relative">Contact</a>
+                    <a href="#home" class="hover:text-cyan-400 transition-all duration-300 relative group">
+                        Home
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#about" class="hover:text-cyan-400 transition-all duration-300 relative group">
+                        About
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#skills" class="hover:text-cyan-400 transition-all duration-300 relative group">
+                        Skills
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#projects" class="hover:text-cyan-400 transition-all duration-300 relative group">
+                        Projects
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#contact" class="hover:text-cyan-400 transition-all duration-300 relative group">
+                        Contact
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-cyan-400 group-hover:w-full transition-all duration-300"></span>
+                    </a>
                 </div>
-                <button class="md:hidden text-slate-300 hover:text-cyan-400">
+                <button class="md:hidden text-white hover:text-cyan-400 transition-colors duration-300">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
@@ -193,109 +179,126 @@
     <!-- Hero Section -->
     <section id="home" class="min-h-screen flex items-center justify-center relative pt-20">
         <div class="container mx-auto px-6 text-center">
-            <div class="reveal">
-                <div class="relative inline-block mb-8">
-                    <div class="w-48 h-48 mx-auto morph bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 p-1">
-                        <div class="w-full h-full rounded-full bg-slate-900 flex items-center justify-center morph">
-                            <img src="https://placehold.co/180x180/1F2937/D1D5DB?text=Profile" alt="Profile" class="w-40 h-40 rounded-full object-cover">
-                        </div>
+            <div class="mb-8">
+                <div class="relative inline-block">
+                    <div class="w-56 h-56 mx-auto rounded-full bg-gradient-to-r from-cyan-400 via-purple-500 to-blue-600 p-2 animate-pulse">
+                        <img src="https://placehold.co/200x200/1e293b/06b6d4?text=DG" alt="Profile" class="w-full h-full rounded-full object-cover">
+                    </div>
+                    <div class="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full flex items-center justify-center animate-bounce">
+                        <i class="fas fa-code text-2xl text-white"></i>
                     </div>
                 </div>
-                <h1 class="text-5xl md:text-7xl font-black mb-6 text-gradient">
-                    Desnabil Gymnastiar
-                </h1>
-                <p class="text-xl md:text-2xl text-slate-300 mb-4 typing" id="typing-text">Full-Stack Web Developer</p>
-                <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-8">
-                    Creating exceptional digital experiences with modern technologies and clean, efficient code.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <a href="#projects" class="px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full font-semibold hover-lift neon-glow">
-                        <i class="fas fa-rocket mr-2"></i>View My Work
-                    </a>
-                    <a href="#contact" class="px-8 py-4 border-2 border-cyan-400 text-cyan-400 rounded-full font-semibold hover:bg-cyan-400 hover:text-slate-900 transition-all duration-300">
-                        <i class="fas fa-envelope mr-2"></i>Get In Touch
-                    </a>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent text-glow">
+                Desnabil Gymnastiar
+            </h1>
+            
+            <p class="text-2xl md:text-3xl mb-4 text-slate-300 typing" id="typing-text">
+                Full-Stack Developer
+            </p>
+            
+            <p class="text-lg text-slate-400 max-w-3xl mx-auto mb-8 leading-relaxed">
+                🚀 Creating exceptional digital experiences with modern technologies, clean code, and innovative solutions. 
+                Turning complex problems into elegant, user-friendly applications.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
+                <a href="#projects" class="group px-8 py-4 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full font-bold text-lg hover-glow transition-all duration-300 neon-cyan">
+                    <i class="fas fa-rocket mr-2 group-hover:animate-bounce"></i>
+                    View My Work
+                </a>
+                <a href="#contact" class="px-8 py-4 border-2 border-purple-500 text-purple-400 rounded-full font-bold text-lg hover:bg-purple-500 hover:text-white transition-all duration-300">
+                    <i class="fas fa-envelope mr-2"></i>
+                    Get In Touch
+                </a>
+            </div>
+
+            <!-- Social Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-2xl mx-auto">
+                <div class="glass rounded-2xl p-4 hover-glow transition-all duration-300">
+                    <div class="text-2xl font-bold text-cyan-400">2+</div>
+                    <div class="text-slate-400">Years Experience</div>
+                </div>
+                <div class="glass rounded-2xl p-4 hover-glow transition-all duration-300">
+                    <div class="text-2xl font-bold text-purple-400">95%</div>
+                    <div class="text-slate-400">Error Reduction</div>
+                </div>
+                <div class="glass rounded-2xl p-4 hover-glow transition-all duration-300">
+                    <div class="text-2xl font-bold text-green-400">100%</div>
+                    <div class="text-slate-400">Client Satisfaction</div>
                 </div>
             </div>
         </div>
         
-        <!-- Scroll indicator -->
+        <!-- Scroll Indicator -->
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-            <i class="fas fa-chevron-down text-2xl text-slate-400"></i>
+            <i class="fas fa-chevron-down text-3xl text-cyan-400 opacity-70"></i>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="py-20 relative">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gradient">About Me</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-600 mx-auto"></div>
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-black mb-4 bg-gradient-to-r from-cyan-400 to-purple-600 bg-clip-text text-transparent">
+                    About Me
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-purple-600 mx-auto"></div>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="reveal">
-                    <div class="glass rounded-3xl p-8 hover-lift">
-                        <h3 class="text-2xl font-bold mb-6 text-cyan-400">
-                            <i class="fas fa-user-code mr-3"></i>Professional Journey
-                        </h3>
-                        <p class="text-slate-300 mb-6 leading-relaxed">
-                            I am a professional full-stack web developer with 2 years of experience in creating robust, 
-                            scalable digital solutions. My journey in technology started from a passion for solving 
-                            complex problems and transforming ideas into functional, user-friendly applications.
-                        </p>
-                        <p class="text-slate-300 mb-6 leading-relaxed">
-                            With extensive experience at leading companies in the automotive industry, I've developed 
-                            systems that significantly improved operational efficiency and reduced errors by up to 95%.
-                        </p>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="px-4 py-2 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full text-cyan-400 border border-cyan-400/30">
-                                <i class="fas fa-check mr-2"></i>Problem Solver
-                            </span>
-                            <span class="px-4 py-2 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full text-purple-400 border border-purple-400/30">
-                                <i class="fas fa-lightbulb mr-2"></i>Innovative
-                            </span>
-                            <span class="px-4 py-2 bg-gradient-to-r from-emerald-500/20 to-teal-500/20 rounded-full text-emerald-400 border border-emerald-400/30">
-                                <i class="fas fa-rocket mr-2"></i>Performance Focused
-                            </span>
+                <div class="glass rounded-3xl p-8 hover-glow transition-all duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-gradient-to-r from-cyan-400 to-blue-600 rounded-full flex items-center justify-center mr-4">
+                            <i class="fas fa-user-astronaut text-xl text-white"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-cyan-400">Professional Journey</h3>
+                    </div>
+                    
+                    <p class="text-slate-300 mb-6 leading-relaxed">
+                        I am a passionate full-stack web developer with <span class="text-cyan-400 font-semibold">2+ years</span> of experience creating robust, scalable digital solutions. My journey began with a fascination for problem-solving and has evolved into a career of transforming complex ideas into intuitive, user-friendly applications.
+                    </p>
+                    
+                    <p class="text-slate-300 mb-6 leading-relaxed">
+                        With extensive experience in the <span class="text-purple-400 font-semibold">automotive industry</span>, I've developed systems that have achieved remarkable results - reducing operational errors by up to <span class="text-green-400 font-bold">95%</span> and significantly improving customer satisfaction.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-xl p-4 border border-cyan-500/30">
+                            <i class="fas fa-brain text-2xl text-cyan-400 mb-2"></i>
+                            <div class="font-semibold text-cyan-400">Problem Solver</div>
+                        </div>
+                        <div class="bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-xl p-4 border border-purple-500/30">
+                            <i class="fas fa-lightbulb text-2xl text-purple-400 mb-2"></i>
+                            <div class="font-semibold text-purple-400">Innovator</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="reveal">
-                    <div class="glass rounded-3xl p-8 hover-lift">
-                        <h3 class="text-2xl font-bold mb-6 text-blue-400">
-                            <i class="fas fa-chart-line mr-3"></i>Key Achievements
-                        </h3>
-                        <div class="space-y-6">
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 bg-gradient-to-r from-green-400 to-emerald-600 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-trophy text-white"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-green-400 mb-1">95% Error Reduction</h4>
-                                    <p class="text-slate-300 text-sm">Implemented component export system that dramatically reduced shipping errors</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 bg-gradient-to-r from-blue-400 to-cyan-600 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-users text-white"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-blue-400 mb-1">Enhanced User Experience</h4>
-                                    <p class="text-slate-300 text-sm">Delivered intuitive systems that improved customer satisfaction</p>
-                                </div>
-                            </div>
-                            <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 bg-gradient-to-r from-purple-400 to-pink-600 rounded-full flex items-center justify-center flex-shrink-0">
-                                    <i class="fas fa-code text-white"></i>
-                                </div>
-                                <div>
-                                    <h4 class="font-semibold text-purple-400 mb-1">Clean Architecture</h4>
-                                    <p class="text-slate-300 text-sm">Developed maintainable, scalable code following best practices</p>
-                                </div>
-                            </div>
+                <div class="space-y-6">
+                    <div class="glass rounded-2xl p-6 hover-glow transition-all duration-300 border-l-4 border-green-400">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-trophy text-2xl text-green-400 mr-3"></i>
+                            <h4 class="text-xl font-bold text-green-400">95% Error Reduction</h4>
                         </div>
+                        <p class="text-slate-300">Implemented advanced component export system that dramatically reduced shipping errors in automotive manufacturing.</p>
+                    </div>
+
+                    <div class="glass rounded-2xl p-6 hover-glow transition-all duration-300 border-l-4 border-blue-400">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-users text-2xl text-blue-400 mr-3"></i>
+                            <h4 class="text-xl font-bold text-blue-400">Enhanced UX</h4>
+                        </div>
+                        <p class="text-slate-300">Delivered intuitive systems that significantly improved user experience and operational efficiency.</p>
+                    </div>
+
+                    <div class="glass rounded-2xl p-6 hover-glow transition-all duration-300 border-l-4 border-purple-400">
+                        <div class="flex items-center mb-3">
+                            <i class="fas fa-code text-2xl text-purple-400 mr-3"></i>
+                            <h4 class="text-xl font-bold text-purple-400">Clean Architecture</h4>
+                        </div>
+                        <p class="text-slate-300">Developed maintainable, scalable applications following industry best practices and modern standards.</p>
                     </div>
                 </div>
             </div>
@@ -305,101 +308,135 @@
     <!-- Skills Section -->
     <section id="skills" class="py-20 relative">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gradient">Skills & Technologies</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-600 mx-auto mb-4"></div>
-                <p class="text-slate-400 max-w-2xl mx-auto">Technologies and tools I use to bring ideas to life</p>
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-black mb-4 bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent">
+                    Skills & Technologies
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-purple-400 to-cyan-400 mx-auto mb-6"></div>
+                <p class="text-slate-400 text-xl max-w-2xl mx-auto">
+                    Technologies and tools I use to bring ideas to life
+                </p>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                 <!-- PHP -->
-                <div class="reveal glass rounded-2xl p-6 text-center hover-lift group">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-indigo-400 to-purple-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fab fa-php text-2xl text-white"></i>
+                <div class="glass rounded-2xl p-6 text-center hover-glow transition-all duration-300 group">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i class="fab fa-php text-3xl text-white"></i>
                     </div>
-                    <h3 class="font-semibold text-white mb-2">PHP</h3>
-                    <div class="skill-bar"></div>
+                    <h3 class="font-bold text-white mb-2">PHP</h3>
+                    <p class="text-xs text-slate-400">Native & Frameworks</p>
+                    <div class="mt-3 bg-slate-700 rounded-full h-2 overflow-hidden">
+                        <div class="skill-progress bg-gradient-to-r from-purple-500 to-indigo-600 h-full" style="width: 90%;"></div>
+                    </div>
                 </div>
 
                 <!-- MySQL -->
-                <div class="reveal glass rounded-2xl p-6 text-center hover-lift group">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-orange-400 to-red-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-database text-2xl text-white"></i>
+                <div class="glass rounded-2xl p-6 text-center hover-glow transition-all duration-300 group">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-database text-3xl text-white"></i>
                     </div>
-                    <h3 class="font-semibold text-white mb-2">MySQL</h3>
-                    <div class="skill-bar"></div>
+                    <h3 class="font-bold text-white mb-2">MySQL</h3>
+                    <p class="text-xs text-slate-400">Database Design</p>
+                    <div class="mt-3 bg-slate-700 rounded-full h-2 overflow-hidden">
+                        <div class="skill-progress bg-gradient-to-r from-orange-500 to-red-600 h-full" style="width: 85%;"></div>
+                    </div>
                 </div>
 
                 <!-- JavaScript -->
-                <div class="reveal glass rounded-2xl p-6 text-center hover-lift group">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-yellow-400 to-orange-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fab fa-js-square text-2xl text-white"></i>
+                <div class="glass rounded-2xl p-6 text-center hover-glow transition-all duration-300 group">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-yellow-500 to-orange-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i class="fab fa-js-square text-3xl text-white"></i>
                     </div>
-                    <h3 class="font-semibold text-white mb-2">JavaScript</h3>
-                    <div class="skill-bar"></div>
-                </div>
-
-                <!-- Node.js -->
-                <div class="reveal glass rounded-2xl p-6 text-center hover-lift group">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-green-400 to-emerald-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fab fa-node-js text-2xl text-white"></i>
+                    <h3 class="font-bold text-white mb-2">JavaScript</h3>
+                    <p class="text-xs text-slate-400">ES6+ & Frameworks</p>
+                    <div class="mt-3 bg-slate-700 rounded-full h-2 overflow-hidden">
+                        <div class="skill-progress bg-gradient-to-r from-yellow-500 to-orange-600 h-full" style="width: 88%;"></div>
                     </div>
-                    <h3 class="font-semibold text-white mb-2">Node.js</h3>
-                    <div class="skill-bar"></div>
                 </div>
 
                 <!-- Laravel -->
-                <div class="reveal glass rounded-2xl p-6 text-center hover-lift group">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-red-400 to-pink-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fab fa-laravel text-2xl text-white"></i>
+                <div class="glass rounded-2xl p-6 text-center hover-glow transition-all duration-300 group">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-red-500 to-pink-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i class="fab fa-laravel text-3xl text-white"></i>
                     </div>
-                    <h3 class="font-semibold text-white mb-2">Laravel</h3>
-                    <div class="skill-bar"></div>
+                    <h3 class="font-bold text-white mb-2">Laravel</h3>
+                    <p class="text-xs text-slate-400">MVC Framework</p>
+                    <div class="mt-3 bg-slate-700 rounded-full h-2 overflow-hidden">
+                        <div class="skill-progress bg-gradient-to-r from-red-500 to-pink-600 h-full" style="width: 80%;"></div>
+                    </div>
+                </div>
+
+                <!-- Node.js -->
+                <div class="glass rounded-2xl p-6 text-center hover-glow transition-all duration-300 group">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i class="fab fa-node-js text-3xl text-white"></i>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">Node.js</h3>
+                    <p class="text-xs text-slate-400">Backend Development</p>
+                    <div class="mt-3 bg-slate-700 rounded-full h-2 overflow-hidden">
+                        <div class="skill-progress bg-gradient-to-r from-green-500 to-emerald-600 h-full" style="width: 75%;"></div>
+                    </div>
                 </div>
 
                 <!-- Bootstrap -->
-                <div class="reveal glass rounded-2xl p-6 text-center hover-lift group">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-purple-400 to-indigo-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fab fa-bootstrap text-2xl text-white"></i>
+                <div class="glass rounded-2xl p-6 text-center hover-glow transition-all duration-300 group">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-purple-500 to-indigo-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i class="fab fa-bootstrap text-3xl text-white"></i>
                     </div>
-                    <h3 class="font-semibold text-white mb-2">Bootstrap</h3>
-                    <div class="skill-bar"></div>
+                    <h3 class="font-bold text-white mb-2">Bootstrap</h3>
+                    <p class="text-xs text-slate-400">CSS Framework</p>
+                    <div class="mt-3 bg-slate-700 rounded-full h-2 overflow-hidden">
+                        <div class="skill-progress bg-gradient-to-r from-purple-500 to-indigo-600 h-full" style="width: 90%;"></div>
+                    </div>
                 </div>
 
                 <!-- jQuery -->
-                <div class="reveal glass rounded-2xl p-6 text-center hover-lift group">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-blue-400 to-cyan-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-code text-2xl text-white"></i>
+                <div class="glass rounded-2xl p-6 text-center hover-glow transition-all duration-300 group">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-blue-500 to-cyan-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-code text-3xl text-white"></i>
                     </div>
-                    <h3 class="font-semibold text-white mb-2">jQuery</h3>
-                    <div class="skill-bar"></div>
-                </div>
-
-                <!-- Linux -->
-                <div class="reveal glass rounded-2xl p-6 text-center hover-lift group">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-gray-400 to-slate-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fab fa-linux text-2xl text-white"></i>
+                    <h3 class="font-bold text-white mb-2">jQuery</h3>
+                    <p class="text-xs text-slate-400">DOM Manipulation</p>
+                    <div class="mt-3 bg-slate-700 rounded-full h-2 overflow-hidden">
+                        <div class="skill-progress bg-gradient-to-r from-blue-500 to-cyan-600 h-full" style="width: 85%;"></div>
                     </div>
-                    <h3 class="font-semibold text-white mb-2">Linux</h3>
-                    <div class="skill-bar"></div>
-                </div>
-
-                <!-- Power BI -->
-                <div class="reveal glass rounded-2xl p-6 text-center hover-lift group">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-chart-bar text-2xl text-white"></i>
-                    </div>
-                    <h3 class="font-semibold text-white mb-2">Power BI</h3>
-                    <div class="skill-bar"></div>
                 </div>
 
                 <!-- CodeIgniter -->
-                <div class="reveal glass rounded-2xl p-6 text-center hover-lift group">
-                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-red-400 to-orange-600 rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                        <i class="fas fa-fire text-2xl text-white"></i>
+                <div class="glass rounded-2xl p-6 text-center hover-glow transition-all duration-300 group">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-red-500 to-orange-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-fire text-3xl text-white"></i>
                     </div>
-                    <h3 class="font-semibold text-white mb-2">CodeIgniter</h3>
-                    <div class="skill-bar"></div>
+                    <h3 class="font-bold text-white mb-2">CodeIgniter</h3>
+                    <p class="text-xs text-slate-400">CI 3 & 4</p>
+                    <div class="mt-3 bg-slate-700 rounded-full h-2 overflow-hidden">
+                        <div class="skill-progress bg-gradient-to-r from-red-500 to-orange-600 h-full" style="width: 85%;"></div>
+                    </div>
+                </div>
+
+                <!-- Linux -->
+                <div class="glass rounded-2xl p-6 text-center hover-glow transition-all duration-300 group">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-gray-500 to-slate-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i class="fab fa-linux text-3xl text-white"></i>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">Linux</h3>
+                    <p class="text-xs text-slate-400">Debian Server</p>
+                    <div class="mt-3 bg-slate-700 rounded-full h-2 overflow-hidden">
+                        <div class="skill-progress bg-gradient-to-r from-gray-500 to-slate-600 h-full" style="width: 70%;"></div>
+                    </div>
+                </div>
+
+                <!-- Power BI -->
+                <div class="glass rounded-2xl p-6 text-center hover-glow transition-all duration-300 group">
+                    <div class="w-16 h-16 mx-auto mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-chart-bar text-3xl text-white"></i>
+                    </div>
+                    <h3 class="font-bold text-white mb-2">Power BI</h3>
+                    <p class="text-xs text-slate-400">Data Visualization</p>
+                    <div class="mt-3 bg-slate-700 rounded-full h-2 overflow-hidden">
+                        <div class="skill-progress bg-gradient-to-r from-yellow-500 to-orange-500 h-full" style="width: 75%;"></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -408,92 +445,36 @@
     <!-- Projects Section -->
     <section id="projects" class="py-20 relative">
         <div class="container mx-auto px-6">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gradient">Featured Projects</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-600 mx-auto mb-4"></div>
-                <p class="text-slate-400 max-w-2xl mx-auto">Showcase of my recent work and achievements</p>
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-black mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                    Featured Projects
+                </h2>
+                <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-500 mx-auto mb-6"></div>
+                <p class="text-slate-400 text-xl max-w-2xl mx-auto">
+                    Showcase of impactful solutions and achievements
+                </p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Project 1 -->
-                <div class="reveal glass rounded-3xl overflow-hidden hover-lift group">
-                    <div class="relative h-64 bg-gradient-to-br from-blue-600 to-purple-700 flex items-center justify-center">
-                        <div class="text-6xl text-white opacity-50 group-hover:opacity-70 transition-opacity duration-300">
-                            <i class="fas fa-car"></i>
-                        </div>
-                        <div class="absolute inset-0 bg-black/20"></div>
-                    </div>
-                    <div class="p-8">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                            <span class="text-xs text-green-400 font-semibold uppercase tracking-wider">Production</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-3 text-white">Component Export System</h3>
-                        <p class="text-slate-400 mb-4">Advanced system for automotive component export processes that reduced shipping errors by 95% and improved verification efficiency for international shipments.</p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-xs">PHP</span>
-                            <span class="px-3 py-1 bg-green-500/20 text-green-400 rounded-full text-xs">MySQL</span>
-                            <span class="px-3 py-1 bg-yellow-500/20 text-yellow-400 rounded-full text-xs">JavaScript</span>
-                            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs">jQuery</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center text-cyan-400">
-                                <i class="fas fa-star mr-2"></i>
-                                <span class="text-sm">Enterprise Solution</span>
+                <div class="glass rounded-3xl overflow-hidden hover-glow transition-all duration-500 group">
+                    <div class="relative h-64 bg-gradient-to-br from-blue-600 via-purple-700 to-pink-600 overflow-hidden">
+                        <div class="absolute inset-0 bg-black/30"></div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center text-white">
+                                <i class="fas fa-car text-6xl mb-4 group-hover:scale-110 transition-transform duration-300"></i>
+                                <div class="text-2xl font-bold">Automotive Export System</div>
                             </div>
-                            <a href="#" class="px-4 py-2 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-300">
-                                <i class="fas fa-external-link-alt mr-2"></i>View Details
-                            </a>
+                        </div>
+                        <div class="absolute top-4 right-4">
+                            <span class="px-3 py-1 bg-green-500/90 text-white text-xs font-bold rounded-full flex items-center">
+                                <i class="fas fa-check-circle mr-1"></i> Production
+                            </span>
                         </div>
                     </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="reveal glass rounded-3xl overflow-hidden hover-lift group">
-                    <div class="relative h-64 bg-gradient-to-br from-green-600 to-teal-700 flex items-center justify-center">
-                        <div class="text-6xl text-white opacity-50 group-hover:opacity-70 transition-opacity duration-300">
-                            <i class="fas fa-truck"></i>
-                        </div>
-                        <div class="absolute inset-0 bg-black/20"></div>
-                    </div>
+                    
                     <div class="p-8">
-                        <div class="flex items-center gap-3 mb-4">
-                            <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
-                            <span class="text-xs text-green-400 font-semibold uppercase tracking-wider">Production</span>
-                        </div>
-                        <h3 class="text-2xl font-bold mb-3 text-white">4-Point Delivery System</h3>
-                        <p class="text-slate-400 mb-4">Comprehensive delivery assurance system that improves accuracy and reliability of customer shipments with automatic verification at each process stage.</p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="px-3 py-1 bg-red-500/20 text-red-400 rounded-full text-xs">CodeIgniter</span>
-                            <span class="px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-xs">PHP</span>
-                            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-xs">Bootstrap</span>
-                            <span class="px-3 py-1 bg-orange-500/20 text-orange-400 rounded-full text-xs">AJAX</span>
-                        </div>
-                        <div class="flex items-center justify-between">
-                            <div class="flex items-center text-green-400">
-                                <i class="fas fa-check-circle mr-2"></i>
-                                <span class="text-sm">Quality Assured</span>
-                            </div>
-                            <a href="#" class="px-4 py-2 bg-gradient-to-r from-green-500 to-teal-600 rounded-full text-sm font-semibold hover:shadow-lg transition-all duration-300">
-                                <i class="fas fa-external-link-alt mr-2"></i>View Details
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="py-20 relative">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 reveal">
-                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gradient">What People Say</h2>
-                <div class="w-24 h-1 bg-gradient-to-r from-cyan-400 to-blue-600 mx-auto mb-4"></div>
-                <p class="text-slate-400 max-w-2xl mx-auto">Feedback from colleagues and clients</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="reveal glass rounded-3xl p-8 hover-lift">
-
-
+                        <h3 class="text-2xl font-bold mb-3 text-cyan-400">Component Export Process Assurance System</h3>
+                        <p class="text-slate-300 mb-6 leading-relaxed">
+                            Advanced enterprise system for automotive component export processes that achieved 
+                            <span class="text-green-400 font-bold">95% reduction in shipping errors</span
