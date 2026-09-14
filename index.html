@@ -3,1602 +3,644 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Desnabil Gymnastiar — Portfolio</title>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --accent: #00FF87;
-    --accent2: #00C6FF;
-    --bg: #0a0a0f;
-    --surface: #111118;
-    --surface2: #1a1a24;
-    --border: rgba(255,255,255,0.08);
-    --text: #e8e8f0;
-    --muted: #6b6b80;
-    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Syne', sans-serif;
-    overflow-x: hidden;
-  }
-
-  body.nav-menu-open { overflow: hidden; }
-
-  ::selection {
-    background: rgba(0, 255, 135, 0.22);
-    color: var(--text);
-  }
-
-  a:focus-visible,
-  button:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 3px;
-  }
-
-  .mono { font-family: 'Space Mono', monospace; }
-
-  section[id] {
-    scroll-margin-top: 5.5rem;
-  }
-
-  /* Grid + aurora background */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(0,255,135,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,255,135,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    animation: gridDrift 28s linear infinite;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  body::after {
-    content: '';
-    position: fixed;
-    inset: -20%;
-    background:
-      radial-gradient(ellipse 80% 50% at 20% 40%, rgba(0, 255, 135, 0.09), transparent 55%),
-      radial-gradient(ellipse 70% 60% at 85% 20%, rgba(0, 198, 255, 0.08), transparent 50%),
-      radial-gradient(ellipse 50% 40% at 60% 85%, rgba(0, 255, 135, 0.05), transparent 45%);
-    animation: aurora 18s ease-in-out infinite alternate;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  @keyframes gridDrift {
-    0% { background-position: 0 0, 0 0; }
-    100% { background-position: 60px 60px, 60px 60px; }
-  }
-
-  @keyframes aurora {
-    0% { transform: translate(0, 0) scale(1); opacity: 1; }
-    50% { transform: translate(-2%, 3%) scale(1.05); opacity: 0.92; }
-    100% { transform: translate(2%, -2%) scale(1.02); opacity: 1; }
-  }
-
-  /* Nav */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 1rem 1.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    background: rgba(10,10,15,0.88);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-    transition:
-      padding 0.45s var(--ease-spring),
-      background 0.5s ease,
-      border-color 0.45s ease,
-      box-shadow 0.5s var(--ease-spring);
-  }
-
-  nav.is-scrolled {
-    padding: 0.65rem 1.5rem;
-    background: rgba(8, 8, 14, 0.94);
-    border-bottom-color: rgba(0, 255, 135, 0.12);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45), 0 0 60px rgba(0, 255, 135, 0.04);
-  }
-
-  .nav-logo {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.85rem;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    z-index: 102;
-    transition: opacity 0.3s ease, transform 0.4s var(--ease-spring), text-shadow 0.4s ease;
-  }
-  .nav-logo:hover {
-    opacity: 1;
-    transform: translateY(-1px);
-    text-shadow: 0 0 24px rgba(0, 255, 135, 0.35);
-  }
-
-  .nav-toggle {
-    display: none;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    background: var(--surface);
-    cursor: pointer;
-    z-index: 102;
-    transition: border-color 0.2s, background 0.2s;
-  }
-  .nav-toggle:hover {
-    border-color: rgba(0, 255, 135, 0.35);
-    background: var(--surface2);
-  }
-  .nav-toggle span {
-    display: block;
-    width: 18px;
-    height: 2px;
-    margin: 0 auto;
-    background: var(--text);
-    border-radius: 1px;
-    transition: transform 0.25s ease, opacity 0.2s;
-  }
-  .nav-toggle[aria-expanded="true"] span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg);
-  }
-  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
-  .nav-toggle[aria-expanded="true"] span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg);
-  }
-
-  .nav-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.55);
-    z-index: 99;
-    opacity: 0;
-    transition: opacity 0.25s ease;
-    pointer-events: none;
-  }
-  .nav-overlay.is-visible {
-    display: block;
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .nav-menu {
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-  }
-  .nav-menu a {
-    font-size: 0.78rem;
-    color: var(--muted);
-    text-decoration: none;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    position: relative;
-    transition: color 0.35s var(--ease-spring), transform 0.35s var(--ease-spring);
-  }
-  @media (min-width: 769px) {
-    .nav-menu a::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: -6px;
-      width: 100%;
-      height: 1px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform 0.45s var(--ease-out-expo);
-    }
-    .nav-menu a:hover::after,
-    .nav-menu a.nav-active::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-  }
-  .nav-menu a:hover {
-    color: var(--accent);
-    transform: translateY(-2px);
-  }
-  .nav-menu a.nav-active { color: var(--accent); }
-
-  /* Hero */
-  .hero {
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    align-items: center;
-    padding: 7rem 1.5rem 3.5rem;
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .hero-content { max-width: 800px; }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--accent);
-    border: 1px solid rgba(0,255,135,0.3);
-    padding: 0.4rem 0.9rem;
-    border-radius: 2px;
-    margin-bottom: 2rem;
-    letter-spacing: 0.1em;
-    transition: border-color 0.4s ease, box-shadow 0.5s ease, transform 0.45s var(--ease-spring);
-  }
-  .hero-badge:hover {
-    border-color: rgba(0, 255, 135, 0.55);
-    box-shadow: 0 0 28px rgba(0, 255, 135, 0.12);
-    transform: translateY(-2px);
-  }
-
-  .hero-badge::before {
-    content: '';
-    width: 6px; height: 6px;
-    border-radius: 50%;
-    background: var(--accent);
-    animation: blink 1.5s infinite;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.2; }
-  }
-
-  .hero-name {
-    font-size: clamp(3rem, 8vw, 6.5rem);
-    font-weight: 800;
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    margin-bottom: 1.5rem;
-  }
-
-  .hero-name .line1 {
-    display: inline-block;
-    transition: transform 0.6s var(--ease-spring);
-  }
-
-  .hero-name .line2 {
-    display: inline-block;
-    background: linear-gradient(
-      110deg,
-      var(--accent) 0%,
-      var(--accent2) 40%,
-      var(--accent) 80%,
-      var(--accent2) 100%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientFlow 5s ease-in-out infinite;
-  }
-
-  @keyframes gradientFlow {
-    0%, 100% { background-position: 0% center; }
-    50% { background-position: 100% center; }
-  }
-
-  .hero-tagline {
-    font-size: 1.1rem;
-    color: var(--muted);
-    line-height: 1.7;
-    max-width: 520px;
-    margin-bottom: 3rem;
-    transition: color 0.5s ease;
-  }
-
-  .hero:hover .hero-tagline { color: #8a8aa0; }
-
-  .hero-ctas {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .btn-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: var(--accent);
-    color: #000;
-    font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    padding: 0.85rem 1.75rem;
-    border-radius: 2px;
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    transition:
-      transform 0.45s var(--ease-spring),
-      box-shadow 0.45s ease,
-      background 0.35s ease;
-  }
-  .btn-primary::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.45) 50%, transparent 60%);
-    transform: translateX(-120%);
-    transition: transform 0.65s var(--ease-out-expo);
-  }
-  .btn-primary:hover {
-    background: #00e07a;
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 12px 36px rgba(0, 255, 135, 0.28), 0 0 0 1px rgba(255,255,255,0.08);
-  }
-  .btn-primary:hover::after { transform: translateX(120%); }
-  .btn-primary span:last-child {
-    display: inline-block;
-    transition: transform 0.4s var(--ease-spring);
-  }
-  .btn-primary:hover span:last-child { transform: translateX(4px); }
-
-  .btn-outline {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-family: 'Space Mono', monospace;
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    padding: 0.85rem 1.75rem;
-    border-radius: 2px;
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    transition:
-      transform 0.45s var(--ease-spring),
-      border-color 0.4s ease,
-      color 0.35s ease,
-      box-shadow 0.45s ease,
-      background 0.45s ease;
-  }
-  .btn-outline::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(0,255,135,0.12), rgba(0,198,255,0.08));
-    opacity: 0;
-    transition: opacity 0.45s ease;
-  }
-  .btn-outline span { position: relative; z-index: 1; }
-  .btn-outline:hover {
-    border-color: rgba(0, 255, 135, 0.45);
-    color: var(--accent);
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 32px rgba(0, 0, 0, 0.35), 0 0 24px rgba(0, 198, 255, 0.08);
-    background: rgba(17, 17, 24, 0.9);
-  }
-  .btn-outline:hover::before { opacity: 1; }
-
-  /* Floating stats */
-  .hero-stats {
-    position: absolute;
-    right: 1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  @media (min-width: 1100px) {
-    .hero { padding-left: 2rem; padding-right: 2rem; }
-    .hero-stats { right: 2rem; }
-  }
-
-  .about-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: clamp(2rem, 5vw, 4rem);
-    align-items: start;
-  }
-
-  .stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.25rem 1.5rem;
-    text-align: center;
-    min-width: 120px;
-    transition:
-      transform 0.5s var(--ease-spring),
-      border-color 0.4s ease,
-      box-shadow 0.5s ease,
-      background 0.4s ease;
-    animation: statFloat 5s ease-in-out infinite;
-  }
-  .stat-card:nth-child(1) { animation-delay: 0s; }
-  .stat-card:nth-child(2) { animation-delay: 0.4s; }
-  .stat-card:nth-child(3) { animation-delay: 0.8s; }
-
-  @keyframes statFloat {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
-  }
-
-  .stat-card:hover {
-    animation: none;
-    transform: translateY(-10px) scale(1.03);
-    border-color: rgba(0, 255, 135, 0.35);
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 0 32px rgba(0, 255, 135, 0.1);
-    background: var(--surface2);
-  }
-
-  .stat-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--accent);
-    line-height: 1;
-    display: block;
-    text-shadow: 0 0 40px rgba(0, 255, 135, 0.25);
-    transition: transform 0.4s var(--ease-spring);
-  }
-  .stat-card:hover .stat-num { transform: scale(1.06); }
-
-  .stat-label {
-    font-size: 0.7rem;
-    color: var(--muted);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    margin-top: 0.4rem;
-  }
-
-  /* Section */
-  section {
-    position: relative;
-    z-index: 1;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 6rem 2rem;
-  }
-
-  .section-label {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--accent);
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .section-label::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    max-width: 120px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
-    transform-origin: left;
-    transform: scaleX(0.2);
-    opacity: 0.5;
-    transition:
-      transform 1s var(--ease-out-expo),
-      opacity 0.8s ease;
-  }
-
-  .section-label.is-inview::after {
-    transform: scaleX(1);
-    opacity: 1;
-  }
-
-  .section-title {
-    font-size: clamp(2rem, 4vw, 3.5rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    margin-bottom: 1rem;
-    line-height: 1.1;
-    transition: text-shadow 0.6s ease;
-  }
-  .section-title.is-inview {
-    text-shadow: 0 0 80px rgba(0, 255, 135, 0.06);
-  }
-
-  .section-desc {
-    font-size: 1rem;
-    color: var(--muted);
-    max-width: 560px;
-    line-height: 1.7;
-    margin-bottom: 3.5rem;
-  }
-
-  /* Skills grid */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .skill-cell {
-    background: var(--surface);
-    padding: 1.75rem;
-    transition:
-      background 0.45s ease,
-      transform 0.5s var(--ease-spring),
-      border-color 0.4s ease,
-      box-shadow 0.5s ease;
-  }
-  .skill-cell:hover {
-    background: var(--surface2);
-    transform: translateY(-6px);
-    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
-  }
-
-  .skill-icon {
-    width: 40px; height: 40px;
-    border-radius: 4px;
-    background: rgba(0,255,135,0.1);
-    border: 1px solid rgba(0,255,135,0.2);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    transition:
-      transform 0.5s var(--ease-spring),
-      box-shadow 0.45s ease,
-      border-color 0.35s ease;
-  }
-  .skill-cell:hover .skill-icon {
-    transform: scale(1.08) rotate(-4deg);
-    box-shadow: 0 0 24px rgba(0, 255, 135, 0.15);
-    border-color: rgba(0, 255, 135, 0.4);
-  }
-
-  .skill-name {
-    font-weight: 700;
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
-    color: var(--text);
-  }
-
-  .skill-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 0.75rem;
-  }
-
-  .tag {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--accent);
-    border: 1px solid rgba(0,255,135,0.2);
-    padding: 0.2rem 0.55rem;
-    border-radius: 2px;
-    letter-spacing: 0.05em;
-    transition: transform 0.3s var(--ease-spring), border-color 0.3s ease, background 0.3s ease;
-  }
-  .skill-cell:hover .tag:hover {
-    transform: translateY(-2px);
-    border-color: rgba(0, 255, 135, 0.45);
-    background: rgba(0, 255, 135, 0.06);
-  }
-
-  /* Experience */
-  .exp-timeline { display: flex; flex-direction: column; gap: 2px; }
-
-  .exp-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 2rem 2.5rem;
-    position: relative;
-    overflow: hidden;
-    transition:
-      border-color 0.45s ease,
-      transform 0.55s var(--ease-spring),
-      box-shadow 0.55s ease;
-    cursor: default;
-  }
-
-  .exp-card::before {
-    content: '';
-    position: absolute;
-    left: 0; top: 0; bottom: 0;
-    width: 3px;
-    background: linear-gradient(180deg, var(--accent), var(--accent2));
-    opacity: 0;
-    transition: opacity 0.45s ease, box-shadow 0.5s ease;
-    box-shadow: 0 0 20px rgba(0, 255, 135, 0.4);
-  }
-
-  .exp-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(800px circle at var(--mx, 50%) var(--my, 50%), rgba(0, 255, 135, 0.06), transparent 40%);
-    opacity: 0;
-    transition: opacity 0.5s ease;
-    pointer-events: none;
-  }
-
-  .exp-card:hover {
-    border-color: rgba(0,255,135,0.28);
-    transform: translateY(-4px);
-    box-shadow: 0 24px 56px rgba(0, 0, 0, 0.38), 0 0 0 1px rgba(0, 255, 135, 0.08);
-  }
-  .exp-card:hover::before { opacity: 1; }
-  .exp-card:hover::after { opacity: 1; }
-
-  .exp-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1.25rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .exp-company {
-    font-size: 0.72rem;
-    font-family: 'Space Mono', monospace;
-    color: var(--accent);
-    letter-spacing: 0.1em;
-    margin-bottom: 0.4rem;
-  }
-
-  .exp-role {
-    font-size: 1.2rem;
-    font-weight: 700;
-  }
-
-  .exp-period {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--muted);
-    text-align: right;
-  }
-
-  .exp-bullets {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.6rem;
-  }
-
-  .exp-bullets li {
-    font-size: 0.9rem;
-    color: var(--muted);
-    padding-left: 1.2rem;
-    position: relative;
-    line-height: 1.6;
-  }
-
-  .exp-bullets li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--accent);
-    font-size: 0.75rem;
-  }
-
-  /* Projects */
-  .projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .project-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 1.75rem;
-    position: relative;
-    overflow: hidden;
-    transition:
-      transform 0.55s var(--ease-spring),
-      border-color 0.45s ease,
-      background 0.45s ease,
-      box-shadow 0.55s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .project-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background:
-      radial-gradient(600px circle at var(--px, 50%) var(--py, 0%), rgba(0, 255, 135, 0.09), transparent 50%),
-      linear-gradient(145deg, rgba(0, 198, 255, 0.06), transparent 55%);
-    opacity: 0;
-    transition: opacity 0.55s ease;
-    pointer-events: none;
-  }
-
-  .project-card:hover {
-    border-color: rgba(0,255,135,0.22);
-    transform: translateY(-8px) scale(1.01);
-    background: var(--surface2);
-    box-shadow: 0 28px 64px rgba(0, 0, 0, 0.42), 0 0 48px rgba(0, 198, 255, 0.06);
-  }
-  .project-card:hover::before { opacity: 1; }
-
-  .project-num {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--muted);
-  }
-
-  .project-name {
-    font-size: 1.15rem;
-    font-weight: 700;
-    line-height: 1.3;
-  }
-
-  .project-desc {
-    font-size: 0.88rem;
-    color: var(--muted);
-    line-height: 1.6;
-    flex: 1;
-  }
-
-  .project-tech {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-  }
-
-  .tech-pill {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.65rem;
-    color: var(--accent2);
-    border: 1px solid rgba(0,198,255,0.2);
-    padding: 0.2rem 0.6rem;
-    border-radius: 2px;
-    transition: transform 0.35s var(--ease-spring), border-color 0.35s ease, box-shadow 0.35s ease;
-  }
-  .project-card:hover .tech-pill:hover,
-  .exp-card:hover .tech-pill:hover {
-    transform: translateY(-2px);
-    border-color: rgba(0, 198, 255, 0.45);
-    box-shadow: 0 0 16px rgba(0, 198, 255, 0.12);
-  }
-
-  /* Contact */
-  .contact-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    align-items: start;
-  }
-
-  .contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
-
-  .contact-link {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1.25rem 1.5rem;
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    text-decoration: none;
-    color: var(--text);
-    font-size: 0.9rem;
-    position: relative;
-    overflow: hidden;
-    transition:
-      transform 0.5s var(--ease-spring),
-      border-color 0.4s ease,
-      color 0.35s ease,
-      box-shadow 0.5s ease;
-  }
-
-  .contact-link::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(105deg, transparent 30%, rgba(0,255,135,0.07) 50%, transparent 70%);
-    transform: translateX(-100%);
-    transition: transform 0.85s var(--ease-out-expo);
-  }
-
-  .contact-link:hover {
-    border-color: rgba(0,255,135,0.38);
-    color: var(--accent);
-    transform: translateX(6px);
-    box-shadow: -6px 0 32px rgba(0, 255, 135, 0.08);
-  }
-  .contact-link:hover::after { transform: translateX(100%); }
-
-  .contact-link-icon {
-    width: 36px; height: 36px;
-    background: rgba(0,255,135,0.08);
-    border: 1px solid rgba(0,255,135,0.15);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    flex-shrink: 0;
-    transition: transform 0.45s var(--ease-spring), box-shadow 0.45s ease, border-color 0.35s ease;
-  }
-  .contact-link:hover .contact-link-icon {
-    transform: scale(1.08) rotate(4deg);
-    box-shadow: 0 0 20px rgba(0, 255, 135, 0.2);
-    border-color: rgba(0, 255, 135, 0.35);
-  }
-
-  /* Footer */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 2rem;
-    text-align: center;
-    position: relative;
-    z-index: 1;
-  }
-
-  footer p {
-    font-family: 'Space Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--muted);
-    letter-spacing: 0.05em;
-    transition: color 0.4s ease, text-shadow 0.5s ease;
-  }
-  footer:hover p {
-    color: #8f8fa3;
-    text-shadow: 0 0 24px rgba(0, 255, 135, 0.08);
-  }
-
-  /* Cursor dot */
-  .cursor-dot {
-    width: 6px; height: 6px;
-    background: var(--accent);
-    border-radius: 50%;
-    position: fixed;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: transform 0.1s;
-  }
-
-  /* Scroll reveal */
-  .reveal {
-    opacity: 0;
-    transform: translateY(48px) scale(0.97);
-    filter: blur(10px);
-    transition:
-      opacity 1s var(--ease-out-expo),
-      transform 1s var(--ease-out-expo),
-      filter 0.9s ease;
-    transition-delay: var(--reveal-delay, 0s);
-  }
-  .reveal.is-inview {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-
-  .reveal-stagger > * {
-    opacity: 0;
-    transform: translateY(40px);
-    filter: blur(8px);
-    transition:
-      opacity 0.85s var(--ease-out-expo),
-      transform 0.85s var(--ease-out-expo),
-      filter 0.75s ease;
-  }
-
-  .reveal-stagger.is-inview > *:nth-child(1) { transition-delay: 0.04s; }
-  .reveal-stagger.is-inview > *:nth-child(2) { transition-delay: 0.1s; }
-  .reveal-stagger.is-inview > *:nth-child(3) { transition-delay: 0.16s; }
-  .reveal-stagger.is-inview > *:nth-child(4) { transition-delay: 0.22s; }
-  .reveal-stagger.is-inview > *:nth-child(5) { transition-delay: 0.28s; }
-  .reveal-stagger.is-inview > *:nth-child(6) { transition-delay: 0.34s; }
-  .reveal-stagger.is-inview > *:nth-child(7) { transition-delay: 0.4s; }
-  .reveal-stagger.is-inview > *:nth-child(8) { transition-delay: 0.46s; }
-  .reveal-stagger.is-inview > *:nth-child(9) { transition-delay: 0.52s; }
-  .reveal-stagger.is-inview > *:nth-child(10) { transition-delay: 0.58s; }
-  .reveal-stagger.is-inview > *:nth-child(11) { transition-delay: 0.64s; }
-  .reveal-stagger.is-inview > *:nth-child(12) { transition-delay: 0.7s; }
-
-  .reveal-stagger.is-inview > * {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-
-  .hero-content {
-    transition: transform 0.15s ease-out;
-    will-change: transform;
-  }
-
-  /* Animations */
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-      filter: blur(12px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-      filter: blur(0);
-    }
-  }
-
-  .fade-up {
-    opacity: 0;
-    animation: fadeUp 1s var(--ease-out-expo) forwards;
-  }
-
-  .delay-1 { animation-delay: 0.12s; }
-  .delay-2 { animation-delay: 0.26s; }
-  .delay-3 { animation-delay: 0.42s; }
-  .delay-4 { animation-delay: 0.58s; }
-  .delay-5 { animation-delay: 0.74s; }
-
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    body::before,
-    body::after {
-      animation: none !important;
-    }
-    .fade-up {
-      opacity: 1;
-      animation: none;
-      filter: none;
-    }
-    .hero-badge::before { animation: none; }
-    .hero-name .line2 { animation: none; background-position: 0% center; }
-    .stat-card { animation: none; }
-    .reveal,
-    .reveal.is-inview {
-      opacity: 1;
-      transform: none;
-      filter: none;
-      transition: none;
-    }
-    .reveal-stagger > *,
-    .reveal-stagger.is-inview > * {
-      opacity: 1 !important;
-      transform: none !important;
-      filter: none !important;
-      transition: none !important;
-    }
-    .section-label::after {
-      transform: scaleX(1);
-      opacity: 1;
-      transition: none;
-    }
-    .hero-content { transform: none !important; }
-    .exp-card, .project-card, .skill-cell, .contact-link {
-      opacity: 1 !important;
-      transform: none !important;
-      filter: none !important;
-    }
-    .exp-card:hover, .project-card:hover, .btn-primary:hover, .btn-outline:hover,
-    .skill-cell:hover, .stat-card:hover, .contact-link:hover {
-      transform: none;
-    }
-    .btn-primary::after,
-    .contact-link::after {
-      display: none;
-    }
-    @media (max-width: 768px) {
-      .nav-menu a {
-        opacity: 1;
-        transform: none;
-        transition: color 0.2s ease;
-      }
-    }
-  }
-
-  @media (hover: none), (pointer: coarse) {
-    .cursor-dot { display: none !important; }
-  }
-
-  @media (max-width: 900px) {
-    .about-grid { grid-template-columns: 1fr; }
-  }
-
-  @media (max-width: 1024px) {
-    .hero-stats { display: none; }
-  }
-
-  @media (max-width: 768px) {
-    .contact-grid { grid-template-columns: 1fr; }
-    nav { padding: 0.85rem 1rem; }
-    .nav-toggle { display: flex; }
-    .nav-menu {
-      position: fixed;
-      top: 0;
-      right: 0;
-      width: min(320px, 88vw);
-      height: 100vh;
-      height: 100dvh;
-      flex-direction: column;
-      align-items: stretch;
-      justify-content: center;
-      gap: 0;
-      padding: 5rem 1.75rem 2rem;
-      background: rgba(14, 14, 22, 0.97);
-      border-left: 1px solid var(--border);
-      box-shadow: -12px 0 40px rgba(0, 0, 0, 0.45);
-      transform: translateX(100%);
-      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-      z-index: 101;
-    }
-    .nav-menu.is-open {
-      transform: translateX(0);
-    }
-    .nav-menu a {
-      font-size: 0.82rem;
-      padding: 1rem 0;
-      border-bottom: 1px solid var(--border);
-      opacity: 0;
-      transform: translateX(28px);
-      transition:
-        opacity 0.5s var(--ease-out-expo),
-        transform 0.55s var(--ease-spring),
-        color 0.35s ease;
-    }
-    .nav-menu.is-open a {
-      opacity: 1;
-      transform: translateX(0);
-    }
-    .nav-menu.is-open a:nth-child(1) { transition-delay: 0.07s; }
-    .nav-menu.is-open a:nth-child(2) { transition-delay: 0.12s; }
-    .nav-menu.is-open a:nth-child(3) { transition-delay: 0.17s; }
-    .nav-menu.is-open a:nth-child(4) { transition-delay: 0.22s; }
-    .nav-menu.is-open a:nth-child(5) { transition-delay: 0.27s; }
-    .nav-menu a:last-child { border-bottom: none; }
-    section { padding-left: 1.25rem; padding-right: 1.25rem; }
-    .hero { padding-left: 1.25rem; padding-right: 1.25rem; }
-  }
-</style>
+<title>Desnabil Gymnastiar — PPIC &amp; Full-Stack Developer</title>
+<meta name="description" content="Portfolio of Desnabil Gymnastiar — PPIC &amp; Full-Stack Developer specializing in Manufacturing Systems, Web Applications, and Industrial Automation in Cikarang, Indonesia.">
+<meta property="og:title" content="Desnabil Gymnastiar — PPIC &amp; Full-Stack Developer">
+<meta property="og:description" content="Portfolio of Desnabil Gymnastiar — Specializing in Manufacturing Systems, Full-Stack Web Applications, and Industrial Automation in Cikarang, Indonesia.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://fbilgy-tech.github.io/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Desnabil Gymnastiar — PPIC &amp; Full-Stack Developer">
+<meta name="twitter:description" content="Portfolio of Desnabil Gymnastiar — Specializing in Manufacturing Systems, Full-Stack Web Applications, and Industrial Automation.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<div class="cursor-dot" id="cursor" aria-hidden="true"></div>
-<div class="nav-overlay" id="navOverlay" hidden></div>
+<!-- SCROLL PROGRESS BAR -->
+<div id="scrollProgress"></div>
 
-<!-- NAV -->
-<nav id="siteNav">
-  <a href="#" class="nav-logo mono">// desnabil.dev</a>
-  <button type="button" class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Buka menu navigasi">
-    <span></span><span></span><span></span>
-  </button>
-  <div class="nav-menu" id="navMenu">
-    <a href="#about">About</a>
-    <a href="#skills">Skills</a>
-    <a href="#experience">Experience</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
+<!-- HEADER & NAVIGATION -->
+<header>
+  <div class="container">
+    <div class="nav-bar">
+      <a href="#" class="nav-logo">
+        <div class="avatar-circle">DG</div>
+        <span>Desnabil Gymnastiar</span>
+      </a>
+
+      <nav class="nav-menu" id="navMenu">
+        <a href="#about">About</a>
+        <a href="#transformation">Impact</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <button id="navPrintBtn" style="color:var(--text-sub); font-size:0.88rem; font-weight:500; cursor:pointer;">📄 Print CV</button>
+        <a href="#contact" class="btn-contact-nav">Contact Me</a>
+      </nav>
+    </div>
   </div>
-</nav>
+</header>
 
-<!-- HERO -->
-<div style="position:relative; z-index:1;">
-  <div class="hero">
-    <div class="hero-content">
-      <div class="hero-badge fade-up">PPIC &amp; Full-Stack Developer · Cikarang, ID</div>
+<main class="container">
 
-      <h1 class="hero-name fade-up delay-1">
-        <span class="line1">DESNABIL</span><br>
-        <span class="line2">GYMNASTIAR</span>
-      </h1>
+  <!-- HERO SECTION -->
+  <div class="hero-section">
+    <div class="hero-grid">
+      <!-- Left Column: Introduction & Headline -->
+      <div class="hero-left">
+        <div class="badge-status">
+          <span class="status-dot"></span>
+          <span>Available for Full-Stack &amp; Industrial Systems Opportunities</span>
+        </div>
 
-      <p class="hero-tagline fade-up delay-2">
-        Bridging manufacturing complexity with high-end software engineering.
-        I don't just plan production — I build the systems that run it.
-      </p>
+        <h1 class="hero-title">
+          Building Reliable<br>
+          <span class="type-highlight" id="typewriterText">Web Applications</span><span class="type-cursor">|</span>
+        </h1>
 
-      <div class="hero-ctas fade-up delay-3">
-        <a href="#projects" class="btn-primary">
-          <span>View Projects</span>
-          <span>→</span>
-        </a>
-        <a href="#contact" class="btn-outline">
-          <span>Get in Touch</span>
-        </a>
+        <p class="hero-subtitle">
+          Halo! Saya <strong>Desnabil Gymnastiar</strong>, berdomisili di <strong>Cikarang Barat, Jawa Barat</strong>.
+          Berpengalaman di industri manufaktur otomotif dalam merancang dan mengembangkan
+          <strong>Full-Stack Web Applications</strong>, sistem digitalisasi <strong>PPIC (Production Planning &amp; Inventory Control)</strong>,
+          serta <strong>Workflow Automation</strong> berstandar lean manufacturing yang memangkas pekerjaan manual agar operasional berjalan cepat, presisi, dan terukur.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            Explore Projects ↓
+          </a>
+          <a href="https://api.whatsapp.com/send?phone=62895372483883&text=Halo%20Desnabil,%20saya%20melihat%20portofolio%20Anda%20dan%20tertarik%20untuk%20berdiskusi%20mengenai%20peluang%20kerja%20/%20proyek." target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="border-color:rgba(46, 160, 67, 0.4); color:#3fb950;">
+            💬 WhatsApp
+          </a>
+          <button class="btn btn-secondary" id="copyEmailBtn">
+            ✉ Copy Email
+          </button>
+          <button class="btn btn-secondary" id="heroPrintBtn">
+            📄 Print CV
+          </button>
+          <a href="https://www.linkedin.com/in/desnabil-gymnastiar-b9375320a" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            LinkedIn Profile ↗
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Profile & Status Card -->
+      <div class="hero-right">
+        <div class="hero-profile-card">
+          <div class="profile-card-top">
+            <div class="profile-avatar-large">DG</div>
+            <div>
+              <div class="profile-name">Desnabil Gymnastiar</div>
+              <div class="profile-title">PPIC &amp; Full-Stack Developer</div>
+              <div class="profile-location">📍 Cikarang Barat, Jawa Barat, ID</div>
+            </div>
+          </div>
+
+          <div class="profile-status-pill">
+            <span class="status-dot"></span>
+            <span>Open for Full-Time &amp; Systems Consulting</span>
+          </div>
+
+          <div class="profile-details-list">
+            <div class="profile-detail-item">
+              <span class="profile-detail-key">Current Role</span>
+              <span class="profile-detail-val">PPIC &amp; IT Developer</span>
+            </div>
+            <div class="profile-detail-item">
+              <span class="profile-detail-key">Company</span>
+              <span class="profile-detail-val">PT Namicoh Indonesia</span>
+            </div>
+            <div class="profile-detail-item">
+              <span class="profile-detail-key">Experience</span>
+              <span class="profile-detail-val">3+ Years (Automotive &amp; Web)</span>
+            </div>
+            <div class="profile-detail-item">
+              <span class="profile-detail-key">Primary Focus</span>
+              <span class="profile-detail-val">PPIC, MRP &amp; Hardware Auto-Cutter</span>
+            </div>
+          </div>
+
+          <div class="profile-tech-stack">
+            <div class="profile-tech-title">Core Technologies</div>
+            <div class="profile-pills">
+              <span class="pill">Python</span>
+              <span class="pill">PHP</span>
+              <span class="pill">Node.js</span>
+              <span class="pill">MySQL</span>
+              <span class="pill">n8n</span>
+              <span class="pill">E-Kanban</span>
+            </div>
+          </div>
+
+          <div class="profile-quick-actions">
+            <button class="btn-profile-action" id="cardCopyEmailBtn" title="Copy Email">
+              <span>✉ Email</span>
+            </button>
+            <a href="https://api.whatsapp.com/send?phone=62895372483883&text=Halo%20Desnabil,%20saya%20melihat%20portofolio%20Anda%20dan%20tertarik%20untuk%20berdiskusi%20mengenai%20peluang%20kerja%20/%20proyek." target="_blank" rel="noopener noreferrer" class="btn-profile-action" style="color:#3fb950;">
+              <span>💬 WA</span>
+            </a>
+            <a href="https://www.linkedin.com/in/desnabil-gymnastiar-b9375320a" target="_blank" rel="noopener noreferrer" class="btn-profile-action">
+              <span>LinkedIn ↗</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="hero-stats fade-up delay-4">
+    <!-- STATS SUMMARY -->
+    <div class="stats-grid reveal">
       <div class="stat-card">
-        <span class="stat-num">3+</span>
-        <div class="stat-label">Years Exp</div>
+        <span class="stat-number">3+ Years</span>
+        <span class="stat-desc">Manufacturing &amp; Software Experience</span>
       </div>
       <div class="stat-card">
-        <span class="stat-num">5+</span>
-        <div class="stat-label">Systems Built</div>
+        <span class="stat-number">6+ Systems</span>
+        <span class="stat-desc">Production Apps &amp; Automations Built</span>
       </div>
       <div class="stat-card">
-        <span class="stat-num">0→1</span>
-        <div class="stat-label">Full Builds</div>
+        <span class="stat-number">5,000+ / Day</span>
+        <span class="stat-desc">Automated E-Kanban Cuts</span>
       </div>
+      <div class="stat-card">
+        <span class="stat-number">Zero Stops</span>
+        <span class="stat-desc">Reliable Factory Dispatch Operation</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT ME SECTION -->
+  <section id="about" class="reveal">
+    <div class="section-tag">01 / About Me</div>
+    <h2 class="section-title">The Person Behind the Systems</h2>
+    <p class="section-subtitle">Bridging practical manufacturing domain with modern software engineering.</p>
+
+    <div class="about-content">
+      <div class="about-text">
+        <p>
+          Saya adalah seorang <strong>PPIC &amp; Full-Stack Developer</strong> yang menggabungkan keahlian pemrograman web dengan pemahaman mendalam tentang alur kerja manufaktur otomotif.
+          Kelebihan utama saya adalah pemahaman langsung di lapangan: saya tidak hanya membangun aplikasi, tetapi juga memahami bagaimana jadwal perakitan dihitung, bagaimana suku cadang dikirim, dan bagaimana operator pabrik berinteraksi dengan sistem setiap hari.
+        </p>
+        <p>
+          Dalam pengalaman kerja saya di <strong>PT Namicoh Indonesia Component</strong> dan <strong>PT Astra Daihatsu Motor</strong>, saya terbiasa menerapkan disiplin alur kerja manufaktur berstandar Toyota Production System (TPS) ke dalam kode software: mulai dari eliminasi pekerjaan manual berulang (muda elimination), pencegahan kesalahan (poka-yoke), hingga sinkronisasi alur material secara tepat waktu (just-in-time).
+        </p>
+        <p>
+          Fokus saya adalah menciptakan <strong>sistem yang andal, scalable, dan mudah digunakan (user-friendly)</strong>—mulai dari sistem kalkulasi kebutuhan material otomatis (MRP), otomasi pencetakan E-Kanban fisik, hingga dashboard monitoring antar fasilitas produksi.
+        </p>
+      </div>
+
+      <div class="info-box-list">
+        <div class="info-box">
+          <div class="info-box-label">Current Role</div>
+          <div class="info-box-val">PPIC &amp; IT Developer</div>
+          <div style="font-size:0.85rem; color:var(--text-sub);">PT Namicoh Indonesia Component</div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-box-label">Base Location</div>
+          <div class="info-box-val">Cikarang Barat, West Java</div>
+          <div style="font-size:0.85rem; color:var(--text-sub);">Indonesia 🇮🇩</div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-box-label">Core Specialization</div>
+          <div class="info-box-val">Manufacturing Digitization &amp; Web Apps</div>
+          <div style="font-size:0.85rem; color:var(--text-sub);">Full-Stack Systems &amp; Hardware Integration</div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-box-label">Direct Communication</div>
+          <div class="info-box-val">desnabil.dev@gmail.com</div>
+          <div style="font-size:0.85rem; color:var(--text-sub);">Open for full-time &amp; consulting roles</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BEFORE VS AFTER OPERATIONAL TRANSFORMATION -->
+  <section id="transformation" class="reveal">
+    <div class="section-tag">02 / Operational Transformation</div>
+    <h2 class="section-title">Before vs After Impact</h2>
+    <p class="section-subtitle">Perbandingan nyata alur kerja operasional pabrik sebelum dan sesudah penerapan sistem digital yang saya bangun.</p>
+
+    <div class="transformation-grid">
+      <!-- Item 1: PPIC Production Planning -->
+      <div class="trans-card">
+        <div class="trans-card-header">
+          <span class="trans-badge">01 / PPIC &amp; Material Planning</span>
+          <span class="trans-stat-highlight">4 Jam ➔ &lt;15 Detik</span>
+        </div>
+        <div class="trans-compare-row">
+          <div class="trans-box before-box">
+            <div class="trans-box-tag">🔴 SEBELUM (Manual)</div>
+            <p>Jadwal perakitan &amp; kebutuhan bahan baku dihitung manual lewat spreadsheet Excel terpisah. Butuh waktu lebih dari 4 jam per batch pesanan dan rawan salah hitung.</p>
+          </div>
+          <div class="trans-arrow">➔</div>
+          <div class="trans-box after-box">
+            <div class="trans-box-tag">🟢 SESUDAH (Automated System)</div>
+            <p>Kalkulasi kebutuhan bahan (MRP) berjalan otomatis dalam &lt;15 detik begitu pesanan diunggah. Stok gudang terpotong real-time dan 100% transisi tanpa kertas (paperless).</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2: E-Kanban & Hardware Auto-Cutter -->
+      <div class="trans-card">
+        <div class="trans-card-header">
+          <span class="trans-badge">02 / Shop-Floor Kanban Dispatch</span>
+          <span class="trans-stat-highlight">Manual Cutting ➔ 5.000+ Auto-Cuts/Hari</span>
+        </div>
+        <div class="trans-compare-row">
+          <div class="trans-box before-box">
+            <div class="trans-box-tag">🔴 SEBELUM (Manual)</div>
+            <p>Tiket instruksi produksi dicetak lembaran lalu digunting satu per satu secara manual oleh operator. Format per-customer sering tertukar dan memicu antrean di jalur distribusi.</p>
+          </div>
+          <div class="trans-arrow">➔</div>
+          <div class="trans-box after-box">
+            <div class="trans-box-tag">🟢 SESUDAH (Automated System)</div>
+            <p>Sistem terhubung langsung ke mesin printer thermal dengan pemotong otomatis. Tiket terpotong rapi dengan format barcode standar tiap customer tanpa campur tangan fisik operator.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3: Inter-Plant Logistics -->
+      <div class="trans-card">
+        <div class="trans-card-header">
+          <span class="trans-badge">03 / Inter-Plant Shipping &amp; Logistics</span>
+          <span class="trans-stat-highlight">Risiko Line Stop ➔ Zero Discrepancy</span>
+        </div>
+        <div class="trans-compare-row">
+          <div class="trans-box before-box">
+            <div class="trans-box-tag">🔴 SEBELUM (Manual)</div>
+            <p>Surat jalan pengiriman barang antar Plant 1 dan Plant 2 dicek manual dengan paraf kertas. Selisih part baru disadari saat barang tiba di lini perakitan, memicu risiko line stop.</p>
+          </div>
+          <div class="trans-arrow">➔</div>
+          <div class="trans-box after-box">
+            <div class="trans-box-tag">🟢 SESUDAH (Automated System)</div>
+            <p>Sistem web tracking dengan verifikasi barcode ganda (saat muat truk &amp; terima). Memberikan alert instan jika ada ketidaksesuaian jumlah, menjamin zero line stop.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 4: Customer Order Ingestion (EDI) -->
+      <div class="trans-card">
+        <div class="trans-card-header">
+          <span class="trans-badge">04 / Customer Order Data Ingestion</span>
+          <span class="trans-stat-highlight">Hemat 3+ Jam Kerja/Hari</span>
+        </div>
+        <div class="trans-compare-row">
+          <div class="trans-box before-box">
+            <div class="trans-box-tag">🔴 SEBELUM (Manual)</div>
+            <p>Staf administrasi login setiap pagi ke portal berbagai customer otomotif, mengunduh file PO, dan mengetik ulang ribuan baris data ke sistem internal secara berulang.</p>
+          </div>
+          <div class="trans-arrow">➔</div>
+          <div class="trans-box after-box">
+            <div class="trans-box-tag">🟢 SESUDAH (Automated System)</div>
+            <p>Pipeline n8n terjadwal otomatis mengekstraksi data pesanan, membersihkan anomali format, dan menyimpannya langsung ke database tanpa perlu staf mengetik manual.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK EXPERIENCE SECTION -->
+  <section id="experience" class="reveal">
+    <div class="section-tag">03 / Work Experience</div>
+    <h2 class="section-title">Career History &amp; Impact</h2>
+    <p class="section-subtitle">Rekam jejak kontribusi nyata dan sistem yang telah berhasil diimplementasikan di industri manufaktur.</p>
+
+    <div class="experience-timeline">
+      <!-- 1. Namicoh -->
+      <div class="experience-card">
+        <div class="exp-top">
+          <div class="exp-company-title">PT Namicoh Indonesia Component</div>
+          <span class="exp-period-badge">Mar 2025 – Present · 1+ Year</span>
+        </div>
+        <div class="exp-role">PPIC &amp; IT Developer — Full-Stack Systems · Cikarang Selatan, Jawa Barat</div>
+        <ul class="exp-list">
+          <li>Merancang dan membangun <strong>Full-Stack PPIC Digitization Platform dari nol (ground-up)</strong> untuk mendigitalisasi jadwal produksi harian dan alokasi material secara terpusat.</li>
+          <li>Mengembangkan aplikasi desktop berbasis Python sebagai core engine kalkulasi <strong>MRP (Material Requirements Planning)</strong> dan demand forecasting tanpa risiko salah hitung.</li>
+          <li>Menciptakan sistem <strong>E-Kanban Hardware Integration</strong> dengan fitur <em>Auto-Cutting Thermal Printer</em> yang memotong tiket kanban secara otomatis dengan format barcode kustomisasi per customer.</li>
+          <li>Mengembangkan <strong>Inter-Plant Logistics Web Monitoring</strong> untuk verifikasi kuantitas pengiriman part antar fasilitas secara real-time demi mencegah line stop dan keterlambatan barang.</li>
+          <li>Mengimplementasikan <strong>n8n Workflow Automation</strong> untuk mengunduh dan menyinkronkan data pesanan pelanggan (Customer PO) secara terjadwal tanpa input manual harian.</li>
+        </ul>
+      </div>
+
+      <!-- 2. Astra Daihatsu -->
+      <div class="experience-card">
+        <div class="exp-top">
+          <div class="exp-company-title">PT Astra Daihatsu Motor</div>
+          <span class="exp-period-badge">Feb 2023 – Jan 2025 · 2 Years</span>
+        </div>
+        <div class="exp-role">Web Application Development &amp; Export Administration · Jakarta Utara</div>
+        <ul class="exp-list">
+          <li>Membangun full-stack web application untuk mengelola dokumentasi dan tracking administrasi ekspor suku cadang kendaraan bermotor.</li>
+          <li>Mengembangkan <strong>Advanced Excel VBA Macros</strong> untuk otomasi pengolahan ribuan baris data manifes ekspor, mengeliminasi manual error dan memangkas waktu kerja.</li>
+          <li>Merancang <strong>Power BI Interactive KPI Dashboard</strong> untuk monitoring performa fulfillment ekspor komponen kendaraan secara visual dan data-driven.</li>
+          <li>Melakukan pemeliharaan rutin database MySQL dan web application untuk menjamin kontinuitas operasional divisi ekspor 24/7.</li>
+        </ul>
+      </div>
+
+      <!-- 3. Dhecyber -->
+      <div class="experience-card">
+        <div class="exp-top">
+          <div class="exp-company-title">PT Dhecyber Flow Indonesia</div>
+          <span class="exp-period-badge">Feb 2021 – Apr 2021 · 3 Months</span>
+        </div>
+        <div class="exp-role">IT Support Specialist — Data Center &amp; NOC · Jakarta Selatan</div>
+        <ul class="exp-list">
+          <li>Pemeliharaan rutin server racks, perkabelan terstruktur, dan perangkat keras di lingkungan Data Center Tier-3.</li>
+          <li>Real-time network monitoring di <strong>Network Operations Center (NOC)</strong> serta dokumentasi dan eskalasi penanganan insiden jaringan sesuai SOP.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PROJECTS SECTION -->
+  <section id="projects" class="reveal">
+    <div class="section-tag">04 / Featured Projects</div>
+    <h2 class="section-title">Key Systems &amp; Production Solutions</h2>
+    <p class="section-subtitle">Klik pada kartu proyek mana pun untuk membaca cerita tantangan dan detail solusi yang dibuat.</p>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs">
+      <button class="filter-btn active" data-filter="all">All Projects (6)</button>
+      <button class="filter-btn" data-filter="ppic">Manufacturing &amp; PPIC</button>
+      <button class="filter-btn" data-filter="hardware">Hardware &amp; IoT</button>
+      <button class="filter-btn" data-filter="web">Web &amp; Automation</button>
+    </div>
+
+    <div class="projects-grid" id="projectsContainer">
+      <!-- Project 1 -->
+      <div class="project-card" data-category="ppic" data-modal="sys01">
+        <div>
+          <div class="project-category">Manufacturing ERP &amp; PPIC</div>
+          <h3 class="project-name">PPIC Digitization &amp; Inventory Platform</h3>
+          <div class="project-benefit">
+            ★ 100% Paperless Transition &amp; Rapid Production Scheduling
+          </div>
+          <p class="project-desc">
+            Sistem terpusat untuk mengelola jadwal produksi harian, validasi Bill of Materials (BOM), dan kalkulasi otomatis kebutuhan bahan baku (MRP) saat pesanan customer masuk.
+          </p>
+          <div class="project-cta-link">
+            <span>Lihat Detail Cerita &amp; Fitur</span> <span>↗</span>
+          </div>
+        </div>
+        <div class="project-tech-pills">
+          <span class="pill">Python</span>
+          <span class="pill">PHP</span>
+          <span class="pill">MySQL</span>
+          <span class="pill">MRP Engine</span>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card" data-category="hardware" data-modal="sys02">
+        <div>
+          <div class="project-category">Hardware &amp; IoT Automation</div>
+          <h3 class="project-name">E-Kanban Auto-Cutting Printer Controller</h3>
+          <div class="project-benefit">
+            ★ 5,000+ Daily Automated Dispatches without manual cutting lag
+          </div>
+          <p class="project-desc">
+            Sistem controller terintegrasi hardware printer thermal. Membaca nomor part, memformat kode barcode sesuai standar pelanggan, dan mengirimkan sinyal pemotongan kertas otomatis tanpa gunting manual.
+          </p>
+          <div class="project-cta-link">
+            <span>Lihat Detail Cerita &amp; Fitur</span> <span>↗</span>
+          </div>
+        </div>
+        <div class="project-tech-pills">
+          <span class="pill">Python</span>
+          <span class="pill">ESC/POS</span>
+          <span class="pill">Hardware Comms</span>
+          <span class="pill">Barcode Standards</span>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card" data-category="web" data-modal="sys03">
+        <div>
+          <div class="project-category">Real-Time Logistics Telemetry</div>
+          <h3 class="project-name">Inter-Plant Logistics &amp; Dispatch Monitoring Web</h3>
+          <div class="project-benefit">
+            ★ Zero Line Stops caused by part shipment quantity discrepancies
+          </div>
+          <p class="project-desc">
+            Website pemantau pengiriman barang antar-pabrik (Plant 1 &amp; Plant 2). Dilengkapi verifikasi barcode dua arah saat pemuatan truk dan serah terima part untuk mencegah selisih kuantitas.
+          </p>
+          <div class="project-cta-link">
+            <span>Lihat Detail Cerita &amp; Fitur</span> <span>↗</span>
+          </div>
+        </div>
+        <div class="project-tech-pills">
+          <span class="pill">PHP</span>
+          <span class="pill">JavaScript</span>
+          <span class="pill">MySQL</span>
+          <span class="pill">Real-Time Web</span>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card" data-category="web" data-modal="sys04">
+        <div>
+          <div class="project-category">Workflow &amp; Data Automation</div>
+          <h3 class="project-name">Automated Customer EDI Pipeline (n8n)</h3>
+          <div class="project-benefit">
+            ★ Saved 3+ hours of daily manual data entry
+          </div>
+          <p class="project-desc">
+            Pipeline otomatis terjadwal yang mengunduh data pesanan pelanggan dari portal B2B, merapikan inkonsistensi format, dan menyinkronkan data langsung ke database operasional.
+          </p>
+          <div class="project-cta-link">
+            <span>Lihat Detail Cerita &amp; Fitur</span> <span>↗</span>
+          </div>
+        </div>
+        <div class="project-tech-pills">
+          <span class="pill">n8n</span>
+          <span class="pill">Node.js</span>
+          <span class="pill">REST APIs</span>
+          <span class="pill">Cron Workflows</span>
+        </div>
+      </div>
+
+      <!-- Project 5 -->
+      <div class="project-card" data-category="web" data-modal="sys05">
+        <div>
+          <div class="project-category">Enterprise Web System</div>
+          <h3 class="project-name">Export Administration &amp; Logistics Platform (ADM)</h3>
+          <div class="project-benefit">
+            ★ Streamlined high-volume automotive export documentation
+          </div>
+          <p class="project-desc">
+            Aplikasi web untuk PT Astra Daihatsu Motor yang mengelola administrasi ekspor suku cadang kendaraan, terintegrasi dengan advanced Excel VBA macros dan visualisasi dashboard Power BI.
+          </p>
+          <div class="project-cta-link">
+            <span>Lihat Detail Cerita &amp; Fitur</span> <span>↗</span>
+          </div>
+        </div>
+        <div class="project-tech-pills">
+          <span class="pill">PHP &amp; MySQL</span>
+          <span class="pill">Advanced VBA</span>
+          <span class="pill">Power BI</span>
+        </div>
+      </div>
+
+      <!-- Project 6 -->
+      <div class="project-card" data-category="ppic" data-modal="sys06">
+        <div>
+          <div class="project-category">Data Modeling &amp; Analytics</div>
+          <h3 class="project-name">Production Demand Time-Series Engine</h3>
+          <div class="project-benefit">
+            ★ Data-driven raw material procurement &amp; buffer optimization
+          </div>
+          <p class="project-desc">
+            Aplikasi desktop berbasis Python untuk menganalisis tren riwayat pesanan part dan memprediksi kebutuhan material beberapa bulan ke depan guna menghindari kekurangan maupun kelebihan stok.
+          </p>
+          <div class="project-cta-link">
+            <span>Lihat Detail Cerita &amp; Fitur</span> <span>↗</span>
+          </div>
+        </div>
+        <div class="project-tech-pills">
+          <span class="pill">Python</span>
+          <span class="pill">NumPy</span>
+          <span class="pill">Desktop GUI</span>
+          <span class="pill">Time-Series Modeling</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE SKILLS SECTION -->
+  <section id="skills" class="reveal">
+    <div class="section-tag">05 / Core Competencies</div>
+    <h2 class="section-title">Technical &amp; Domain Skills</h2>
+    <p class="section-subtitle">Keahlian teknis software engineering yang dipadukan dengan pemahaman lapangan industri manufaktur.</p>
+
+    <div class="skills-grid">
+      <!-- 1. Web & Full-Stack -->
+      <div class="skill-card">
+        <div class="skill-icon">🌐</div>
+        <h3 class="skill-title">Web &amp; Full-Stack</h3>
+        <div class="skill-pill-tags">
+          <span class="skill-badge">PHP</span>
+          <span class="skill-badge">Node.js</span>
+          <span class="skill-badge">JavaScript (ESNext)</span>
+          <span class="skill-badge">HTML5 &amp; CSS3</span>
+          <span class="skill-badge">Responsive Apps</span>
+          <span class="skill-badge">Internal Web Portals</span>
+          <span class="skill-badge">RESTful APIs</span>
+        </div>
+      </div>
+
+      <!-- 2. Industrial & PPIC Domain (Lean & TPS principles integrated naturally) -->
+      <div class="skill-card">
+        <div class="skill-icon">🏭</div>
+        <h3 class="skill-title">Industrial &amp; PPIC Domain</h3>
+        <div class="skill-pill-tags">
+          <span class="skill-badge">PPIC Principles</span>
+          <span class="skill-badge">Lean / TPS Methods</span>
+          <span class="skill-badge">Production Scheduling</span>
+          <span class="skill-badge">MRP Calculations</span>
+          <span class="skill-badge">E-Kanban Pull System</span>
+          <span class="skill-badge">Poka-Yoke (Anti-Salah)</span>
+          <span class="skill-badge">Inventory Turnover</span>
+          <span class="skill-badge">Inter-Plant Logistics</span>
+        </div>
+      </div>
+
+      <!-- 3. Database & Analytics -->
+      <div class="skill-card">
+        <div class="skill-icon">🗄️</div>
+        <h3 class="skill-title">Database &amp; Analytics</h3>
+        <div class="skill-pill-tags">
+          <span class="skill-badge">MySQL Relational DB</span>
+          <span class="skill-badge">MariaDB</span>
+          <span class="skill-badge">Schema Optimization</span>
+          <span class="skill-badge">Power BI Dashboards</span>
+          <span class="skill-badge">Advanced Excel VBA</span>
+          <span class="skill-badge">Data Processing</span>
+        </div>
+      </div>
+
+      <!-- 4. Automation & Hardware -->
+      <div class="skill-card">
+        <div class="skill-icon">⚡</div>
+        <h3 class="skill-title">Automation &amp; Hardware</h3>
+        <div class="skill-pill-tags">
+          <span class="skill-badge">Python Automation</span>
+          <span class="skill-badge">n8n Workflows</span>
+          <span class="skill-badge">Excel Macros</span>
+          <span class="skill-badge">ESC/POS Drivers</span>
+          <span class="skill-badge">Thermal Printers</span>
+          <span class="skill-badge">Barcode Integration</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section id="contact" class="reveal">
+    <div class="contact-box">
+      <div>
+        <h2 class="contact-info-title">Let's Connect &amp; Collaborate</h2>
+        <p class="contact-info-desc">
+          Tertarik mendiskusikan peluang kerja (full-time / project-based), digitalisasi sistem manufaktur, atau kolaborasi teknis lainnya? Silakan hubungi saya melalui saluran di bawah ini.
+        </p>
+      </div>
+
+      <div class="contact-btns">
+        <a href="https://api.whatsapp.com/send?phone=62895372483883&text=Halo%20Desnabil,%20saya%20melihat%20portofolio%20Anda%20dan%20tertarik%20untuk%20berdiskusi%20mengenai%20peluang%20kerja%20/%20proyek." target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background:#2ea043; border-color:#2ea043;">
+          💬 Chat WhatsApp
+        </a>
+        <button class="btn btn-secondary" id="copyEmailContactBtn">
+          ✉ Copy Email
+        </button>
+        <button class="btn btn-secondary" id="contactPrintBtn">
+          📄 Print CV
+        </button>
+        <a href="https://www.linkedin.com/in/desnabil-gymnastiar-b9375320a" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+          LinkedIn Profile ↗
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div>© 2026 Desnabil Gymnastiar · Cikarang Barat, West Java, Indonesia</div>
+    <div style="margin-top:0.35rem; color:var(--text-muted);">Designed with clean professional standards · Responsive &amp; Interactive</div>
+  </footer>
+
+</main>
+
+<!-- FLOATING BACK TO TOP -->
+<button id="backToTop" aria-label="Scroll back to top">↑</button>
+
+<!-- INTERACTIVE PROJECT STORY MODAL -->
+<div class="modal-backdrop" id="projectModalBackdrop">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Project Title</div>
+      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">✕</button>
+    </div>
+    <div>
+      <div class="modal-section-title">Latar Belakang &amp; Tantangan</div>
+      <p class="modal-text" id="modalProblem"></p>
+
+      <div class="modal-section-title">Solusi yang Dibuat</div>
+      <p class="modal-text" id="modalSolution"></p>
+
+      <div class="modal-section-title">Hasil &amp; Dampak Nyata</div>
+      <p class="modal-text" id="modalImpact"></p>
+
+      <div class="modal-section-title">Teknologi yang Digunakan</div>
+      <div class="project-tech-pills" id="modalTechPills" style="border:none; padding-top:0.25rem;"></div>
     </div>
   </div>
 </div>
 
-<!-- ABOUT -->
-<section id="about">
-  <div class="section-label reveal">01 · About</div>
-  <h2 class="section-title reveal" style="--reveal-delay: 0.08s">The Man Behind<br>The Systems</h2>
-  <div class="about-grid">
-    <p class="reveal" style="--reveal-delay: 0.14s; font-size:1.05rem; line-height:1.85; color: var(--muted);">
-      Saya adalah seorang <span style="color: var(--text); font-weight:600;">PPIC Developer</span> yang
-      menggabungkan keahlian teknis full-stack dengan pemahaman mendalam tentang manufaktur.
-      Dengan pengalaman di Astra Daihatsu Motor dan sekarang di PT Namicoh Indonesia Component,
-      saya membangun sistem dari nol yang benar-benar digunakan dan berdampak di lini produksi.
-      <br><br>
-      Fokus saya: mengubah proses manual yang lambat dan error-prone menjadi pipeline otomatis
-      yang akurat, real-time, dan scalable — mulai dari E-Kanban hingga sistem prediksi MRP.
-    </p>
-    <div class="about-cards reveal-stagger" style="display: flex; flex-direction: column; gap: 1rem;">
-      <div style="background: var(--surface); border: 1px solid var(--border); border-radius:4px; padding: 1.25rem 1.5rem;">
-        <div style="font-family: 'Space Mono'; font-size:0.7rem; color: var(--accent); margin-bottom:0.5rem;">CURRENT ROLE</div>
-        <div style="font-weight:700;">PPIC &amp; IT Developer</div>
-        <div style="font-size:0.88rem; color:var(--muted);">PT Namicoh Indonesia Component</div>
-      </div>
-      <div style="background: var(--surface); border: 1px solid var(--border); border-radius:4px; padding: 1.25rem 1.5rem;">
-        <div style="font-family: 'Space Mono'; font-size:0.7rem; color: var(--accent); margin-bottom:0.5rem;">LOCATION</div>
-        <div style="font-weight:700;">Cikarang Barat, Jawa Barat</div>
-        <div style="font-size:0.88rem; color:var(--muted);">Indonesia 🇮🇩</div>
-      </div>
-      <div style="background: var(--surface); border: 1px solid var(--border); border-radius:4px; padding: 1.25rem 1.5rem;">
-        <div style="font-family: 'Space Mono'; font-size:0.7rem; color: var(--accent); margin-bottom:0.5rem;">SPECIALIZATION</div>
-        <div style="font-weight:700;">Manufacturing Digitization</div>
-        <div style="font-size:0.88rem; color:var(--muted);">Industrial Automation &amp; Full-Stack Systems</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills" style="padding-top: 0;">
-  <div class="section-label reveal">02 · Skills</div>
-  <h2 class="section-title reveal" style="--reveal-delay: 0.08s">Technical Skills</h2>
-  <p class="section-desc reveal" style="--reveal-delay: 0.14s">Tools and technologies I use to architect, build, and automate industrial-grade software systems.</p>
-
-  <div class="skills-grid reveal-stagger">
-    <div class="skill-cell">
-      <div class="skill-icon">⚙️</div>
-      <div class="skill-name">Backend &amp; Logic</div>
-      <div style="font-size:0.85rem; color:var(--muted); line-height:1.6;">Core engine untuk sistem enterprise dan kalkulasi algoritma kompleks.</div>
-      <div class="skill-tags">
-        <span class="tag">PHP</span>
-        <span class="tag">Node.js</span>
-        <span class="tag">Python</span>
-      </div>
-    </div>
-    <div class="skill-cell">
-      <div class="skill-icon">🖥️</div>
-      <div class="skill-name">Frontend &amp; UI</div>
-      <div style="font-size:0.85rem; color:var(--muted); line-height:1.6;">Interface visualisasi data produksi dan manajemen inventaris real-time.</div>
-      <div class="skill-tags">
-        <span class="tag">HTML5</span>
-        <span class="tag">CSS3</span>
-        <span class="tag">JavaScript</span>
-        <span class="tag">Tailwind</span>
-      </div>
-    </div>
-    <div class="skill-cell">
-      <div class="skill-icon">🗄️</div>
-      <div class="skill-name">Database</div>
-      <div style="font-size:0.85rem; color:var(--muted); line-height:1.6;">Manajemen data high-volume dengan integritas tinggi untuk sistem manufaktur.</div>
-      <div class="skill-tags">
-        <span class="tag">MySQL</span>
-        <span class="tag">MariaDB</span>
-      </div>
-    </div>
-    <div class="skill-cell">
-      <div class="skill-icon">🤖</div>
-      <div class="skill-name">Automation &amp; AI</div>
-      <div style="font-size:0.85rem; color:var(--muted); line-height:1.6;">Workflow otomatis yang memangkas proses manual dan meningkatkan akurasi data.</div>
-      <div class="skill-tags">
-        <span class="tag">n8n</span>
-        <span class="tag">AI Automation</span>
-        <span class="tag">VBA</span>
-      </div>
-    </div>
-    <div class="skill-cell">
-      <div class="skill-icon">📊</div>
-      <div class="skill-name">BI &amp; Analytics</div>
-      <div style="font-size:0.85rem; color:var(--muted); line-height:1.6;">Transformasi data operasional mentah menjadi insight yang actionable.</div>
-      <div class="skill-tags">
-        <span class="tag">Power BI</span>
-        <span class="tag">Excel</span>
-      </div>
-    </div>
-    <div class="skill-cell">
-      <div class="skill-icon">🏭</div>
-      <div class="skill-name">Manufacturing Domain</div>
-      <div style="font-size:0.85rem; color:var(--muted); line-height:1.6;">Pemahaman mendalam proses industri yang menjadi fondasi setiap sistem.</div>
-      <div class="skill-tags">
-        <span class="tag">PPIC</span>
-        <span class="tag">MRP</span>
-        <span class="tag">E-Kanban</span>
-        <span class="tag">Supply Chain</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience" style="padding-top: 0;">
-  <div class="section-label reveal">03 · Experience</div>
-  <h2 class="section-title reveal" style="--reveal-delay: 0.08s">Work History</h2>
-  <p class="section-desc reveal" style="--reveal-delay: 0.14s">Dari data center hingga factory floor — membangun sistem yang benar-benar digunakan.</p>
-
-  <div class="exp-timeline reveal-stagger">
-
-    <!-- Namicoh -->
-    <div class="exp-card">
-      <div class="exp-header">
-        <div>
-          <div class="exp-company">PT NAMICOH INDONESIA COMPONENT</div>
-          <div class="exp-role">PPIC &amp; IT Developer — Full-Stack System Architecture</div>
-        </div>
-        <div class="exp-period">Mar 2025 – Present<br><span style="color:var(--accent);">1+ Year</span><br>Cikarang Selatan</div>
-      </div>
-      <ul class="exp-bullets">
-        <li>Merancang dan mengimplementasikan sistem PPIC end-to-end dari nol — mendigitalisasi seluruh alur kerja manufaktur.</li>
-        <li>Mengembangkan aplikasi desktop berbasis Python sebagai core engine kalkulasi algoritma forecasting produksi dan MRP.</li>
-        <li>Membangun E-Kanban terintegrasi hardware dengan fitur Auto-Cutting Printer format kustomisasi per customer.</li>
-        <li>Sistem web antar-plant monitoring untuk akurasi kuantitas part pengiriman — mencegah loss time &amp; line stop.</li>
-        <li>Mengimplementasikan n8n workflow automation untuk upload data order customer secara terjadwal ke sistem web.</li>
-        <li>Modul analisis untuk optimasi inventory turnover dan reduksi pemborosan material.</li>
-      </ul>
-      <div class="project-tech" style="margin-top:1.25rem;">
-        <span class="tech-pill">Python</span>
-        <span class="tech-pill">PHP</span>
-        <span class="tech-pill">Node.js</span>
-        <span class="tech-pill">MySQL</span>
-        <span class="tech-pill">n8n</span>
-        <span class="tech-pill">Hardware Integration</span>
-      </div>
-    </div>
-
-    <!-- Astra Daihatsu -->
-    <div class="exp-card">
-      <div class="exp-header">
-        <div>
-          <div class="exp-company">PT. ASTRA DAIHATSU MOTOR</div>
-          <div class="exp-role">Web App Development &amp; Export Administration System</div>
-        </div>
-        <div class="exp-period">Feb 2023 – Jan 2025<br><span style="color:var(--accent);">2 Years</span><br>Jakarta Utara</div>
-      </div>
-      <ul class="exp-bullets">
-        <li>Mendesain dan deploy full-stack web system untuk streamline proses administrasi ekspor, menggantikan metode tracking manual.</li>
-        <li>Mengembangkan advanced VBA macros untuk otomasi data processing kompleks di Excel — eliminasi manual entry errors.</li>
-        <li>Membangun interactive dashboards Power BI untuk tracking KPI ekspor komponen dan mengubah data ke business insights.</li>
-        <li>Proactive maintenance dan debugging untuk menjamin 24/7 operational continuity sistem.</li>
-      </ul>
-      <div class="project-tech" style="margin-top:1.25rem;">
-        <span class="tech-pill">PHP</span>
-        <span class="tech-pill">MySQL</span>
-        <span class="tech-pill">Power BI</span>
-        <span class="tech-pill">VBA</span>
-        <span class="tech-pill">JavaScript</span>
-      </div>
-    </div>
-
-    <!-- Dhecyber -->
-    <div class="exp-card">
-      <div class="exp-header">
-        <div>
-          <div class="exp-company">PT. DHECYBER FLOW INDONESIA</div>
-          <div class="exp-role">IT Support Specialist — Data Center &amp; NOC</div>
-        </div>
-        <div class="exp-period">Feb 2021 – Apr 2021<br><span style="color:var(--muted);">3 Months</span><br>Jakarta Selatan</div>
-      </div>
-      <ul class="exp-bullets">
-        <li>Maintenance dan monitoring server racks di data center — hardware troubleshooting dan cable management.</li>
-        <li>Real-time monitoring jaringan di NOC, dokumentasi insiden dan eskalasi sesuai SOP.</li>
-        <li>Konfigurasi dan troubleshooting basic network protocols dan hardware (Routers/Switches).</li>
-      </ul>
-      <div class="project-tech" style="margin-top:1.25rem;">
-        <span class="tech-pill">Networking</span>
-        <span class="tech-pill">NOC Monitoring</span>
-        <span class="tech-pill">LAN/WAN</span>
-        <span class="tech-pill">Zabbix</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" style="padding-top: 0;">
-  <div class="section-label reveal">04 · Projects</div>
-  <h2 class="section-title reveal" style="--reveal-delay: 0.08s">Key Systems Built</h2>
-  <p class="section-desc reveal" style="--reveal-delay: 0.14s">Sistem-sistem nyata yang saya rancang dan bangun dari ground up untuk kebutuhan industri.</p>
-
-  <div class="projects-grid reveal-stagger">
-    <div class="project-card">
-      <div class="project-num">01</div>
-      <div class="project-name">PPIC Digitization System</div>
-      <div class="project-desc">Sistem end-to-end untuk Production Planning dan Inventory Control. Mendigitalisasi seluruh alur kerja manufaktur dari order masuk hingga delivery output — menggantikan proses manual sepenuhnya.</div>
-      <div class="project-tech">
-        <span class="tech-pill">Python</span>
-        <span class="tech-pill">PHP</span>
-        <span class="tech-pill">MySQL</span>
-        <span class="tech-pill">MRP Algorithm</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-num">02</div>
-      <div class="project-name">E-Kanban + Auto-Cutting Printer</div>
-      <div class="project-desc">Sistem E-Kanban terintegrasi dengan perangkat keras (printer). Fitur Auto-Cutting dengan format label kustomisasi sesuai kebutuhan setiap customer. Otomasi fisik di lini produksi.</div>
-      <div class="project-tech">
-        <span class="tech-pill">Python</span>
-        <span class="tech-pill">Hardware API</span>
-        <span class="tech-pill">Custom Format</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-num">03</div>
-      <div class="project-name">Inter-Plant Monitoring System</div>
-      <div class="project-desc">Web system antar-plant untuk verifikasi akurasi kuantitas part yang dikirim antar fasilitas. Secara proaktif mencegah loss time dan line stop dengan real-time tracking dan alert.</div>
-      <div class="project-tech">
-        <span class="tech-pill">PHP</span>
-        <span class="tech-pill">MySQL</span>
-        <span class="tech-pill">Real-time Web</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-num">04</div>
-      <div class="project-name">n8n Workflow Automation</div>
-      <div class="project-desc">Pipeline otomatis menggunakan n8n untuk mengunggah data orderan customer ke sistem web sesuai jadwal. Eliminasi proses input manual harian dan memastikan sinkronisasi data yang akurat.</div>
-      <div class="project-tech">
-        <span class="tech-pill">n8n</span>
-        <span class="tech-pill">Node.js</span>
-        <span class="tech-pill">REST API</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-num">05</div>
-      <div class="project-name">Export Admin System — ADM</div>
-      <div class="project-desc">Full-stack web system untuk Astra Daihatsu Motor yang mengelola administrasi ekspor komponen kendaraan. MySQL database management untuk high-volume component documentation.</div>
-      <div class="project-tech">
-        <span class="tech-pill">PHP</span>
-        <span class="tech-pill">MySQL</span>
-        <span class="tech-pill">JavaScript</span>
-        <span class="tech-pill">Power BI</span>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-num">06</div>
-      <div class="project-name">Production Forecasting Desktop App</div>
-      <div class="project-desc">Aplikasi desktop Python sebagai core engine kalkulasi algoritma forecasting demand produksi dan kebutuhan bahan baku. Membantu pengambilan keputusan perencanaan material secara data-driven.</div>
-      <div class="project-tech">
-        <span class="tech-pill">Python</span>
-        <span class="tech-pill">Forecasting Algorithm</span>
-        <span class="tech-pill">Desktop GUI</span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" style="padding-top: 0;">
-  <div class="section-label reveal">05 · Contact</div>
-  <h2 class="section-title reveal" style="--reveal-delay: 0.08s">Let's Build<br>Something.</h2>
-
-  <div class="contact-grid">
-    <div>
-      <p class="reveal" style="--reveal-delay: 0.12s; font-size:1.05rem; color:var(--muted); line-height:1.8; margin-bottom:2rem;">
-        Tertarik berdiskusi tentang proyek IT, otomasi sistem manufaktur,
-        atau kolaborasi teknis lainnya? Jangan ragu untuk reach out.
-      </p>
-      <div class="reveal" style="--reveal-delay: 0.2s; font-family:'Space Mono'; font-size:0.8rem; color:var(--muted);">
-        <span style="color:var(--accent);">▸</span> Terbuka untuk peluang baru<br>
-        <span style="color:var(--accent);">▸</span> Freelance &amp; full-time projects<br>
-        <span style="color:var(--accent);">▸</span> Diskusi teknis &amp; konsultasi sistem
-      </div>
-    </div>
-    <div class="contact-links reveal-stagger">
-      <a href="https://www.linkedin.com/in/desnabil-gymnastiar-b9375320a" target="_blank" rel="noopener noreferrer" class="contact-link">
-        <div class="contact-link-icon">in</div>
-        <div>
-          <div style="font-weight:600; font-size:0.88rem;">LinkedIn</div>
-          <div style="font-size:0.78rem; color:var(--muted); font-family:'Space Mono';">desnabil-gymnastiar</div>
-        </div>
-        <span style="margin-left:auto; color:var(--muted);">→</span>
-      </a>
-      <a href="mailto:desnabil@example.com" class="contact-link">
-        <div class="contact-link-icon">@</div>
-        <div>
-          <div style="font-weight:600; font-size:0.88rem;">Email</div>
-          <div style="font-size:0.78rem; color:var(--muted); font-family:'Space Mono';">Send a message</div>
-        </div>
-        <span style="margin-left:auto; color:var(--muted);">→</span>
-      </a>
-      <a href="https://www.openstreetmap.org/search?query=Cikarang%20Barat%2C%20West%20Java" target="_blank" rel="noopener noreferrer" class="contact-link">
-        <div class="contact-link-icon">📍</div>
-        <div>
-          <div style="font-weight:600; font-size:0.88rem;">Location</div>
-          <div style="font-size:0.78rem; color:var(--muted); font-family:'Space Mono';">Cikarang Barat, West Java, ID</div>
-        </div>
-        <span style="margin-left:auto; color:var(--muted);">→</span>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <p class="reveal">© 2026 Desnabil Gymnastiar · Designed &amp; Built from Scratch · Cikarang, Indonesia</p>
-</footer>
-
-<script>
-  (function () {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const finePointer = window.matchMedia('(pointer: fine)').matches;
-
-    // Custom cursor (desktop / fine pointer only)
-    const cursor = document.getElementById('cursor');
-    if (cursor && finePointer && !prefersReducedMotion) {
-      document.addEventListener('mousemove', e => {
-        cursor.style.left = e.clientX + 'px';
-        cursor.style.top = e.clientY + 'px';
-      });
-    }
-
-    // Mobile nav
-    const navToggle = document.getElementById('navToggle');
-    const navMenu = document.getElementById('navMenu');
-    const navOverlay = document.getElementById('navOverlay');
-
-    function setNavOpen(open) {
-      if (!navToggle || !navMenu) return;
-      navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-      navToggle.setAttribute('aria-label', open ? 'Tutup menu navigasi' : 'Buka menu navigasi');
-      navMenu.classList.toggle('is-open', open);
-      document.body.classList.toggle('nav-menu-open', open);
-      if (navOverlay) {
-        navOverlay.hidden = !open;
-        navOverlay.classList.toggle('is-visible', open);
-      }
-    }
-
-    if (navToggle && navMenu) {
-      navToggle.addEventListener('click', () => {
-        const open = navToggle.getAttribute('aria-expanded') !== 'true';
-        setNavOpen(open);
-      });
-      navMenu.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => setNavOpen(false));
-      });
-      if (navOverlay) {
-        navOverlay.addEventListener('click', () => setNavOpen(false));
-      }
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') setNavOpen(false);
-      });
-      window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) setNavOpen(false);
-      });
-    }
-
-    // Nav bar — compact + shadow on scroll
-    const siteNav = document.getElementById('siteNav');
-    function updateNavScroll() {
-      if (siteNav) siteNav.classList.toggle('is-scrolled', window.scrollY > 32);
-    }
-    updateNavScroll();
-    window.addEventListener('scroll', updateNavScroll, { passive: true });
-
-    // Hero parallax (subtle)
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent && !prefersReducedMotion) {
-      let ticking = false;
-      window.addEventListener('scroll', () => {
-        if (ticking) return;
-        ticking = true;
-        requestAnimationFrame(() => {
-          const y = window.scrollY;
-          const max = window.innerHeight * 1.25;
-          const p = y < max ? y * 0.07 : max * 0.07;
-          heroContent.style.transform = `translateY(${p}px)`;
-          ticking = false;
-        });
-      }, { passive: true });
-    }
-
-    // Scroll reveal — blur + stagger
-    const revealTargets = document.querySelectorAll('.reveal, .reveal-stagger');
-    if (prefersReducedMotion) {
-      revealTargets.forEach(el => el.classList.add('is-inview'));
-    } else {
-      const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-inview');
-          revealObserver.unobserve(entry.target);
-        });
-      }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
-      revealTargets.forEach(el => revealObserver.observe(el));
-    }
-
-    // Spotlight follow cursor — experience & project cards
-    if (!prefersReducedMotion && finePointer) {
-      function bindSpotlight(selector, xVar, yVar, asPercent) {
-        document.querySelectorAll(selector).forEach(el => {
-          el.addEventListener('mousemove', e => {
-            const r = el.getBoundingClientRect();
-            if (asPercent) {
-              el.style.setProperty(xVar, `${((e.clientX - r.left) / r.width) * 100}%`);
-              el.style.setProperty(yVar, `${((e.clientY - r.top) / r.height) * 100}%`);
-            } else {
-              el.style.setProperty(xVar, `${e.clientX - r.left}px`);
-              el.style.setProperty(yVar, `${e.clientY - r.top}px`);
-            }
-          });
-        });
-      }
-      bindSpotlight('.exp-card', '--mx', '--my', false);
-      bindSpotlight('.project-card', '--px', '--py', true);
-    }
-
-    // Active nav link highlight
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-menu a');
-
-    function updateNavActive() {
-      let current = '';
-      const y = window.scrollY + 120;
-      sections.forEach(section => {
-        if (y >= section.offsetTop) current = section.getAttribute('id');
-      });
-      navLinks.forEach(link => {
-        const href = link.getAttribute('href');
-        if (href === `#${current}`) link.classList.add('nav-active');
-        else link.classList.remove('nav-active');
-      });
-    }
-
-    updateNavActive();
-    window.addEventListener('scroll', updateNavActive, { passive: true });
-  })();
-</script>
+<script src="js/main.js"></script>
 </body>
 </html>
