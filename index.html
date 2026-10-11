@@ -1,646 +1,1152 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Desnabil Gymnastiar — PPIC &amp; Full-Stack Developer</title>
-<meta name="description" content="Portfolio of Desnabil Gymnastiar — PPIC &amp; Full-Stack Developer specializing in Manufacturing Systems, Web Applications, and Industrial Automation in Cikarang, Indonesia.">
-<meta property="og:title" content="Desnabil Gymnastiar — PPIC &amp; Full-Stack Developer">
-<meta property="og:description" content="Portfolio of Desnabil Gymnastiar — Specializing in Manufacturing Systems, Full-Stack Web Applications, and Industrial Automation in Cikarang, Indonesia.">
+<title>BIEL07.DEV — Software Engineer | Industrial Digitalization</title>
+<meta name="description" content="Portfolio of Desnabil Gymnastiar (BIEL07.DEV) — Software Engineer specializing in Web Applications, Industrial Digitalization, PPIC Systems, Kanban Management, and Process Automation.">
+<meta name="keywords" content="Software Engineer, Industrial Digitalization, Manufacturing Systems, PPIC, Kanban, Web Development, Automation, Desnabil Gymnastiar">
+<meta name="author" content="Desnabil Gymnastiar">
+
+<!-- Open Graph / Social Meta -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://fbilgy-tech.github.io/">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Desnabil Gymnastiar — PPIC &amp; Full-Stack Developer">
-<meta name="twitter:description" content="Portfolio of Desnabil Gymnastiar — Specializing in Manufacturing Systems, Full-Stack Web Applications, and Industrial Automation.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚙️</text></svg>">
+<meta property="og:title" content="BIEL07.DEV — Software Engineer | Industrial Digitalization">
+<meta property="og:description" content="Building Practical Digital Systems Connecting Software Engineering and Industrial Manufacturing Operations.">
+<meta property="og:site_name" content="BIEL07.DEV">
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23080B12'/><rect x='4' y='4' width='92' height='92' rx='16' fill='none' stroke='%2300E5FF' stroke-width='4'/><text x='50' y='64' font-family='monospace' font-size='44' font-weight='bold' fill='%2300E5FF' text-anchor='middle'>B7</text></svg>">
+
+<!-- Typography: Space Grotesk (Headings), Inter (Body), JetBrains Mono (Technical/Code) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css?v=4.0">
 </head>
 <body>
 
+<!-- ACCESSIBLE SKIP TO CONTENT -->
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 <!-- SCROLL PROGRESS BAR -->
-<div id="scrollProgress"></div>
+<div id="scrollProgress" aria-hidden="true"></div>
 
-<!-- HEADER & NAVIGATION -->
-<header>
-  <div class="container">
-    <div class="nav-bar">
-      <a href="#" class="nav-logo">
-        <div class="avatar-circle">DG</div>
-        <span>Desnabil Gymnastiar</span>
-      </a>
+<!-- A. NAVIGATION BAR -->
+<header class="site-header" id="header">
+  <div class="nav-container">
+    <a href="#hero" class="brand-logo" aria-label="BIEL07.DEV Home">
+      <span class="logo-symbol">B7</span>
+      <span class="logo-text">BIEL07<span class="logo-dot">.DEV</span></span>
+    </a>
 
-      <nav class="nav-menu" id="navMenu">
-        <a href="#about">About</a>
-        <a href="#transformation">Impact</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <button id="navPrintBtn" style="color:var(--text-sub); font-size:0.88rem; font-weight:500; cursor:pointer;">📄 Print CV</button>
-        <a href="#contact" class="btn-contact-nav">Contact Me</a>
-      </nav>
+    <nav class="nav-desktop" aria-label="Main Navigation">
+      <a href="#hero" class="nav-link active" data-i18n="nav_home">Home</a>
+      <a href="#about" class="nav-link" data-i18n="nav_about">About</a>
+      <a href="#expertise" class="nav-link" data-i18n="nav_expertise">Expertise</a>
+      <a href="#projects" class="nav-link" data-i18n="nav_projects">Projects</a>
+      <a href="#experience" class="nav-link" data-i18n="nav_experience">Experience</a>
+      <a href="#approach" class="nav-link" data-i18n="nav_approach">Approach</a>
+      <a href="#connect" class="nav-link" data-i18n="nav_connect">Connect</a>
+    </nav>
+
+    <div class="nav-actions">
+      <!-- 4-Language Switcher (EN | ID | JP | ZH) -->
+      <div class="lang-switcher" role="group" aria-label="Language Selector">
+        <button type="button" class="lang-btn active" data-lang="en" aria-label="English">EN</button>
+        <button type="button" class="lang-btn" data-lang="id" aria-label="Bahasa Indonesia">ID</button>
+        <button type="button" class="lang-btn" data-lang="jp" aria-label="日本語">JP</button>
+        <button type="button" class="lang-btn" data-lang="zh" aria-label="中文">ZH</button>
+      </div>
+
+      <div class="availability-badge" title="Open for software engineering and manufacturing digitalization inquiries">
+        <span class="status-indicator" aria-hidden="true"></span>
+        <span class="status-label" data-i18n="status_available">AVAILABLE FOR WORK</span>
+      </div>
+      <a href="https://id.linkedin.com/in/desnabil-gymnastiar-b9375320a" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-accent nav-cta" data-i18n="nav_cta">LinkedIn &nearr;</a>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Collapsible Menu -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mobile-nav-links">
+      <a href="#hero" class="mobile-nav-link" data-i18n="nav_home">Home</a>
+      <a href="#about" class="mobile-nav-link" data-i18n="nav_about">About</a>
+      <a href="#expertise" class="mobile-nav-link" data-i18n="nav_expertise">Expertise</a>
+      <a href="#projects" class="mobile-nav-link" data-i18n="nav_projects">Projects</a>
+      <a href="#experience" class="mobile-nav-link" data-i18n="nav_experience">Experience</a>
+      <a href="#approach" class="mobile-nav-link" data-i18n="nav_approach">Approach</a>
+      <a href="#connect" class="mobile-nav-link" data-i18n="nav_connect">Connect</a>
+    </nav>
+    <div class="mobile-menu-footer">
+      <div class="mobile-lang-row">
+        <span class="mobile-lang-label">LANG:</span>
+        <div class="lang-switcher">
+          <button type="button" class="lang-btn active" data-lang="en">EN</button>
+          <button type="button" class="lang-btn" data-lang="id">ID</button>
+          <button type="button" class="lang-btn" data-lang="jp">JP</button>
+          <button type="button" class="lang-btn" data-lang="zh">ZH</button>
+        </div>
+      </div>
+      <a href="https://id.linkedin.com/in/desnabil-gymnastiar-b9375320a" target="_blank" rel="noopener noreferrer" class="btn btn-accent btn-full mobile-cta-btn" data-i18n="mobile_cta">Connect on LinkedIn &nearr;</a>
     </div>
   </div>
 </header>
 
-<main class="container">
+<main id="main-content">
 
-  <!-- HERO SECTION -->
-  <div class="hero-section">
-    <div class="hero-grid">
-      <!-- Left Column: Introduction & Headline -->
-      <div class="hero-left">
-        <div class="badge-status">
-          <span class="status-dot"></span>
-          <span>Available for Full-Stack &amp; Industrial Systems Opportunities</span>
+  <!-- B. HERO SECTION -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-container">
+      <!-- Left Column: Asymmetric Content -->
+      <div class="hero-content">
+        <div class="eyebrow-badge">
+          <span class="eyebrow-line"></span>
+          <span class="eyebrow-text" data-i18n="hero_eyebrow">SOFTWARE ENGINEER / INDUSTRIAL DIGITALIZATION</span>
         </div>
 
-        <h1 class="hero-title">
-          Building Reliable<br>
-          <span class="type-highlight" id="typewriterText">Web Applications</span><span class="type-cursor">|</span>
+        <h1 class="hero-headline" data-i18n-html="hero_headline">
+          Building Digital<br>
+          <span class="headline-gradient">Systems That Work.</span>
         </h1>
 
-        <p class="hero-subtitle">
-          Halo! Saya <strong>Desnabil Gymnastiar</strong>, berdomisili di <strong>Cikarang Barat, Jawa Barat</strong>.
-          Berpengalaman di industri manufaktur otomotif dalam merancang dan mengembangkan
-          <strong>Full-Stack Web Applications</strong>, sistem digitalisasi <strong>PPIC (Production Planning &amp; Inventory Control)</strong>,
-          serta <strong>Workflow Automation</strong> berstandar lean manufacturing yang memangkas pekerjaan manual agar operasional berjalan cepat, presisi, dan terukur.
+        <p class="hero-description" data-i18n="hero_desc">
+          I build practical software solutions that connect technology, manufacturing operations, and process improvement — turning complex workflows into efficient digital systems.
         </p>
 
-        <div class="hero-actions">
+        <div class="hero-cta-group">
           <a href="#projects" class="btn btn-primary">
-            Explore Projects ↓
+            <span data-i18n="hero_cta_explore">Explore My Work</span>
+            <svg class="btn-arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
           </a>
-          <a href="https://api.whatsapp.com/send?phone=62895372483883&text=Halo%20Desnabil,%20saya%20melihat%20portofolio%20Anda%20dan%20tertarik%20untuk%20berdiskusi%20mengenai%20peluang%20kerja%20/%20proyek." target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="border-color:rgba(46, 160, 67, 0.4); color:#3fb950;">
-            💬 WhatsApp
+          <a href="https://id.linkedin.com/in/desnabil-gymnastiar-b9375320a" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+            <span data-i18n="hero_cta_connect">Connect on LinkedIn &nearr;</span>
           </a>
-          <button class="btn btn-secondary" id="copyEmailBtn">
-            ✉ Copy Email
-          </button>
-          <button class="btn btn-secondary" id="heroPrintBtn">
-            📄 Print CV
-          </button>
-          <a href="https://www.linkedin.com/in/desnabil-gymnastiar-b9375320a" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-            LinkedIn Profile ↗
-          </a>
+        </div>
+
+        <div class="hero-metadata">
+          <span class="meta-label" data-i18n="hero_meta_label">CORE DOMAINS</span>
+          <div class="meta-chips">
+            <span class="meta-chip" data-i18n="hero_meta_web">Web Application Development</span>
+            <span class="meta-chip" data-i18n="hero_meta_mfg">Manufacturing Systems</span>
+            <span class="meta-chip" data-i18n="hero_meta_auto">Workflow Automation</span>
+          </div>
         </div>
       </div>
 
-      <!-- Right Column: Interactive Profile & Status Card -->
-      <div class="hero-right">
-        <div class="hero-profile-card">
-          <div class="profile-card-top">
-            <div class="profile-avatar-large">DG</div>
-            <div>
-              <div class="profile-name">Desnabil Gymnastiar</div>
-              <div class="profile-title">PPIC &amp; Full-Stack Developer</div>
-              <div class="profile-location">📍 Cikarang Barat, Jawa Barat, ID</div>
+      <!-- Right Column: Original Technical Visualization -->
+      <div class="hero-visualization-wrapper" aria-label="Digital System Node Architecture Diagram">
+        <div class="tech-diagram-card">
+          <div class="diagram-header">
+            <div class="diagram-title-bar">
+              <span class="diagram-dot red"></span>
+              <span class="diagram-dot yellow"></span>
+              <span class="diagram-dot green"></span>
+              <span class="diagram-label">SYS_ARCHITECTURE // TOPOLOGY_V1</span>
             </div>
+            <span class="diagram-status">ONLINE // 99.98%</span>
           </div>
 
-          <div class="profile-status-pill">
-            <span class="status-dot"></span>
-            <span>Open for Full-Time &amp; Systems Consulting</span>
+          <div class="diagram-viewport">
+            <div class="grid-overlay" aria-hidden="true"></div>
+
+            <!-- Central Hub Node -->
+            <div class="node-central">
+              <div class="node-pulse" aria-hidden="true"></div>
+              <div class="node-inner">
+                <span class="node-code">CORE_ENGINE</span>
+                <span class="node-title">BIEL07</span>
+                <span class="node-sub">System Hub</span>
+              </div>
+            </div>
+
+            <!-- Connected Nodes -->
+            <!-- Node 1: Web Apps -->
+            <div class="module-node node-web">
+              <div class="module-tag">MOD_01</div>
+              <div class="module-name">Web Applications</div>
+              <div class="module-spec">Full-Stack / REST APIs</div>
+            </div>
+
+            <!-- Node 2: PPIC Systems -->
+            <div class="module-node node-ppic">
+              <div class="module-tag">MOD_02</div>
+              <div class="module-name">PPIC Systems</div>
+              <div class="module-spec">MRP / Inventory Engine</div>
+            </div>
+
+            <!-- Node 3: Kanban -->
+            <div class="module-node node-kanban">
+              <div class="module-tag">MOD_03</div>
+              <div class="module-name">Kanban Mgmt</div>
+              <div class="module-spec">Pull Flow / Auto-Cut</div>
+            </div>
+
+            <!-- Node 4: Automation -->
+            <div class="module-node node-automation">
+              <div class="module-tag">MOD_04</div>
+              <div class="module-name">Automation</div>
+              <div class="module-spec">ETL / n8n / VBA</div>
+            </div>
+
+            <!-- Connecting Circuit Lines (SVG) -->
+            <svg class="diagram-connections" viewBox="0 0 460 380" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <!-- Central to Web -->
+              <path d="M 230 190 L 110 90" stroke="rgba(0, 229, 255, 0.45)" stroke-width="1.5" stroke-dasharray="4 4" class="anim-trace"/>
+              <!-- Central to PPIC -->
+              <path d="M 230 190 L 350 90" stroke="rgba(59, 130, 246, 0.45)" stroke-width="1.5" stroke-dasharray="4 4" class="anim-trace"/>
+              <!-- Central to Kanban -->
+              <path d="M 230 190 L 105 295" stroke="rgba(59, 130, 246, 0.45)" stroke-width="1.5" stroke-dasharray="4 4" class="anim-trace"/>
+              <!-- Central to Automation -->
+              <path d="M 230 190 L 355 295" stroke="rgba(0, 229, 255, 0.45)" stroke-width="1.5" stroke-dasharray="4 4" class="anim-trace"/>
+              
+              <!-- Orbital Rings -->
+              <circle cx="230" cy="190" r="54" stroke="rgba(0, 229, 255, 0.2)" stroke-width="1"/>
+              <circle cx="230" cy="190" r="92" stroke="rgba(59, 130, 246, 0.15)" stroke-width="1" stroke-dasharray="2 4"/>
+              <circle cx="230" cy="190" r="140" stroke="rgba(148, 163, 184, 0.1)" stroke-width="1"/>
+            </svg>
           </div>
 
-          <div class="profile-details-list">
-            <div class="profile-detail-item">
-              <span class="profile-detail-key">Current Role</span>
-              <span class="profile-detail-val">PPIC &amp; IT Developer</span>
+          <div class="diagram-footer">
+            <div class="telemetry-item">
+              <span class="telemetry-k">LATENCY</span>
+              <span class="telemetry-v">0.8ms</span>
             </div>
-            <div class="profile-detail-item">
-              <span class="profile-detail-key">Company</span>
-              <span class="profile-detail-val">PT Namicoh Indonesia</span>
+            <div class="telemetry-item">
+              <span class="telemetry-k">OPERATIONAL TARGET</span>
+              <span class="telemetry-v text-accent">ZERO DISCREPANCY</span>
             </div>
-            <div class="profile-detail-item">
-              <span class="profile-detail-key">Experience</span>
-              <span class="profile-detail-val">3+ Years (Automotive &amp; Web)</span>
+            <div class="telemetry-item">
+              <span class="telemetry-k">STACK</span>
+              <span class="telemetry-v">HYBRID INDUSTRIAL</span>
             </div>
-            <div class="profile-detail-item">
-              <span class="profile-detail-key">Primary Focus</span>
-              <span class="profile-detail-val">PPIC, MRP &amp; Hardware Auto-Cutter</span>
-            </div>
-          </div>
-
-          <div class="profile-tech-stack">
-            <div class="profile-tech-title">Core Technologies</div>
-            <div class="profile-pills">
-              <span class="pill">Python</span>
-              <span class="pill">PHP</span>
-              <span class="pill">Node.js</span>
-              <span class="pill">MySQL</span>
-              <span class="pill">n8n</span>
-              <span class="pill">E-Kanban</span>
-            </div>
-          </div>
-
-          <div class="profile-quick-actions">
-            <button class="btn-profile-action" id="cardCopyEmailBtn" title="Copy Email">
-              <span>✉ Email</span>
-            </button>
-            <a href="https://api.whatsapp.com/send?phone=62895372483883&text=Halo%20Desnabil,%20saya%20melihat%20portofolio%20Anda%20dan%20tertarik%20untuk%20berdiskusi%20mengenai%20peluang%20kerja%20/%20proyek." target="_blank" rel="noopener noreferrer" class="btn-profile-action" style="color:#3fb950;">
-              <span>💬 WA</span>
-            </a>
-            <a href="https://www.linkedin.com/in/desnabil-gymnastiar-b9375320a" target="_blank" rel="noopener noreferrer" class="btn-profile-action">
-              <span>LinkedIn ↗</span>
-            </a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- STATS SUMMARY -->
-    <div class="stats-grid reveal">
-      <div class="stat-card">
-        <span class="stat-number">3+ Years</span>
-        <span class="stat-desc">Manufacturing &amp; Software Experience</span>
+    <!-- Scroll Down Indicator -->
+    <a href="#about" class="scroll-indicator" aria-label="Scroll down to About section">
+      <span class="scroll-label" data-i18n="hero_scroll">SCROLL</span>
+      <div class="scroll-mouse" aria-hidden="true">
+        <div class="scroll-wheel"></div>
       </div>
-      <div class="stat-card">
-        <span class="stat-number">6+ Systems</span>
-        <span class="stat-desc">Production Apps &amp; Automations Built</span>
+    </a>
+  </section>
+
+  <!-- C. ABOUT SECTION -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow" data-i18n="about_eyebrow">01 // ABOUT IDENTITY</span>
+        <h2 class="section-title" data-i18n="about_title">Engineering Beyond the Code.</h2>
+        <p class="section-sub" data-i18n="about_sub">
+          Where modern software engineering disciplines meet real-world industrial plant floor execution.
+        </p>
       </div>
-      <div class="stat-card">
-        <span class="stat-number">5,000+ / Day</span>
-        <span class="stat-desc">Automated E-Kanban Cuts</span>
+
+      <div class="about-grid">
+        <!-- Editorial Main Text -->
+        <div class="about-editorial">
+          <p class="lead-text" data-i18n="about_lead">
+            I am a Software Engineer based in Cikarang Barat, West Java, specializing in the intersection of full-stack web applications and manufacturing operational digitalization.
+          </p>
+          <p data-i18n-html="about_p1">
+            Unlike purely theoretical software development, my engineering background is anchored directly inside Tier-1 automotive manufacturing environments. I don't just develop software interfaces; I analyze how material moves across factory floors, how takt time drives production pacing, and how frontline operators interact with physical hardware.
+          </p>
+          <p data-i18n-html="about_p2">
+            With professional experience at <strong>PT Namicoh Indonesia Component</strong> and <strong>PT Astra Daihatsu Motor</strong>, my work focuses on eliminating operational waste (<em>Muda</em>), preventing manual calculation discrepancies (<em>Poka-Yoke</em>), and establishing transparent data flows between inventory, planning, and delivery.
+          </p>
+
+          <div class="about-highlights-list">
+            <div class="highlight-item">
+              <span class="highlight-bullet">01</span>
+              <div>
+                <strong data-i18n="about_h1_title">Software Development &amp; System Integration:</strong>
+                <span data-i18n="about_h1_desc">Architecting robust web backends, responsive dashboards, and hardware-connected drivers.</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-bullet">02</span>
+              <div>
+                <strong data-i18n="about_h2_title">Manufacturing Workflow Understanding:</strong>
+                <span data-i18n="about_h2_desc">Direct floor experience in automotive assembly logistics, stamping, and supply chain timelines.</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-bullet">03</span>
+              <div>
+                <strong data-i18n="about_h3_title">Production Planning &amp; Inventory Processes:</strong>
+                <span data-i18n="about_h3_desc">Translating BOM structures, daily demand schedules, and stock levels into automated calculation engines.</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-bullet">04</span>
+              <div>
+                <strong data-i18n="about_h4_title">Process Automation &amp; Data Visualization:</strong>
+                <span data-i18n="about_h4_desc">Eliminating multi-hour manual data entry routines via scheduled pipelines, Power BI, and VBA tools.</span>
+              </div>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-bullet">05</span>
+              <div>
+                <strong data-i18n="about_h5_title">Continuous Improvement Mindset:</strong>
+                <span data-i18n="about_h5_desc">Practicing Kaizen discipline to optimize system reliability, execution speed, and operator safety.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Technical Side Panel -->
+        <aside class="about-side-panel">
+          <div class="panel-card">
+            <div class="panel-header">
+              <span class="panel-mono" data-i18n="panel_title">SYSTEM_PILLARS // SPECS</span>
+              <span class="panel-badge" data-i18n="panel_badge">CORE DNA</span>
+            </div>
+
+            <div class="panel-pillars">
+              <div class="pillar-block">
+                <span class="pillar-code">P-01</span>
+                <h3 class="pillar-heading" data-i18n="pillar_1_title">SYSTEM THINKING</h3>
+                <p class="pillar-desc" data-i18n="pillar_1_desc">Viewing code not as isolated scripts, but as interdependent links within a living enterprise manufacturing pipeline.</p>
+              </div>
+
+              <div class="pillar-block">
+                <span class="pillar-code">P-02</span>
+                <h3 class="pillar-heading" data-i18n="pillar_2_title">PROCESS OPTIMIZATION</h3>
+                <p class="pillar-desc" data-i18n="pillar_2_desc">Systematically auditing root-cause bottlenecks before writing a line of code to eliminate operational waste.</p>
+              </div>
+
+              <div class="pillar-block">
+                <span class="pillar-code">P-03</span>
+                <h3 class="pillar-heading" data-i18n="pillar_3_title">DATA-DRIVEN SOLUTIONS</h3>
+                <p class="pillar-desc" data-i18n="pillar_3_desc">Replacing subjective estimates with automated time-series models, live telemetry, and structured validation tables.</p>
+              </div>
+
+              <div class="pillar-block">
+                <span class="pillar-code">P-04</span>
+                <h3 class="pillar-heading" data-i18n="pillar_4_title">CONTINUOUS IMPROVEMENT</h3>
+                <p class="pillar-desc" data-i18n="pillar_4_desc">Iterating software based on measurable floor operator feedback, runtime metrics, and long-term maintainability.</p>
+              </div>
+            </div>
+
+            <div class="panel-footer">
+              <div class="panel-meta-row">
+                <span class="panel-meta-k" data-i18n="panel_location_label">LOCATION</span>
+                <span class="panel-meta-v" data-i18n="panel_location_val">Cikarang Barat, West Java, ID</span>
+              </div>
+              <div class="panel-meta-row">
+                <span class="panel-meta-k" data-i18n="panel_role_label">ROLE</span>
+                <span class="panel-meta-v" data-i18n="panel_role_val">PPIC &amp; Software Developer</span>
+              </div>
+              <div class="panel-meta-row">
+                <span class="panel-meta-k" data-i18n="panel_profile_label">PROFILE</span>
+                <span class="panel-meta-v"><a href="https://id.linkedin.com/in/desnabil-gymnastiar-b9375320a" target="_blank" rel="noopener noreferrer" class="text-accent" data-i18n="panel_profile_val">LinkedIn Profile &nearr;</a></span>
+              </div>
+            </div>
+          </div>
+        </aside>
       </div>
-      <div class="stat-card">
-        <span class="stat-number">Zero Stops</span>
-        <span class="stat-desc">Reliable Factory Dispatch Operation</span>
+    </div>
+  </section>
+
+  <!-- D. TECHNICAL EXPERTISE -->
+  <section class="section section-dark" id="expertise">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow" data-i18n="exp_eyebrow">02 // TECHNICAL MATRIX</span>
+        <h2 class="section-title" data-i18n="exp_title">Technical Expertise.</h2>
+        <p class="section-sub" data-i18n="exp_sub">
+          A verified stack combining modern software engineering with industrial plant operations and automation tools.
+        </p>
+      </div>
+
+      <div class="expertise-grid">
+        <!-- 1. Web Development -->
+        <div class="expertise-card">
+          <div class="card-top-bar">
+            <span class="tech-code">DOMAIN // WEB_DEV</span>
+            <span class="tech-icon-symbol">&lt;/&gt;</span>
+          </div>
+          <h3 class="expertise-title" data-i18n="exp_d1_title">Web Development</h3>
+          <p class="expertise-summary" data-i18n="exp_d1_desc">Building reliable internal portals, RESTful services, and responsive operational interfaces.</p>
+          <div class="tech-chips">
+            <span class="tech-chip">PHP</span>
+            <span class="tech-chip">JavaScript (ES6+)</span>
+            <span class="tech-chip">HTML5</span>
+            <span class="tech-chip">CSS3</span>
+            <span class="tech-chip">Bootstrap</span>
+            <span class="tech-chip">Laravel</span>
+            <span class="tech-chip">CodeIgniter</span>
+          </div>
+          <div class="card-status-note" data-i18n="exp_d1_status">Verified in automotive production environments</div>
+        </div>
+
+        <!-- 2. Database -->
+        <div class="expertise-card">
+          <div class="card-top-bar">
+            <span class="tech-code">DOMAIN // DATABASE</span>
+            <span class="tech-icon-symbol">&#9776;</span>
+          </div>
+          <h3 class="expertise-title" data-i18n="exp_d2_title">Database &amp; Data Sources</h3>
+          <p class="expertise-summary" data-i18n="exp_d2_desc">Relational schema design, query optimization, and structured operational storage.</p>
+          <div class="tech-chips">
+            <span class="tech-chip">MySQL</span>
+            <span class="tech-chip">SQL</span>
+            <span class="tech-chip">Database Indexing</span>
+            <span class="tech-chip">Google Sheets (Lightweight API)</span>
+          </div>
+          <div class="card-status-note" data-i18n="exp_d2_status">High-volume transactional query design</div>
+        </div>
+
+        <!-- 3. Automation & Analytics -->
+        <div class="expertise-card">
+          <div class="card-top-bar">
+            <span class="tech-code">DOMAIN // AUTOMATION</span>
+            <span class="tech-icon-symbol">&#9881;</span>
+          </div>
+          <h3 class="expertise-title" data-i18n="exp_d3_title">Automation &amp; Analytics</h3>
+          <p class="expertise-summary" data-i18n="exp_d3_desc">Eliminating multi-hour manual data workflows through scheduled ETL routines and reports.</p>
+          <div class="tech-chips">
+            <span class="tech-chip">Python</span>
+            <span class="tech-chip">Excel VBA Macros</span>
+            <span class="tech-chip">Power BI</span>
+            <span class="tech-chip">Google Apps Script</span>
+            <span class="tech-chip">n8n Workflows</span>
+          </div>
+          <div class="card-status-note" data-i18n="exp_d3_status">Production-grade ETL and dashboard generation</div>
+        </div>
+
+        <!-- 4. Infrastructure -->
+        <div class="expertise-card">
+          <div class="card-top-bar">
+            <span class="tech-code">DOMAIN // INFRASTRUCTURE</span>
+            <span class="tech-icon-symbol">&#9889;</span>
+          </div>
+          <h3 class="expertise-title" data-i18n="exp_d4_title">Infrastructure &amp; Networking</h3>
+          <p class="expertise-summary" data-i18n="exp_d4_desc">Server maintenance, networking fundamentals, and production deployment environments.</p>
+          <div class="tech-chips">
+            <span class="tech-chip">Linux Administration</span>
+            <span class="tech-chip">Networking Fundamentals</span>
+            <span class="tech-chip">Server Administration</span>
+            <span class="tech-chip">Git / Version Control</span>
+          </div>
+          <div class="card-status-note" data-i18n="exp_d4_status">Data center Tier-3 &amp; plant server support</div>
+        </div>
+
+        <!-- 5. Industrial Systems (Featured Wide Card) -->
+        <div class="expertise-card card-span-2">
+          <div class="card-top-bar">
+            <span class="tech-code">DOMAIN // INDUSTRIAL_OPERATIONS</span>
+            <span class="tech-badge-cyan" data-i18n="exp_d5_badge">PLANT FLOOR SPECIALIZATION</span>
+          </div>
+          <h3 class="expertise-title" data-i18n="exp_d5_title">Industrial Systems &amp; Manufacturing Digitalization</h3>
+          <p class="expertise-summary" data-i18n="exp_d5_desc">Domain expertise in lean manufacturing workflows, production planning calculations, and physical hardware floor controls.</p>
+          <div class="tech-chips">
+            <span class="tech-chip highlighted">PPIC (Production Planning &amp; Inventory)</span>
+            <span class="tech-chip highlighted">Kanban Pull System</span>
+            <span class="tech-chip highlighted">Production Monitoring</span>
+            <span class="tech-chip highlighted">Inventory Control</span>
+            <span class="tech-chip">Manufacturing Process Digitalization</span>
+            <span class="tech-chip">ESC/POS Thermal Protocol</span>
+            <span class="tech-chip">Barcode Standards</span>
+            <span class="tech-chip">Toyota Production System (TPS)</span>
+          </div>
+          <div class="card-status-note" data-i18n="exp_d5_status">Direct floor alignment: Bridging operators, line leaders, and executive systems</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- E. FEATURED PROJECTS -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow" data-i18n="proj_eyebrow">03 // SELECTED WORK</span>
+        <h2 class="section-title" data-i18n="proj_title">Featured Projects.</h2>
+        <p class="section-sub" data-i18n="proj_sub">
+          High-impact operational systems, automation pipelines, and manufacturing digitalization concepts.
+        </p>
+      </div>
+
+      <div class="projects-list">
+
+        <!-- Project 01 — PPIC & Kanban Management System -->
+        <article class="project-showcase-card" data-project-id="p1">
+          <div class="project-card-layout">
+            <!-- Left Project Info -->
+            <div class="project-details">
+              <div class="project-meta-top">
+                <span class="project-num">PROJECT // 01</span>
+                <span class="project-category-tag" data-i18n="p1_cat">MANUFACTURING CONCEPT / PRODUCTION SYSTEM</span>
+              </div>
+
+              <h3 class="project-heading" data-i18n="p1_title">PPIC &amp; Kanban Management System</h3>
+
+              <div class="project-callout-problem">
+                <span class="callout-label" data-i18n="label_problem">PROBLEM STATEMENT</span>
+                <p data-i18n="p1_problem">Assembly planning and inventory allocation were calculated across segregated spreadsheets, consuming 4+ hours per order batch with elevated risk of calculation drift.</p>
+              </div>
+
+              <div class="project-callout-solution">
+                <span class="callout-label" data-i18n="label_solution">SOLUTION OVERVIEW</span>
+                <p data-i18n="p1_solution">A manufacturing-oriented centralized web application for organizing production planning, inventory levels, bill-of-materials explosion (MRP), and floor operational visibility.</p>
+              </div>
+
+              <div class="project-tech-group">
+                <span class="tech-tag">PHP</span>
+                <span class="tech-tag">JavaScript</span>
+                <span class="tech-tag">MySQL</span>
+                <span class="tech-tag">MRP Engine</span>
+                <span class="tech-tag">Kanban Logic</span>
+              </div>
+
+              <div class="project-actions">
+                <button class="btn btn-sm btn-primary open-modal-btn" data-project="p1" data-i18n="btn_view_details">View Details</button>
+                <span class="project-verified-badge" data-i18n="p1_badge">&#10003; Floor Tested Architecture</span>
+              </div>
+            </div>
+
+            <!-- Right Visual Mockup (Custom CSS Industrial Dashboard) -->
+            <div class="project-mockup-wrapper">
+              <div class="ui-mockup-window">
+                <div class="ui-titlebar">
+                  <div class="ui-circles"><span></span><span></span><span></span></div>
+                  <span class="ui-title">PPIC_KANBAN_PORTAL // PROD_MONITOR</span>
+                  <span class="ui-badge-live">LIVE MONITOR</span>
+                </div>
+                <div class="ui-dashboard-preview">
+                  <div class="mock-stats-row">
+                    <div class="mock-stat-tile">
+                      <span class="mock-k">DAILY PLAN</span>
+                      <span class="mock-v text-cyan">4,200 PCS</span>
+                    </div>
+                    <div class="mock-stat-tile">
+                      <span class="mock-k">ACTUAL RUN</span>
+                      <span class="mock-v">4,185 PCS</span>
+                    </div>
+                    <div class="mock-stat-tile">
+                      <span class="mock-k">ACHIEVEMENT</span>
+                      <span class="mock-v text-success">99.6%</span>
+                    </div>
+                  </div>
+
+                  <div class="mock-table-wrap">
+                    <div class="mock-table-head">
+                      <span>PART NO</span>
+                      <span>LINE</span>
+                      <span>MRP STOCK</span>
+                      <span>STATUS</span>
+                    </div>
+                    <div class="mock-table-row">
+                      <span class="mono">55310-BZ010</span>
+                      <span>ASY-L1</span>
+                      <span>1,240</span>
+                      <span class="badge-pill pill-ok">SYNCHRONIZED</span>
+                    </div>
+                    <div class="mock-table-row">
+                      <span class="mono">55320-BZ020</span>
+                      <span>ASY-L2</span>
+                      <span>890</span>
+                      <span class="badge-pill pill-ok">SYNCHRONIZED</span>
+                    </div>
+                    <div class="mock-table-row">
+                      <span class="mono">55330-BZ040</span>
+                      <span>SUB-L1</span>
+                      <span>420</span>
+                      <span class="badge-pill pill-warn">DISPATCHING</span>
+                    </div>
+                  </div>
+
+                  <div class="mock-bottom-bar">
+                    <span class="mono text-muted">BOM EXPLOSION: COMPLETE &lt;15s</span>
+                    <span class="mono text-cyan">PAPERLESS TRANSITION: 100%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 02 — Manufacturing Andon Monitoring -->
+        <article class="project-showcase-card" data-project-id="p2">
+          <div class="project-card-layout">
+            <!-- Left Project Info -->
+            <div class="project-details">
+              <div class="project-meta-top">
+                <span class="project-num">PROJECT // 02</span>
+                <span class="project-category-tag" data-i18n="p2_cat">PRODUCTION MONITORING / VISUAL CONTROL</span>
+              </div>
+
+              <h3 class="project-heading" data-i18n="p2_title">Manufacturing Andon Monitoring</h3>
+
+              <div class="project-callout-problem">
+                <span class="callout-label" data-i18n="label_problem">PROBLEM STATEMENT</span>
+                <p data-i18n="p2_problem">Assembly line supervisor stations lacked real-time visibility over line pacing, hourly output discrepancies, and immediate downtime notification across shifts.</p>
+              </div>
+
+              <div class="project-callout-solution">
+                <span class="callout-label" data-i18n="label_solution">SOLUTION OVERVIEW</span>
+                <p data-i18n="p2_solution">A production monitoring interface concept for visualizing plan versus actual, hourly achievement curves, operational takt status, and automated anomaly alert thresholds.</p>
+              </div>
+
+              <div class="project-tech-group">
+                <span class="tech-tag">JavaScript (ES6+)</span>
+                <span class="tech-tag">HTML5/CSS3</span>
+                <span class="tech-tag">MySQL</span>
+                <span class="tech-tag">Real-Time Telemetry</span>
+                <span class="tech-tag">Andon Logic</span>
+              </div>
+
+              <div class="project-actions">
+                <button class="btn btn-sm btn-primary open-modal-btn" data-project="p2" data-i18n="btn_view_details">View Details</button>
+                <span class="project-verified-badge" data-i18n="p2_badge">&#10003; Real-Time UI Concept</span>
+              </div>
+            </div>
+
+            <!-- Right Visual Mockup (Andon KPI Dashboard) -->
+            <div class="project-mockup-wrapper">
+              <div class="ui-mockup-window">
+                <div class="ui-titlebar">
+                  <div class="ui-circles"><span></span><span></span><span></span></div>
+                  <span class="ui-title">ANDON_SYSTEM // MAIN_LINE_DASHBOARD</span>
+                  <span class="ui-badge-live">LINE 01 : ACTIVE</span>
+                </div>
+                <div class="ui-dashboard-preview">
+                  <div class="andon-header-grid">
+                    <div class="andon-kpi-card bg-cyan-soft">
+                      <span class="andon-label">TAKT TIME TARGET</span>
+                      <span class="andon-val text-cyan">54.2 SEC</span>
+                    </div>
+                    <div class="andon-kpi-card bg-blue-soft">
+                      <span class="andon-label">PLAN VS ACTUAL</span>
+                      <span class="andon-val">320 / 318</span>
+                    </div>
+                    <div class="andon-kpi-card bg-green-soft">
+                      <span class="andon-label">OEE RUN RATE</span>
+                      <span class="andon-val text-success">98.4%</span>
+                    </div>
+                  </div>
+
+                  <!-- Visual Production Bar Chart -->
+                  <div class="andon-chart-block">
+                    <span class="mock-k">HOURLY LINE ACHIEVEMENT [SHIFT 1]</span>
+                    <div class="chart-bars-wrap">
+                      <div class="chart-bar-item"><div class="bar-fill" style="height: 85%;"></div><span>07:00</span></div>
+                      <div class="chart-bar-item"><div class="bar-fill" style="height: 98%;"></div><span>08:00</span></div>
+                      <div class="chart-bar-item"><div class="bar-fill" style="height: 95%;"></div><span>09:00</span></div>
+                      <div class="chart-bar-item"><div class="bar-fill" style="height: 100%;"></div><span>10:00</span></div>
+                      <div class="chart-bar-item"><div class="bar-fill current" style="height: 92%;"></div><span>11:00</span></div>
+                      <div class="chart-bar-item"><div class="bar-fill planned" style="height: 95%;"></div><span>12:00</span></div>
+                    </div>
+                  </div>
+
+                  <div class="mock-bottom-bar">
+                    <span class="mono text-muted">LINE STATUS: CONTINUOUS PULL FLOW</span>
+                    <span class="mono text-success">ANOMALIES: 0 DETECTED</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 03 — Export & Delivery Process System -->
+        <article class="project-showcase-card" data-project-id="p3">
+          <div class="project-card-layout">
+            <!-- Left Project Info -->
+            <div class="project-details">
+              <div class="project-meta-top">
+                <span class="project-num">PROJECT // 03</span>
+                <span class="project-category-tag" data-i18n="p3_cat">LOGISTICS &amp; COMPLIANCE / WEB PLATFORM</span>
+              </div>
+
+              <h3 class="project-heading" data-i18n="p3_title">Export &amp; Delivery Process System</h3>
+
+              <div class="project-callout-problem">
+                <span class="callout-label" data-i18n="label_problem">PROBLEM STATEMENT</span>
+                <p data-i18n="p3_problem">Cross-plant component transfers and export documentation reconciliation relied on paper manifests, creating part discrepancy risks and downstream assembly line-stop vulnerabilities.</p>
+              </div>
+
+              <div class="project-callout-solution">
+                <span class="callout-label" data-i18n="label_solution">SOLUTION OVERVIEW</span>
+                <p data-i18n="p3_solution">A web-based operational workflow system managing dispatch verification, automated dual-barcode scanning, manifest compilation, and real-time shipment reconciliation.</p>
+              </div>
+
+              <div class="project-tech-group">
+                <span class="tech-tag">PHP</span>
+                <span class="tech-tag">MySQL</span>
+                <span class="tech-tag">Excel VBA</span>
+                <span class="tech-tag">Power BI</span>
+                <span class="tech-tag">Audit Tracking</span>
+              </div>
+
+              <div class="project-actions">
+                <button class="btn btn-sm btn-primary open-modal-btn" data-project="p3" data-i18n="btn_view_details">View Details</button>
+                <span class="project-verified-badge" data-i18n="p3_badge">&#10003; Zero Line-Stop Record</span>
+              </div>
+            </div>
+
+            <!-- Right Visual Mockup (Logistics Dashboard) -->
+            <div class="project-mockup-wrapper">
+              <div class="ui-mockup-window">
+                <div class="ui-titlebar">
+                  <div class="ui-circles"><span></span><span></span><span></span></div>
+                  <span class="ui-title">EXP_DISPATCH // MANIFEST_VERIFICATION</span>
+                  <span class="ui-badge-live">DUAL SCAN ACTIVE</span>
+                </div>
+                <div class="ui-dashboard-preview">
+                  <div class="dispatch-summary-box">
+                    <div class="dispatch-route">
+                      <span class="route-point">PLANT 01 (ORIGIN)</span>
+                      <span class="route-arrow">&rarr; &rarr;</span>
+                      <span class="route-point">PLANT 02 (RECEIVING)</span>
+                    </div>
+                    <div class="dispatch-stat">DISPATCH VERIFIED // ZERO VARIANCE</div>
+                  </div>
+
+                  <div class="mock-table-wrap">
+                    <div class="mock-table-head">
+                      <span>SHIPMENT ID</span>
+                      <span>DESTINATION</span>
+                      <span>CONTAINER</span>
+                      <span>VERIFICATION</span>
+                    </div>
+                    <div class="mock-table-row">
+                      <span class="mono">SHP-2026-088</span>
+                      <span>ADM EXPORT DOCK</span>
+                      <span>40FT-HQ</span>
+                      <span class="badge-pill pill-ok">PASS // DUAL BARCODE</span>
+                    </div>
+                    <div class="mock-table-row">
+                      <span class="mono">SHP-2026-089</span>
+                      <span>INTER-PLANT LOG</span>
+                      <span>TRUCK #04</span>
+                      <span class="badge-pill pill-ok">PASS // DUAL BARCODE</span>
+                    </div>
+                  </div>
+
+                  <div class="mock-bottom-bar">
+                    <span class="mono text-muted">VALIDATION: 100% DUAL-VERIFIED</span>
+                    <span class="mono text-accent">ZERO DISCREPANCY RECORD</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 04 — Excel Automation & QR Label Generation -->
+        <article class="project-showcase-card" data-project-id="p4">
+          <div class="project-card-layout">
+            <!-- Left Project Info -->
+            <div class="project-details">
+              <div class="project-meta-top">
+                <span class="project-num">PROJECT // 04</span>
+                <span class="project-category-tag" data-i18n="p4_cat">DATA WORKFLOW &amp; HARDWARE AUTOMATION</span>
+              </div>
+
+              <h3 class="project-heading" data-i18n="p4_title">Excel Automation &amp; QR Label Generation</h3>
+
+              <div class="project-callout-problem">
+                <span class="callout-label" data-i18n="label_problem">PROBLEM STATEMENT</span>
+                <p data-i18n="p4_problem">Operators printed uncut sheets of custom barcode labels and hand-trimmed 5,000+ labels daily with scissors, creating human bottlenecks and layout mismatch errors.</p>
+              </div>
+
+              <div class="project-callout-solution">
+                <span class="callout-label" data-i18n="label_solution">SOLUTION OVERVIEW</span>
+                <p data-i18n="p4_solution">Automation workflows for structured data extraction, automatic QR/Barcode string formatting, and direct hardware printer driver integration with automated physical cutting.</p>
+              </div>
+
+              <div class="project-tech-group">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">ESC/POS Protocol</span>
+                <span class="tech-tag">Excel VBA</span>
+                <span class="tech-tag">Thermal Drivers</span>
+                <span class="tech-tag">Auto-Cutter</span>
+              </div>
+
+              <div class="project-actions">
+                <button class="btn btn-sm btn-primary open-modal-btn" data-project="p4" data-i18n="btn_view_details">View Details</button>
+                <span class="project-verified-badge" data-i18n="p4_badge">&#10003; 5,000+ Auto-Cuts Daily</span>
+              </div>
+            </div>
+
+            <!-- Right Visual Mockup (Automation & QR Label Preview) -->
+            <div class="project-mockup-wrapper">
+              <div class="ui-mockup-window">
+                <div class="ui-titlebar">
+                  <div class="ui-circles"><span></span><span></span><span></span></div>
+                  <span class="ui-title">LABEL_CONTROLLER // THERMAL_AUTO_CUT</span>
+                  <span class="ui-badge-live">ESC/POS READY</span>
+                </div>
+                <div class="ui-dashboard-preview">
+                  <div class="label-mockup-box">
+                    <div class="label-header">
+                      <span class="label-company">NAMICOH INDONESIA COMPONENT</span>
+                      <span class="label-type">E-KANBAN TICKET</span>
+                    </div>
+                    <div class="label-body">
+                      <div class="qr-code-mock" aria-hidden="true">
+                        <div class="qr-pattern"></div>
+                      </div>
+                      <div class="label-fields">
+                        <div class="field-item">
+                          <span class="field-k">PART NO</span>
+                          <span class="field-v">55310-BZ010-001</span>
+                        </div>
+                        <div class="field-item">
+                          <span class="field-k">QTY / BOX</span>
+                          <span class="field-v">30 PCS [LOT 04B]</span>
+                        </div>
+                        <div class="field-item">
+                          <span class="field-k">DESTINATION</span>
+                          <span class="field-v">FINAL ASSY LINE 02</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="label-cut-line" aria-hidden="true">
+                      <span>&#9986; HARDWARE AUTO-CUTTER TRIGGER POINT (0.2s)</span>
+                    </div>
+                  </div>
+
+                  <div class="mock-bottom-bar">
+                    <span class="mono text-muted">DRIVER: PYTHON ESC/POS COMM</span>
+                    <span class="mono text-cyan">MANUAL TRIMMING ELIMINATED</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- F. PROFESSIONAL EXPERIENCE -->
+  <section class="section section-dark" id="experience">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow" data-i18n="career_eyebrow">04 // VERIFIED CAREER</span>
+        <h2 class="section-title" data-i18n="career_title">Professional Experience.</h2>
+        <p class="section-sub" data-i18n="career_sub">
+          Verified industry trajectory delivering software systems, digitalization initiatives, and plant floor operations.
+        </p>
+      </div>
+
+      <div class="timeline-container">
+        <div class="timeline-line" aria-hidden="true"></div>
+
+        <!-- 1. PT Namicoh Indonesia Component -->
+        <div class="timeline-milestone">
+          <div class="milestone-dot" aria-hidden="true"></div>
+          <div class="milestone-content">
+            <div class="milestone-header">
+              <div>
+                <h3 class="milestone-company" data-i18n="exp1_company">PT Namicoh Indonesia Component</h3>
+                <div class="milestone-role" data-i18n="exp1_role">PPIC and Software Development / Digitalization</div>
+              </div>
+              <span class="milestone-period" data-i18n="exp1_period">Mar 2025 – Present</span>
+            </div>
+            <div class="milestone-location" data-i18n="exp1_loc">Cikarang Selatan, West Java, Indonesia</div>
+
+            <ul class="milestone-bullets">
+              <li data-i18n-html="exp1_b1">Architected and deployed a centralized <strong>Full-Stack PPIC Digitization Platform</strong> to migrate spreadsheet-based production scheduling into a real-time web portal.</li>
+              <li data-i18n-html="exp1_b2">Developed a Python-based calculation engine for <strong>Material Requirements Planning (MRP)</strong>, reducing calculation cycle time from 4 hours to under 15 seconds.</li>
+              <li data-i18n-html="exp1_b3">Engineered an automated <strong>E-Kanban Hardware Integration</strong> using ESC/POS thermal printer controller protocols and automated physical cutting, processing 5,000+ daily tickets.</li>
+              <li data-i18n-html="exp1_b4">Built an <strong>Inter-Plant Logistics Monitoring Web Portal</strong> implementing two-way barcode scans to ensure accurate parts dispatch and maintain zero line-stop occurrences.</li>
+              <li data-i18n-html="exp1_b5">Constructed scheduled <strong>n8n ETL automation pipelines</strong> to automatically ingest and synchronize customer purchase orders without daily manual re-keying.</li>
+            </ul>
+
+            <div class="milestone-tags">
+              <span class="tech-tag">PHP</span>
+              <span class="tech-tag">Python</span>
+              <span class="tech-tag">MySQL</span>
+              <span class="tech-tag">n8n</span>
+              <span class="tech-tag">ESC/POS</span>
+              <span class="tech-tag">PPIC Systems</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. PT Astra Daihatsu Motor -->
+        <div class="timeline-milestone">
+          <div class="milestone-dot" aria-hidden="true"></div>
+          <div class="milestone-content">
+            <div class="milestone-header">
+              <div>
+                <h3 class="milestone-company" data-i18n="exp2_company">PT Astra Daihatsu Motor</h3>
+                <div class="milestone-role" data-i18n="exp2_role">Web Development / Export Development System</div>
+              </div>
+              <span class="milestone-period" data-i18n="exp2_period">Feb 2023 – Jan 2025</span>
+            </div>
+            <div class="milestone-location" data-i18n="exp2_loc">North Jakarta, Indonesia</div>
+
+            <ul class="milestone-bullets">
+              <li data-i18n-html="exp2_b1">Developed internal web application modules for managing automotive export components documentation and logistics tracking.</li>
+              <li data-i18n-html="exp2_b2">Engineered <strong>Advanced Excel VBA Macros</strong> to automate validation of thousands of export manifest data rows, eliminating manual typing errors and expediting shipment approvals.</li>
+              <li data-i18n-html="exp2_b3">Created interactive <strong>Microsoft Power BI KPI Dashboards</strong> providing management transparency over component export fulfillment rates.</li>
+              <li data-i18n-html="exp2_b4">Maintained MySQL operational databases supporting continuous 24/7 export documentation operations.</li>
+            </ul>
+
+            <div class="milestone-tags">
+              <span class="tech-tag">PHP &amp; MySQL</span>
+              <span class="tech-tag">Excel VBA</span>
+              <span class="tech-tag">Power BI</span>
+              <span class="tech-tag">Export Logistics</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. PT Dhecyber Flow Indonesia -->
+        <div class="timeline-milestone">
+          <div class="milestone-dot" aria-hidden="true"></div>
+          <div class="milestone-content">
+            <div class="milestone-header">
+              <div>
+                <h3 class="milestone-company" data-i18n="exp3_company">PT Dhecyber Flow Indonesia</h3>
+                <div class="milestone-role" data-i18n="exp3_role">IT Support Specialist — Data Center &amp; NOC</div>
+              </div>
+              <span class="milestone-period" data-i18n="exp3_period">Feb 2021 – Apr 2021</span>
+            </div>
+            <div class="milestone-location" data-i18n="exp3_loc">South Jakarta, Indonesia</div>
+
+            <ul class="milestone-bullets">
+              <li data-i18n-html="exp3_b1">Performed structured hardware maintenance, server rack management, and cabling audits inside Tier-3 Data Center infrastructure.</li>
+              <li data-i18n-html="exp3_b2">Monitored network telemetry at the <strong>Network Operations Center (NOC)</strong>, logging incident tickets and executing standardized escalation SOPs.</li>
+            </ul>
+
+            <div class="milestone-tags">
+              <span class="tech-tag">Linux</span>
+              <span class="tech-tag">Server Infrastructure</span>
+              <span class="tech-tag">Network Telemetry</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- G. ENGINEERING APPROACH -->
+  <section class="section" id="approach">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow" data-i18n="appr_eyebrow">05 // METHODOLOGY</span>
+        <h2 class="section-title" data-i18n="appr_title">From Operational Problems to Digital Solutions.</h2>
+        <p class="section-sub" data-i18n="appr_sub">
+          A disciplined, five-step engineering framework converting complex shop-floor realities into resilient software.
+        </p>
+      </div>
+
+      <div class="approach-flow">
+        <!-- Step 1 -->
+        <div class="approach-step">
+          <div class="step-badge" data-i18n="appr_s1_badge">STEP // 01</div>
+          <div class="step-num">01</div>
+          <h3 class="step-title" data-i18n="appr_s1_title">Understand the Process</h3>
+          <p class="step-desc" data-i18n-html="appr_s1_desc">
+            Go directly to the floor (<em>Genba</em>). Shadow operators, audit manual handoffs, and document actual material and information flows before defining technical scope.
+          </p>
+          <div class="step-metric" data-i18n="appr_s1_metric">Floor observation &amp; takt time mapping</div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="approach-step">
+          <div class="step-badge" data-i18n="appr_s2_badge">STEP // 02</div>
+          <div class="step-num">02</div>
+          <h3 class="step-title" data-i18n="appr_s2_title">Identify Inefficiencies</h3>
+          <p class="step-desc" data-i18n-html="appr_s2_desc">
+            Pinpoint operational waste (<em>Muda</em>): redundant spreadsheets, repeated data entry, manual cutting bottlenecks, and unverified transport handoffs.
+          </p>
+          <div class="step-metric" data-i18n="appr_s2_metric">Root-cause failure mode analysis</div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="approach-step">
+          <div class="step-badge" data-i18n="appr_s3_badge">STEP // 03</div>
+          <div class="step-num">03</div>
+          <h3 class="step-title" data-i18n="appr_s3_title">Design the System</h3>
+          <p class="step-desc" data-i18n-html="appr_s3_desc">
+            Architect normalized database schemas, RESTful APIs, and ergonomic UI views tailored for rapid, error-proof operator interaction (<em>Poka-Yoke</em>).
+          </p>
+          <div class="step-metric" data-i18n="appr_s3_metric">Human-centered system architecture</div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="approach-step">
+          <div class="step-badge" data-i18n="appr_s4_badge">STEP // 04</div>
+          <div class="step-num">04</div>
+          <h3 class="step-title" data-i18n="appr_s4_title">Develop and Validate</h3>
+          <p class="step-desc" data-i18n-html="appr_s4_desc">
+            Write clean, modular code. Test hardware communication protocols under realistic shift loads, edge-case network dropouts, and live transaction volumes.
+          </p>
+          <div class="step-metric" data-i18n="appr_s4_metric">Zero-defect deployment validation</div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="approach-step">
+          <div class="step-badge" data-i18n="appr_s5_badge">STEP // 05</div>
+          <div class="step-num">05</div>
+          <h3 class="step-title" data-i18n="appr_s5_title">Measure and Improve</h3>
+          <p class="step-desc" data-i18n-html="appr_s5_desc">
+            Quantify operational gains: calculation time reduction, zero line stops, and paperless transition. Continuously gather operator feedback (<em>Kaizen</em>).
+          </p>
+          <div class="step-metric" data-i18n="appr_s5_metric">Measured performance accountability</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- H. CONNECT SECTION (LINKEDIN ONLY) -->
+  <section class="section section-dark" id="connect">
+    <div class="container">
+      <div class="contact-box-container linkedin-featured-container">
+        <div class="contact-header-block">
+          <span class="section-eyebrow" data-i18n="conn_eyebrow">06 // PROFESSIONAL NETWORK</span>
+          <h2 class="contact-main-headline" data-i18n="conn_title">Connect on LinkedIn.</h2>
+          <p class="contact-sub-copy" data-i18n="conn_sub">
+            Open for professional networking, engineering discussions, and manufacturing digitalization opportunities.
+          </p>
+        </div>
+
+        <div class="linkedin-showcase-card">
+          <div class="linkedin-card-content">
+            <div class="linkedin-badge-tag" data-i18n="conn_badge">VERIFIED IDENTITY // ID.LINKEDIN.COM</div>
+            <h3 class="linkedin-name">Desnabil Gymnastiar</h3>
+            <div class="linkedin-title" data-i18n="conn_role">Software Engineer &bull; Industrial Digitalization &bull; Manufacturing Systems</div>
+            <p class="linkedin-bio" data-i18n="conn_bio">
+              Connecting software engineering principles with automotive plant operations, operational automation, and manufacturing data systems.
+            </p>
+            <div class="linkedin-meta-chips">
+              <span class="meta-chip">PT Namicoh Indonesia Component</span>
+              <span class="meta-chip">Ex-PT Astra Daihatsu Motor</span>
+              <span class="meta-chip">Cikarang Barat, West Java, ID</span>
+            </div>
+          </div>
+          <div class="linkedin-action-wrap">
+            <a href="https://id.linkedin.com/in/desnabil-gymnastiar-b9375320a" target="_blank" rel="noopener noreferrer" class="btn btn-primary linkedin-main-btn">
+              <span data-i18n="conn_btn">View LinkedIn Profile</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                <polyline points="15 3 21 3 21 9"></polyline>
+                <line x1="10" y1="14" x2="21" y2="3"></line>
+              </svg>
+            </a>
+            <span class="linkedin-direct-url">id.linkedin.com/in/desnabil-gymnastiar-b9375320a</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- I. FOOTER -->
+<footer class="site-footer">
+  <div class="container footer-container">
+    <div class="footer-left">
+      <div class="footer-brand">
+        <span class="logo-symbol">B7</span>
+        <span class="logo-text">BIEL07<span class="logo-dot">.DEV</span></span>
+      </div>
+      <p class="footer-tagline" data-i18n="foot_tagline">Software Engineering &times; Industrial Digitalization</p>
+      <div class="footer-status-pill">
+        <span class="status-indicator" aria-hidden="true"></span>
+        <span data-i18n="foot_badge">PRODUCTION READY ARCHITECTURE</span>
+      </div>
+    </div>
+
+    <div class="footer-nav">
+      <div class="footer-col">
+        <span class="footer-col-title" data-i18n="foot_nav_title">NAVIGATION</span>
+        <a href="#hero" data-i18n="nav_home">Home</a>
+        <a href="#about" data-i18n="nav_about">About</a>
+        <a href="#expertise" data-i18n="nav_expertise">Expertise</a>
+        <a href="#projects" data-i18n="nav_projects">Projects</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title" data-i18n="foot_meth_title">METHODOLOGY</span>
+        <a href="#experience" data-i18n="nav_experience">Experience</a>
+        <a href="#approach" data-i18n="nav_approach">Approach</a>
+        <a href="#connect" data-i18n="nav_connect">Connect</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-title" data-i18n="foot_net_title">NETWORK</span>
+        <a href="https://id.linkedin.com/in/desnabil-gymnastiar-b9375320a" target="_blank" rel="noopener noreferrer">LinkedIn Profile &nearr;</a>
       </div>
     </div>
   </div>
 
-  <!-- ABOUT ME SECTION -->
-  <section id="about" class="reveal">
-    <div class="section-tag">01 / About Me</div>
-    <h2 class="section-title">The Person Behind the Systems</h2>
-    <p class="section-subtitle">Bridging practical manufacturing domain with modern software engineering.</p>
+  <div class="container footer-bottom-bar">
+    <div>&copy; <span id="currentYear">2026</span> <span data-i18n="foot_copy">Desnabil Gymnastiar (BIEL07.DEV). All rights reserved.</span></div>
+    <div data-i18n="foot_loc">Cikarang Barat, West Java, Indonesia &middot; Built with semantic HTML5, CSS3 &amp; Vanilla JS.</div>
+  </div>
+</footer>
 
-    <div class="about-content">
-      <div class="about-text">
-        <p>
-          Saya adalah seorang <strong>PPIC &amp; Full-Stack Developer</strong> yang menggabungkan keahlian pemrograman web dengan pemahaman mendalam tentang alur kerja manufaktur otomotif.
-          Kelebihan utama saya adalah pemahaman langsung di lapangan: saya tidak hanya membangun aplikasi, tetapi juga memahami bagaimana jadwal perakitan dihitung, bagaimana suku cadang dikirim, dan bagaimana operator pabrik berinteraksi dengan sistem setiap hari.
-        </p>
-        <p>
-          Dalam pengalaman kerja saya di <strong>PT Namicoh Indonesia Component</strong> dan <strong>PT Astra Daihatsu Motor</strong>, saya terbiasa menerapkan disiplin alur kerja manufaktur berstandar Toyota Production System (TPS) ke dalam kode software: mulai dari eliminasi pekerjaan manual berulang (muda elimination), pencegahan kesalahan (poka-yoke), hingga sinkronisasi alur material secara tepat waktu (just-in-time).
-        </p>
-        <p>
-          Fokus saya adalah menciptakan <strong>sistem yang andal, scalable, dan mudah digunakan (user-friendly)</strong>—mulai dari sistem kalkulasi kebutuhan material otomatis (MRP), otomasi pencetakan E-Kanban fisik, hingga dashboard monitoring antar fasilitas produksi.
-        </p>
-      </div>
+<!-- FLOATING BACK TO TOP BUTTON -->
+<button id="backToTop" class="back-to-top" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M8 13V3M3 8L8 3L13 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
 
-      <div class="info-box-list">
-        <div class="info-box">
-          <div class="info-box-label">Current Role</div>
-          <div class="info-box-val">PPIC &amp; IT Developer</div>
-          <div style="font-size:0.85rem; color:var(--text-sub);">PT Namicoh Indonesia Component</div>
-        </div>
-
-        <div class="info-box">
-          <div class="info-box-label">Base Location</div>
-          <div class="info-box-val">Cikarang Barat, West Java</div>
-          <div style="font-size:0.85rem; color:var(--text-sub);">Indonesia 🇮🇩</div>
-        </div>
-
-        <div class="info-box">
-          <div class="info-box-label">Core Specialization</div>
-          <div class="info-box-val">Manufacturing Digitization &amp; Web Apps</div>
-          <div style="font-size:0.85rem; color:var(--text-sub);">Full-Stack Systems &amp; Hardware Integration</div>
-        </div>
-
-        <div class="info-box">
-          <div class="info-box-label">Direct Communication</div>
-          <div class="info-box-val">desnabil.dev@gmail.com</div>
-          <div style="font-size:0.85rem; color:var(--text-sub);">Open for full-time &amp; consulting roles</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BEFORE VS AFTER OPERATIONAL TRANSFORMATION -->
-  <section id="transformation" class="reveal">
-    <div class="section-tag">02 / Operational Transformation</div>
-    <h2 class="section-title">Before vs After Impact</h2>
-    <p class="section-subtitle">Perbandingan nyata alur kerja operasional pabrik sebelum dan sesudah penerapan sistem digital yang saya bangun.</p>
-
-    <div class="transformation-grid">
-      <!-- Item 1: PPIC Production Planning -->
-      <div class="trans-card">
-        <div class="trans-card-header">
-          <span class="trans-badge">01 / PPIC &amp; Material Planning</span>
-          <span class="trans-stat-highlight">4 Jam ➔ &lt;15 Detik</span>
-        </div>
-        <div class="trans-compare-row">
-          <div class="trans-box before-box">
-            <div class="trans-box-tag">🔴 SEBELUM (Manual)</div>
-            <p>Jadwal perakitan &amp; kebutuhan bahan baku dihitung manual lewat spreadsheet Excel terpisah. Butuh waktu lebih dari 4 jam per batch pesanan dan rawan salah hitung.</p>
-          </div>
-          <div class="trans-arrow">➔</div>
-          <div class="trans-box after-box">
-            <div class="trans-box-tag">🟢 SESUDAH (Automated System)</div>
-            <p>Kalkulasi kebutuhan bahan (MRP) berjalan otomatis dalam &lt;15 detik begitu pesanan diunggah. Stok gudang terpotong real-time dan 100% transisi tanpa kertas (paperless).</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Item 2: E-Kanban & Hardware Auto-Cutter -->
-      <div class="trans-card">
-        <div class="trans-card-header">
-          <span class="trans-badge">02 / Shop-Floor Kanban Dispatch</span>
-          <span class="trans-stat-highlight">Manual Cutting ➔ 5.000+ Auto-Cuts/Hari</span>
-        </div>
-        <div class="trans-compare-row">
-          <div class="trans-box before-box">
-            <div class="trans-box-tag">🔴 SEBELUM (Manual)</div>
-            <p>Tiket instruksi produksi dicetak lembaran lalu digunting satu per satu secara manual oleh operator. Format per-customer sering tertukar dan memicu antrean di jalur distribusi.</p>
-          </div>
-          <div class="trans-arrow">➔</div>
-          <div class="trans-box after-box">
-            <div class="trans-box-tag">🟢 SESUDAH (Automated System)</div>
-            <p>Sistem terhubung langsung ke mesin printer thermal dengan pemotong otomatis. Tiket terpotong rapi dengan format barcode standar tiap customer tanpa campur tangan fisik operator.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Item 3: Inter-Plant Logistics -->
-      <div class="trans-card">
-        <div class="trans-card-header">
-          <span class="trans-badge">03 / Inter-Plant Shipping &amp; Logistics</span>
-          <span class="trans-stat-highlight">Risiko Line Stop ➔ Zero Discrepancy</span>
-        </div>
-        <div class="trans-compare-row">
-          <div class="trans-box before-box">
-            <div class="trans-box-tag">🔴 SEBELUM (Manual)</div>
-            <p>Surat jalan pengiriman barang antar Plant 1 dan Plant 2 dicek manual dengan paraf kertas. Selisih part baru disadari saat barang tiba di lini perakitan, memicu risiko line stop.</p>
-          </div>
-          <div class="trans-arrow">➔</div>
-          <div class="trans-box after-box">
-            <div class="trans-box-tag">🟢 SESUDAH (Automated System)</div>
-            <p>Sistem web tracking dengan verifikasi barcode ganda (saat muat truk &amp; terima). Memberikan alert instan jika ada ketidaksesuaian jumlah, menjamin zero line stop.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Item 4: Customer Order Ingestion (EDI) -->
-      <div class="trans-card">
-        <div class="trans-card-header">
-          <span class="trans-badge">04 / Customer Order Data Ingestion</span>
-          <span class="trans-stat-highlight">Hemat 3+ Jam Kerja/Hari</span>
-        </div>
-        <div class="trans-compare-row">
-          <div class="trans-box before-box">
-            <div class="trans-box-tag">🔴 SEBELUM (Manual)</div>
-            <p>Staf administrasi login setiap pagi ke portal berbagai customer otomotif, mengunduh file PO, dan mengetik ulang ribuan baris data ke sistem internal secara berulang.</p>
-          </div>
-          <div class="trans-arrow">➔</div>
-          <div class="trans-box after-box">
-            <div class="trans-box-tag">🟢 SESUDAH (Automated System)</div>
-            <p>Pipeline n8n terjadwal otomatis mengekstraksi data pesanan, membersihkan anomali format, dan menyimpannya langsung ke database tanpa perlu staf mengetik manual.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WORK EXPERIENCE SECTION -->
-  <section id="experience" class="reveal">
-    <div class="section-tag">03 / Work Experience</div>
-    <h2 class="section-title">Career History &amp; Impact</h2>
-    <p class="section-subtitle">Rekam jejak kontribusi nyata dan sistem yang telah berhasil diimplementasikan di industri manufaktur.</p>
-
-    <div class="experience-timeline">
-      <!-- 1. Namicoh -->
-      <div class="experience-card">
-        <div class="exp-top">
-          <div class="exp-company-title">PT Namicoh Indonesia Component</div>
-          <span class="exp-period-badge">Mar 2025 – Present · 1+ Year</span>
-        </div>
-        <div class="exp-role">PPIC &amp; IT Developer — Full-Stack Systems · Cikarang Selatan, Jawa Barat</div>
-        <ul class="exp-list">
-          <li>Merancang dan membangun <strong>Full-Stack PPIC Digitization Platform dari nol (ground-up)</strong> untuk mendigitalisasi jadwal produksi harian dan alokasi material secara terpusat.</li>
-          <li>Mengembangkan aplikasi desktop berbasis Python sebagai core engine kalkulasi <strong>MRP (Material Requirements Planning)</strong> dan demand forecasting tanpa risiko salah hitung.</li>
-          <li>Menciptakan sistem <strong>E-Kanban Hardware Integration</strong> dengan fitur <em>Auto-Cutting Thermal Printer</em> yang memotong tiket kanban secara otomatis dengan format barcode kustomisasi per customer.</li>
-          <li>Mengembangkan <strong>Inter-Plant Logistics Web Monitoring</strong> untuk verifikasi kuantitas pengiriman part antar fasilitas secara real-time demi mencegah line stop dan keterlambatan barang.</li>
-          <li>Mengimplementasikan <strong>n8n Workflow Automation</strong> untuk mengunduh dan menyinkronkan data pesanan pelanggan (Customer PO) secara terjadwal tanpa input manual harian.</li>
-        </ul>
-      </div>
-
-      <!-- 2. Astra Daihatsu -->
-      <div class="experience-card">
-        <div class="exp-top">
-          <div class="exp-company-title">PT Astra Daihatsu Motor</div>
-          <span class="exp-period-badge">Feb 2023 – Jan 2025 · 2 Years</span>
-        </div>
-        <div class="exp-role">Web Application Development &amp; Export Administration · Jakarta Utara</div>
-        <ul class="exp-list">
-          <li>Membangun full-stack web application untuk mengelola dokumentasi dan tracking administrasi ekspor suku cadang kendaraan bermotor.</li>
-          <li>Mengembangkan <strong>Advanced Excel VBA Macros</strong> untuk otomasi pengolahan ribuan baris data manifes ekspor, mengeliminasi manual error dan memangkas waktu kerja.</li>
-          <li>Merancang <strong>Power BI Interactive KPI Dashboard</strong> untuk monitoring performa fulfillment ekspor komponen kendaraan secara visual dan data-driven.</li>
-          <li>Melakukan pemeliharaan rutin database MySQL dan web application untuk menjamin kontinuitas operasional divisi ekspor 24/7.</li>
-        </ul>
-      </div>
-
-      <!-- 3. Dhecyber -->
-      <div class="experience-card">
-        <div class="exp-top">
-          <div class="exp-company-title">PT Dhecyber Flow Indonesia</div>
-          <span class="exp-period-badge">Feb 2021 – Apr 2021 · 3 Months</span>
-        </div>
-        <div class="exp-role">IT Support Specialist — Data Center &amp; NOC · Jakarta Selatan</div>
-        <ul class="exp-list">
-          <li>Pemeliharaan rutin server racks, perkabelan terstruktur, dan perangkat keras di lingkungan Data Center Tier-3.</li>
-          <li>Real-time network monitoring di <strong>Network Operations Center (NOC)</strong> serta dokumentasi dan eskalasi penanganan insiden jaringan sesuai SOP.</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- FEATURED PROJECTS SECTION -->
-  <section id="projects" class="reveal">
-    <div class="section-tag">04 / Featured Projects</div>
-    <h2 class="section-title">Key Systems &amp; Production Solutions</h2>
-    <p class="section-subtitle">Klik pada kartu proyek mana pun untuk membaca cerita tantangan dan detail solusi yang dibuat.</p>
-
-    <!-- Filter Tabs -->
-    <div class="filter-tabs">
-      <button class="filter-btn active" data-filter="all">All Projects (6)</button>
-      <button class="filter-btn" data-filter="ppic">Manufacturing &amp; PPIC</button>
-      <button class="filter-btn" data-filter="hardware">Hardware &amp; IoT</button>
-      <button class="filter-btn" data-filter="web">Web &amp; Automation</button>
-    </div>
-
-    <div class="projects-grid" id="projectsContainer">
-      <!-- Project 1 -->
-      <div class="project-card" data-category="ppic" data-modal="sys01">
-        <div>
-          <div class="project-category">Manufacturing ERP &amp; PPIC</div>
-          <h3 class="project-name">PPIC Digitization &amp; Inventory Platform</h3>
-          <div class="project-benefit">
-            ★ 100% Paperless Transition &amp; Rapid Production Scheduling
-          </div>
-          <p class="project-desc">
-            Sistem terpusat untuk mengelola jadwal produksi harian, validasi Bill of Materials (BOM), dan kalkulasi otomatis kebutuhan bahan baku (MRP) saat pesanan customer masuk.
-          </p>
-          <div class="project-cta-link">
-            <span>Lihat Detail Cerita &amp; Fitur</span> <span>↗</span>
-          </div>
-        </div>
-        <div class="project-tech-pills">
-          <span class="pill">Python</span>
-          <span class="pill">PHP</span>
-          <span class="pill">MySQL</span>
-          <span class="pill">MRP Engine</span>
-        </div>
-      </div>
-
-      <!-- Project 2 -->
-      <div class="project-card" data-category="hardware" data-modal="sys02">
-        <div>
-          <div class="project-category">Hardware &amp; IoT Automation</div>
-          <h3 class="project-name">E-Kanban Auto-Cutting Printer Controller</h3>
-          <div class="project-benefit">
-            ★ 5,000+ Daily Automated Dispatches without manual cutting lag
-          </div>
-          <p class="project-desc">
-            Sistem controller terintegrasi hardware printer thermal. Membaca nomor part, memformat kode barcode sesuai standar pelanggan, dan mengirimkan sinyal pemotongan kertas otomatis tanpa gunting manual.
-          </p>
-          <div class="project-cta-link">
-            <span>Lihat Detail Cerita &amp; Fitur</span> <span>↗</span>
-          </div>
-        </div>
-        <div class="project-tech-pills">
-          <span class="pill">Python</span>
-          <span class="pill">ESC/POS</span>
-          <span class="pill">Hardware Comms</span>
-          <span class="pill">Barcode Standards</span>
-        </div>
-      </div>
-
-      <!-- Project 3 -->
-      <div class="project-card" data-category="web" data-modal="sys03">
-        <div>
-          <div class="project-category">Real-Time Logistics Telemetry</div>
-          <h3 class="project-name">Inter-Plant Logistics &amp; Dispatch Monitoring Web</h3>
-          <div class="project-benefit">
-            ★ Zero Line Stops caused by part shipment quantity discrepancies
-          </div>
-          <p class="project-desc">
-            Website pemantau pengiriman barang antar-pabrik (Plant 1 &amp; Plant 2). Dilengkapi verifikasi barcode dua arah saat pemuatan truk dan serah terima part untuk mencegah selisih kuantitas.
-          </p>
-          <div class="project-cta-link">
-            <span>Lihat Detail Cerita &amp; Fitur</span> <span>↗</span>
-          </div>
-        </div>
-        <div class="project-tech-pills">
-          <span class="pill">PHP</span>
-          <span class="pill">JavaScript</span>
-          <span class="pill">MySQL</span>
-          <span class="pill">Real-Time Web</span>
-        </div>
-      </div>
-
-      <!-- Project 4 -->
-      <div class="project-card" data-category="web" data-modal="sys04">
-        <div>
-          <div class="project-category">Workflow &amp; Data Automation</div>
-          <h3 class="project-name">Automated Customer EDI Pipeline (n8n)</h3>
-          <div class="project-benefit">
-            ★ Saved 3+ hours of daily manual data entry
-          </div>
-          <p class="project-desc">
-            Pipeline otomatis terjadwal yang mengunduh data pesanan pelanggan dari portal B2B, merapikan inkonsistensi format, dan menyinkronkan data langsung ke database operasional.
-          </p>
-          <div class="project-cta-link">
-            <span>Lihat Detail Cerita &amp; Fitur</span> <span>↗</span>
-          </div>
-        </div>
-        <div class="project-tech-pills">
-          <span class="pill">n8n</span>
-          <span class="pill">Node.js</span>
-          <span class="pill">REST APIs</span>
-          <span class="pill">Cron Workflows</span>
-        </div>
-      </div>
-
-      <!-- Project 5 -->
-      <div class="project-card" data-category="web" data-modal="sys05">
-        <div>
-          <div class="project-category">Enterprise Web System</div>
-          <h3 class="project-name">Export Administration &amp; Logistics Platform (ADM)</h3>
-          <div class="project-benefit">
-            ★ Streamlined high-volume automotive export documentation
-          </div>
-          <p class="project-desc">
-            Aplikasi web untuk PT Astra Daihatsu Motor yang mengelola administrasi ekspor suku cadang kendaraan, terintegrasi dengan advanced Excel VBA macros dan visualisasi dashboard Power BI.
-          </p>
-          <div class="project-cta-link">
-            <span>Lihat Detail Cerita &amp; Fitur</span> <span>↗</span>
-          </div>
-        </div>
-        <div class="project-tech-pills">
-          <span class="pill">PHP &amp; MySQL</span>
-          <span class="pill">Advanced VBA</span>
-          <span class="pill">Power BI</span>
-        </div>
-      </div>
-
-      <!-- Project 6 -->
-      <div class="project-card" data-category="ppic" data-modal="sys06">
-        <div>
-          <div class="project-category">Data Modeling &amp; Analytics</div>
-          <h3 class="project-name">Production Demand Time-Series Engine</h3>
-          <div class="project-benefit">
-            ★ Data-driven raw material procurement &amp; buffer optimization
-          </div>
-          <p class="project-desc">
-            Aplikasi desktop berbasis Python untuk menganalisis tren riwayat pesanan part dan memprediksi kebutuhan material beberapa bulan ke depan guna menghindari kekurangan maupun kelebihan stok.
-          </p>
-          <div class="project-cta-link">
-            <span>Lihat Detail Cerita &amp; Fitur</span> <span>↗</span>
-          </div>
-        </div>
-        <div class="project-tech-pills">
-          <span class="pill">Python</span>
-          <span class="pill">NumPy</span>
-          <span class="pill">Desktop GUI</span>
-          <span class="pill">Time-Series Modeling</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CORE SKILLS SECTION -->
-  <section id="skills" class="reveal">
-    <div class="section-tag">05 / Core Competencies</div>
-    <h2 class="section-title">Technical &amp; Domain Skills</h2>
-    <p class="section-subtitle">Keahlian teknis software engineering yang dipadukan dengan pemahaman lapangan industri manufaktur.</p>
-
-    <div class="skills-grid">
-      <!-- 1. Web & Full-Stack -->
-      <div class="skill-card">
-        <div class="skill-icon">🌐</div>
-        <h3 class="skill-title">Web &amp; Full-Stack</h3>
-        <div class="skill-pill-tags">
-          <span class="skill-badge">PHP</span>
-          <span class="skill-badge">Node.js</span>
-          <span class="skill-badge">JavaScript (ESNext)</span>
-          <span class="skill-badge">HTML5 &amp; CSS3</span>
-          <span class="skill-badge">Responsive Apps</span>
-          <span class="skill-badge">Internal Web Portals</span>
-          <span class="skill-badge">RESTful APIs</span>
-        </div>
-      </div>
-
-      <!-- 2. Industrial & PPIC Domain (Lean & TPS principles integrated naturally) -->
-      <div class="skill-card">
-        <div class="skill-icon">🏭</div>
-        <h3 class="skill-title">Industrial &amp; PPIC Domain</h3>
-        <div class="skill-pill-tags">
-          <span class="skill-badge">PPIC Principles</span>
-          <span class="skill-badge">Lean / TPS Methods</span>
-          <span class="skill-badge">Production Scheduling</span>
-          <span class="skill-badge">MRP Calculations</span>
-          <span class="skill-badge">E-Kanban Pull System</span>
-          <span class="skill-badge">Poka-Yoke (Anti-Salah)</span>
-          <span class="skill-badge">Inventory Turnover</span>
-          <span class="skill-badge">Inter-Plant Logistics</span>
-        </div>
-      </div>
-
-      <!-- 3. Database & Analytics -->
-      <div class="skill-card">
-        <div class="skill-icon">🗄️</div>
-        <h3 class="skill-title">Database &amp; Analytics</h3>
-        <div class="skill-pill-tags">
-          <span class="skill-badge">MySQL Relational DB</span>
-          <span class="skill-badge">MariaDB</span>
-          <span class="skill-badge">Schema Optimization</span>
-          <span class="skill-badge">Power BI Dashboards</span>
-          <span class="skill-badge">Advanced Excel VBA</span>
-          <span class="skill-badge">Data Processing</span>
-        </div>
-      </div>
-
-      <!-- 4. Automation & Hardware -->
-      <div class="skill-card">
-        <div class="skill-icon">⚡</div>
-        <h3 class="skill-title">Automation &amp; Hardware</h3>
-        <div class="skill-pill-tags">
-          <span class="skill-badge">Python Automation</span>
-          <span class="skill-badge">n8n Workflows</span>
-          <span class="skill-badge">Excel Macros</span>
-          <span class="skill-badge">ESC/POS Drivers</span>
-          <span class="skill-badge">Thermal Printers</span>
-          <span class="skill-badge">Barcode Integration</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT SECTION -->
-  <section id="contact" class="reveal">
-    <div class="contact-box">
-      <div>
-        <h2 class="contact-info-title">Let's Connect &amp; Collaborate</h2>
-        <p class="contact-info-desc">
-          Tertarik mendiskusikan peluang kerja (full-time / project-based), digitalisasi sistem manufaktur, atau kolaborasi teknis lainnya? Silakan hubungi saya melalui saluran di bawah ini.
-        </p>
-      </div>
-
-      <div class="contact-btns">
-        <a href="https://api.whatsapp.com/send?phone=62895372483883&text=Halo%20Desnabil,%20saya%20melihat%20portofolio%20Anda%20dan%20tertarik%20untuk%20berdiskusi%20mengenai%20peluang%20kerja%20/%20proyek." target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background:#2ea043; border-color:#2ea043;">
-          💬 Chat WhatsApp
-        </a>
-        <button class="btn btn-secondary" id="copyEmailContactBtn">
-          ✉ Copy Email
-        </button>
-        <button class="btn btn-secondary" id="contactPrintBtn">
-          📄 Print CV
-        </button>
-        <a href="https://www.linkedin.com/in/desnabil-gymnastiar-b9375320a" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-          LinkedIn Profile ↗
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <div>© 2026 Desnabil Gymnastiar · Cikarang Barat, West Java, Indonesia</div>
-    <div style="margin-top:0.35rem; color:var(--text-muted);">Designed with clean professional standards · Responsive &amp; Interactive</div>
-  </footer>
-
-</main>
-
-<!-- FLOATING BACK TO TOP -->
-<button id="backToTop" aria-label="Scroll back to top">↑</button>
-
-<!-- INTERACTIVE PROJECT STORY MODAL -->
-<div class="modal-backdrop" id="projectModalBackdrop">
-  <div class="modal-box">
+<!-- PROJECT STORY MODAL -->
+<div class="modal-backdrop" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-dialog">
     <div class="modal-header">
-      <div class="modal-title" id="modalTitle">Project Title</div>
-      <button class="modal-close-btn" id="modalCloseBtn" aria-label="Close modal">✕</button>
+      <div>
+        <span class="modal-code" id="modalCode">SYS_DETAIL // 01</span>
+        <h3 class="modal-title" id="modalTitle">Project Title</h3>
+      </div>
+      <button class="modal-close" id="modalClose" aria-label="Close project modal">&times;</button>
     </div>
-    <div>
-      <div class="modal-section-title">Latar Belakang &amp; Tantangan</div>
-      <p class="modal-text" id="modalProblem"></p>
 
-      <div class="modal-section-title">Solusi yang Dibuat</div>
-      <p class="modal-text" id="modalSolution"></p>
+    <div class="modal-body">
+      <div class="modal-section">
+        <h4 class="modal-section-h" data-i18n="label_problem">OPERATIONAL PROBLEM STATEMENT</h4>
+        <p id="modalProblem" class="modal-p"></p>
+      </div>
 
-      <div class="modal-section-title">Hasil &amp; Dampak Nyata</div>
-      <p class="modal-text" id="modalImpact"></p>
+      <div class="modal-section">
+        <h4 class="modal-section-h" data-i18n="label_solution">TECHNICAL SOLUTION OVERVIEW</h4>
+        <p id="modalSolution" class="modal-p"></p>
+      </div>
 
-      <div class="modal-section-title">Teknologi yang Digunakan</div>
-      <div class="project-tech-pills" id="modalTechPills" style="border:none; padding-top:0.25rem;"></div>
+      <div class="modal-section">
+        <h4 class="modal-section-h">KEY ENGINEERING FEATURES</h4>
+        <ul id="modalFeatures" class="modal-ul"></ul>
+      </div>
+
+      <div class="modal-section">
+        <h4 class="modal-section-h">VERIFIED OUTCOME &amp; PERFORMANCE</h4>
+        <p id="modalOutcome" class="modal-p text-success"></p>
+      </div>
+
+      <div class="modal-section">
+        <h4 class="modal-section-h">TECHNOLOGY STACK</h4>
+        <div id="modalTechStack" class="modal-tech-pills"></div>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <span class="modal-note">* Concept Presentation &amp; Industrial Production Solution</span>
+      <button class="btn btn-sm btn-secondary" id="modalCloseBottom">Close Window</button>
     </div>
   </div>
 </div>
 
-<script src="main.js"></script>
+<script src="translations.js?v=4.0"></script>
+<script src="main.js?v=4.0"></script>
 </body>
 </html>
